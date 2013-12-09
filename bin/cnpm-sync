@@ -40,16 +40,18 @@ if (!name) {
 }
 
 var logurl;
-var lastLog = '';
+var lastLines = 0;
 
 function showlog() {
   npm.registry.request('GET', logurl, function (err, info) {
     if (err) {
       throw err;
     }
-    lastLog = info.log.replace(lastLog, '');
-    console.log(lastLog);
-    if (lastLog.indexOf('[done] Sync ' + name) >= 0) {
+    var lines = info.log.split('\n');
+    var log = lines.slice(lastLines).join('\n');
+    console.log(log);
+    lastLines = lines.length;
+    if (info.log.indexOf('[done] Sync ' + name) >= 0) {
       process.exit(0);
     } else {
       setTimeout(showlog, 2000);
