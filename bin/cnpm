@@ -75,10 +75,7 @@ var extendsMethd = {
   web: 1,
   check: 1,
   doc: 1,
-  publish: 1,
-  tsearch: 1,
-  auth: 1,
-  notify: 1
+  sync: 1,
 };
 
 if (extendsMethd[action]) {
