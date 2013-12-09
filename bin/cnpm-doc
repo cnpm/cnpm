@@ -19,7 +19,7 @@
 var open = require('open');
 var config = require('../config');
 
-var docurl = config.cnpmHost + '/' + process.argv[2];
+var docurl = config.cnpmHost + '/package/' + process.argv[2];
 
 open(docurl, function (err, stdout, stderr) {
   if (err) {

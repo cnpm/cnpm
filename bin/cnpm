@@ -79,14 +79,13 @@ var extendsMethd = {
 };
 
 if (extendsMethd[action]) {
-  return program
-  .command('web', 'open ali-npm web')
-  .command('check', 'check the dependencies in project')
-  .command('doc [modulename]', 'open ali-npm document page')
-  .command('auth', 'auth with email and password of alibaba npm')
-  .command('publish [moduleName]', 'publish module into ali npm')
-  .command('notify [moduleName]', 'send module notifies to user in mail group')
-  .parse(process.argv);
+  program
+    .command('web', 'open cnpm web')
+    .command('check', 'check the dependencies in project')
+    .command('doc [modulename]', 'open document page')
+    .command('sync [moduleName]', 'sync module from source npm')
+    .parse(process.argv);
+  return;
 }
 
 //origin npm with taobao registry

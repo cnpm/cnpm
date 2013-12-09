@@ -20,11 +20,15 @@ var path = require('path');
 var urllib = require('urllib');
 var open = require('open');
 var npm = require('npm');
+var program = require('commander');
 var config = require('../config');
+
+program.parse(process.argv);
+var args = program.args;
 
 var name;
 try {
-  name = process.argv[2] || require(path.join(process.cwd(), 'package.json')).name;
+  name = args[0] || require(path.join(process.cwd(), 'package.json')).name;
 } catch (err) {
   console.log('Read `package.json` file error: %s', err.message);
   process.exit(1);
