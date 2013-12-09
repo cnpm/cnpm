@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+
+/**!
+ * cnpm - bin/cnpm-sync
+ *
+ * Copyright(c) cnpmjs.org and other contributors.
+ * MIT Licensed
+ *
+ * Authors:
+ *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ */
+
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+
+var path = require('path');
+var urllib = require('urllib');
+var open = require('open');
+var npm = require('npm');
+var config = require('../config');
+
+var name;
+try {
+  name = process.argv[2] || require(path.join(process.cwd(), 'package.json')).name;
+} catch (err) {
+  console.log('Read `package.json` file error: %s', err.message);
+  process.exit(1);
+}
+
+if (!name) {
+  console.log('Usage: $ cnpm sync [moduleName]');
+  process.exit(1);
+}
+
+var logurl;
+var lastLog = '';
+
+function showlog() {
+  npm.registry.request('GET', logurl, function (err, info) {
+    if (err) {
+      throw err;
+    }
+    lastLog = info.log.replace(lastLog, '');
+    console.log(lastLog);
+    if (lastLog.indexOf('[done] Sync ' + name) >= 0) {
+      process.exit(0);
+    } else {
+      setTimeout(showlog, 2000);
+    }
+  });
+}
+
+npm.load({
+  registry: config.cnpmRegistry,
+  cache: config.cache,
+  loglevel: 'warn',
+}, function (err) {
+  npm.registry.request('PUT', name + '/sync', {}, function (err, result) {
+    if (err) {
+      throw err;
+    }
+    logurl = name + '/sync/log/' + result.logId;
+    showlog();
+  });
+});
+

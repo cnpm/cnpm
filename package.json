@@ -1,0 +1,60 @@
+{
+  "name": "cnpm",
+  "version": "0.0.0",
+  "description": "cnpm",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test-all",
+    "blanket": {
+      "pattern": "cnpm/lib",
+      "data-cover-flags": {
+        "debug": false
+      }
+    },
+    "travis-cov": {
+      "threshold": 90
+    }
+  },
+  "bin": {
+    "cnpm": "./bin/cnpm",
+    "cnpm-check": "./bin/cnpm-check",
+    "cnpm-sync": "./bin/cnpm-sync",
+    "cnpm-web": "./bin/cnpm-web"
+  },
+  "dependencies": {
+    "urllib": "0.5.4",
+    "open": "0.0.4",
+    "colors": "0.6.2",
+    "debug": "0.7.4",
+    "commander": "2.1.0",
+    "utility": "0.1.8",
+    "bagpipe": "0.3.5",
+    "npm": ">=1.3.15"
+  },
+  "devDependencies": {
+    "should": "*",
+    "blanket": "*",
+    "travis-cov": "*",
+    "coveralls": "*",
+    "mocha-lcov-reporter": "*",
+    "mocha": "*"
+  },
+  "homepage": "https://github.com/fengmk2/cnpm",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fengmk2/cnpm.git",
+    "web": "https://github.com/fengmk2/cnpm"
+  },
+  "bugs": {
+    "url": "https://github.com/fengmk2/cnpm/issues",
+    "email": "fengmk2@gmail.com"
+  },
+  "keywords": [
+    "cnpm"
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
+  "license": "MIT"
+}

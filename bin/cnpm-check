@@ -1,0 +1,71 @@
+#!/usr/bin/env node
+
+/*!
+ * cnpm - bin/cnpm-check
+ *
+ * Copyright(c) cnpmjs.org and other contributors.
+ * MIT Licensed
+ *
+ * Authors:
+ *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ */
+
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+
+var debug = require ('debug')('cnpm:check');
+var path = require('path');
+var urllib = require('urllib');
+// var CHECK_URL = config.cnpmHost + '/version/check';
+var bagpipe=  require('bagpipe');
+var colors = require('colors');
+var program = require('commander');
+var config = require('../config');
+
+program.parse(process.argv);
+var args = program.args;
+
+var pkg = require(path.join(process.cwd(), 'package.json'));
+var params = {
+  dependencies: JSON.stringify(pkg.dependencies),
+  devDependencies: JSON.stringify(pkg.devDependencies)
+};
+
+function checkUpdate() {
+  var queue = new bagpipe(10);
+  var count = Object.keys(pkg.dependencies);
+  for (var name in pkg.dependencies) {
+    (function (name, version) {
+      var url = config.cnpmRegistry + '/' + name + '/latest';
+      queue.push(urllib.request, url, function (err, result) {
+        var errmsg = '';
+        if (err) {
+          errmsg = err.message;
+        } else {
+          try {
+            result = JSON.parse(result);
+          } catch (e) {
+            errmsg = 'parse origin package info error. ' + err.message;
+            result = {};
+          }
+        }
+        if (errmsg) {
+          console.log('[' + name.red + '] check version error: ' + err.message.red);
+        }
+        debug('%s, remote: %s, local: %s', url, result.version, version);
+        if (!result.version || result.version !== version) {
+          result.version = String(result.version);
+          console.log('[' + name.yellow + '] new version: ' + result.version.green + ', local version: ' + version.yellow);
+        }
+        if (--count === 0) {
+          process.exit(0);
+        }
+      });
+    })(name, pkg.dependencies[name]);
+  }
+}
+
+checkUpdate();

@@ -1,0 +1,96 @@
+#!/usr/bin/env node
+
+/**!
+ * cnpm - bin/cnpm
+ *
+ * Copyright(c) cnpmjs.org and other contributors.
+ * MIT Licensed
+ *
+ * Authors:
+ *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ */
+
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander');
+var child_process = require('child_process');
+var pkg = require('../package.json');
+var config = require('../config');
+
+var help = {
+  'help': 1,
+  '-h': 1,
+  '--help': 1,
+  'usage': 1
+};
+
+var action = process.argv[2];
+
+if (!action || help[action]) {
+  var helpInfo = 'Usage: cnpm <command>\n' +
+'Help: http://cnpmjs.org/help/cnpm\n\n' +
+'  Extend command\n' +
+'    web                            open cnpm web (ex.: tnpm web)\n' +
+'    check [ingoreupdate]           check project dependencies, add ignoreupdate will not check modules\' latest version(ex.: cnpm check, cnpm check -i)\n' +
+'    doc [moduleName]               open document page (ex.: cnpm doc urllib)\n' +
+'    sync [moduleName]              sync module from source npm (ex.: cnpm sync urllib)\n' +
+'\n' +
+'  npm command use --registry=' + config.cnpmRegistry + '\n' +
+'    where <command> is one of:\n' +
+'    add-user, adduser, apihelp, author, bin, bugs, c, cache,\n' +
+'    completion, config, ddp, dedupe, deprecate, docs, edit,\n' +
+'    explore, faq, find, find-dupes, get, help, help-search,\n' +
+'    home, i, info, init, install, isntall, la, link, list, ll,\n' +
+'    ln, login, ls, outdated, owner, pack, prefix, prune,\n' +
+'    publish, r, rb, rebuild, remove, restart, rm, root,\n' +
+'    run-script, s, se, search, set, show, shrinkwrap, star,\n' +
+'    start, stop, submodule, tag, test, tst, un, uninstall,\n' +
+'    unlink, unpublish, unstar, up, update, version, view,\n' +
+'    whoami\n' +
+
+'      npm <cmd> -h     quick help on <cmd>\n' +
+'      npm -l           display full usage info\n' +
+'      npm faq          commonly asked questions\n' +
+'      npm help <term>  search for help on <term>\n' +
+'      npm help npm     involved overview\n\n' +
+
+'      Specify configs in the ini-formatted file:\n' +
+'          ' + config.customConfig + '\n' +
+'      or on the command line via: npm <command> --key value\n' +
+'      Config info can be viewed via: npm help config';
+  console.log(helpInfo);
+  process.exit(0);
+}
+
+if (action === '-v' || action === '--version') {
+  console.log(pkg.version);
+  process.exit(0);
+}
+
+var extendsMethd = {
+  web: 1,
+  check: 1,
+  doc: 1,
+  publish: 1,
+  tsearch: 1,
+  auth: 1,
+  notify: 1
+};
+
+if (extendsMethd[action]) {
+  return program
+  .command('web', 'open ali-npm web')
+  .command('check', 'check the dependencies in project')
+  .command('doc [modulename]', 'open ali-npm document page')
+  .command('auth', 'auth with email and password of alibaba npm')
+  .command('publish [moduleName]', 'publish module into ali npm')
+  .command('notify [moduleName]', 'send module notifies to user in mail group')
+  .parse(process.argv);
+}
+
+//origin npm with taobao registry
+require('../origin_npm.js');
