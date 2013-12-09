@@ -1,8 +1,6 @@
 cnpm
 =======
 
-[![Build Status](https://secure.travis-ci.org/fengmk2/cnpm.png)](http://travis-ci.org/fengmk2/cnpm) [![Coverage Status](https://coveralls.io/repos/fengmk2/cnpm/badge.png)](https://coveralls.io/r/fengmk2/cnpm) [![Build Status](https://drone.io/github.com/fengmk2/cnpm/status.png)](https://drone.io/github.com/fengmk2/cnpm/latest)
-
 [![NPM](https://nodei.co/npm/cnpm.png?downloads=true&stars=true)](https://nodei.co/npm/cnpm/)
 
 ![logo](https://raw.github.com/fengmk2/cnpmjs.org/master/logo.png)
