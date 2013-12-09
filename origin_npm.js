@@ -15,24 +15,24 @@
  */
 
 require('colors');
-var config = require('./config');
-var urllib = require('urllib');
 var debug = require('debug')('cnpm');
-var path = require('path');
-var urllib = require('urllib');
+var spawn = require('child_process').spawn;
+var config = require('./config');
+var parseArgv = require('./parse_argv');
+
+var program = parseArgv();
 
 var args = process.argv.slice(2);
 
 var CWD = process.cwd();
 
-args.unshift('--registry=' + config.cnpmRegistry);
+args.unshift('--registry=' + program.registry);
 args.unshift('--cache=' + config.cache);
 var cmd = 'npm';
 if (process.platform === "win32") {
   cmd = 'npm.cmd';
 }
 debug('%s %s', cmd, args.join(' '));
-var spawn = require('child_process').spawn;
 
 var npm  = spawn(cmd, args, {
   env: process.env,

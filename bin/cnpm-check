@@ -19,13 +19,12 @@
 var debug = require ('debug')('cnpm:check');
 var path = require('path');
 var urllib = require('urllib');
-// var CHECK_URL = config.cnpmHost + '/version/check';
-var bagpipe=  require('bagpipe');
+var bagpipe =  require('bagpipe');
 var colors = require('colors');
-var program = require('commander');
 var config = require('../config');
+var parseArgv = require('../parse_argv');
 
-program.parse(process.argv);
+var program = parseArgv();
 var args = program.args;
 
 var pkg = require(path.join(process.cwd(), 'package.json'));

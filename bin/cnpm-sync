@@ -20,11 +20,12 @@ var path = require('path');
 var urllib = require('urllib');
 var open = require('open');
 var npm = require('npm');
-var program = require('commander');
 var config = require('../config');
+var parseArgv = require('../parse_argv');
 
-program.parse(process.argv);
+var program = parseArgv();
 var args = program.args;
+var registry = program.registry;
 
 var name;
 try {
@@ -43,15 +44,17 @@ var logurl;
 var lastLines = 0;
 
 function showlog() {
-  npm.registry.request('GET', logurl, function (err, info) {
+  npm.registry.request('GET', logurl + '?offset=' + lastLines, function (err, info) {
     if (err) {
       throw err;
     }
-    var lines = info.log.split('\n');
-    var log = lines.slice(lastLines).join('\n');
+    var log = info.log.trim();
+    if (!log) {
+      return setTimeout(showlog, 2000);
+    }
     console.log(log);
-    lastLines = lines.length;
-    if (info.log.indexOf('[done] Sync ' + name) >= 0) {
+    lastLines += log.split('\n').length;
+    if (log.indexOf('[done] Sync ' + name) >= 0) {
       process.exit(0);
     } else {
       setTimeout(showlog, 2000);
@@ -60,7 +63,7 @@ function showlog() {
 }
 
 npm.load({
-  registry: config.cnpmRegistry,
+  registry: registry,
   cache: config.cache,
   loglevel: 'warn',
 }, function (err) {
@@ -69,6 +72,7 @@ npm.load({
       throw err;
     }
     logurl = name + '/sync/log/' + result.logId;
+    console.log('logurl: %s/%s', registry, logurl);
     showlog();
   });
 });
