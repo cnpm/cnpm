@@ -1,8 +1,8 @@
 {
   "name": "cnpm",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "cnpm: npm client for cnpmjs.org",
-  "main": "index.js",
+  "main": "bin/cnpm",
   "scripts": {
     "test": "make test-all",
     "blanket": {
