@@ -19,15 +19,16 @@
     "cnpm": "./bin/cnpm",
     "cnpm-check": "./bin/cnpm-check",
     "cnpm-sync": "./bin/cnpm-sync",
-    "cnpm-web": "./bin/cnpm-web"
+    "cnpm-web": "./bin/cnpm-web",
+    "cnpm-doc": "./bin/cnpm-doc"
   },
   "dependencies": {
-    "urllib": "0.5.4",
+    "urllib": "0.5.5",
     "open": "0.0.4",
     "colors": "0.6.2",
     "debug": "0.7.4",
     "commander": "2.1.0",
-    "utility": "0.1.8",
+    "utility": "0.1.9",
     "bagpipe": "0.3.5",
     "npm": ">=1.3.15"
   },
