@@ -38,6 +38,7 @@ if (!action || help[action]) {
 '    check [ingoreupdate]           check project dependencies, add ignoreupdate will not check modules\' latest version(ex.: cnpm check, cnpm check -i)\n' +
 '    doc [moduleName]               open document page (ex.: cnpm doc urllib)\n' +
 '    sync [moduleName]              sync module from source npm (ex.: cnpm sync urllib)\n' +
+'    user [username]                open user profile page (ex.: cnpm user fengmk2)\n' +
 '\n' +
 '  npm command use --registry=' + config.cnpmRegistry + '\n' +
 '    where <command> is one of:\n' +
@@ -76,6 +77,7 @@ var extendsMethd = {
   check: 1,
   doc: 1,
   sync: 1,
+  user: 1,
 };
 
 if (extendsMethd[action]) {
@@ -84,6 +86,7 @@ if (extendsMethd[action]) {
     .command('check', 'check the dependencies in project')
     .command('doc [modulename]', 'open document page')
     .command('sync [moduleName]', 'sync module from source npm')
+    .command('user [username]', 'open user profile page')
     .parse(process.argv);
   return;
 }

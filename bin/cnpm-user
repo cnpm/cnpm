@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+/**!
+ * cnpm - bin/cnpm-user
+ *
+ * Copyright(c) cnpmjs.org and other contributors.
+ * MIT Licensed
+ *
+ * Authors:
+ *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ */
+
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+
+var open = require('open');
+var config = require('../config');
+
+var userURL = config.cnpmHost + '/~' + process.argv[2];
+
+open(userURL, function (err, stdout, stderr) {
+  if (err) {
+    console.log('Can not open browser, please open your browser to visit: ' + userURL);
+    process.exit(0);
+  }
+  if (stdout || stderr) {
+    console.log(stdout, stderr);
+  }
+  process.exit(0);
+});
+

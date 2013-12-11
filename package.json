@@ -20,6 +20,7 @@
     "cnpm-check": "./bin/cnpm-check",
     "cnpm-sync": "./bin/cnpm-sync",
     "cnpm-web": "./bin/cnpm-web",
+    "cnpm-user": "./bin/cnpm-user",
     "cnpm-doc": "./bin/cnpm-doc"
   },
   "dependencies": {
