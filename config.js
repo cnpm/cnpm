@@ -27,7 +27,7 @@ if (process.platform === 'win32') {
 var config = module.exports = {
   cnpmHost: 'http://cnpmjs.org',
   cnpmRegistry: 'http://registry.cnpmjs.org',
-  cache: path.join(process.env.HOME, '.npm/.cache/cnpm'),  //cache folder name
+  cache: path.join(root, '.npm/.cache/cnpm'),  //cache folder name
   customConfig: path.join(root, '.cnpmrc.json')
 };
 
