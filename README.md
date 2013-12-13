@@ -49,12 +49,12 @@ $ git summary
  project  : cnpm
  repo age : 4 days
  active   : 7 days
- commits  : 25
- files    : 16
+ commits  : 28
+ files    : 17
  authors  :
-    23  fengmk2                 92.0%
-     1  dead_horse              4.0%
-     1  不四                  4.0%
+    25  fengmk2                 89.3%
+     2  dead_horse              7.1%
+     1  不四                  3.6%
 ```
 
 ## License

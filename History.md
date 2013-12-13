@@ -1,4 +1,9 @@
 
+0.0.12 / 2013-12-13 
+==================
+
+  * support sync all the dependencies of a project,fix #6
+
 0.0.11 / 2013-12-13 
 ==================
 
