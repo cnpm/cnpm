@@ -23,7 +23,7 @@ Support all commands just like `npm`.
 $ cnpm sync [moduleName]
 ```
 
-## Build your own private registry npm cli   
+## Build your own private registry npm cli
 
 ```
 $ npm install cnpm -g
@@ -35,10 +35,26 @@ $ alias tnpm='cnpm --registry=http://registry.npm.alibaba-inc.com\
  --userconfig=$HOME/.tnpmrc'
 
 #or put this in your .zshrc / .bashrc
-$ echo "alias tnpm='cnpm --registry=http://registry.npm.alibaba-inc.com\ 
+$ echo "alias tnpm='cnpm --registry=http://registry.npm.alibaba-inc.com\
  --registryweb=http://npm.alibaba-inc.com\
  --cachepath=$HOME/.npm/.cache/tnpm\
  --userconfig=$HOME/.tnpmrc'" >> $HOME/.zshrc && source $HOME/.zshrc
+```
+
+## Authors
+
+```bash
+$ git summary
+
+ project  : cnpm
+ repo age : 4 days
+ active   : 7 days
+ commits  : 25
+ files    : 16
+ authors  :
+    23  fengmk2                 92.0%
+     1  dead_horse              4.0%
+     1  不四                  4.0%
 ```
 
 ## License
