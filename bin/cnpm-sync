@@ -22,17 +22,22 @@ var npm = require('npm');
 var config = require('../config');
 var argv = require('../parse_argv')();
 var Bagpipe = require('bagpipe');
+var fs = require('fs');
 
 var args = argv.args;
 var registry = argv.registry;
+var registryweb = argv.registryweb;
 
-var name = args[1];
+var names = args.slice(1);
+var packageName;
 var dependencies = [];
-if (!name) {
+
+var packagePath = path.join(process.cwd(), 'package.json');
+if (!names.length && fs.existsSync(packagePath)) {
   try {
     console.log('Parse `package.json` file now...');
-    var pkg = require(path.join(process.cwd(), 'package.json'));
-    name = pkg.name;
+    var pkg = require(packagePath);
+    packageName = pkg.name;
     var dependenciesMap = {};
     for (var key in (pkg.dependencies || {})) {
       dependenciesMap[key] = pkg.dependencies[key];
@@ -47,8 +52,12 @@ if (!name) {
   }
 }
 
-if (!name) {
-  console.log('Usage: $ cnpm sync [moduleName]');
+if (names && names.length) {
+  syncByNames(names);
+} else if (packageName) {
+  syncByPackage(packageName);
+} else {
+  console.log('Usage: $ cnpm sync [moduleName1 moduleName2 ...]');
   process.exit(1);
 }
 
@@ -103,7 +112,7 @@ function sync(name, callback) {
       lastLines: 0,
       logurl: name + '/sync/log/' + result.logId
     };
-    console.log('logurl: %s/%s', registry, syncInfo.logurl);
+    console.log('logurl: %s/sync/%s#logid=%d', registryweb, name, result.logId);
     showlog(function (err) {
       if (err) {
         return callback(err);
@@ -113,17 +122,17 @@ function sync(name, callback) {
   });
 }
 
-function syncAllDependencies() {
+function syncByNames(names) {
   var queue = new Bagpipe(1);
-  var remain = name.length;
-  if (!dependencies) {
-    console.log('Can not find any dependencies of %s', name);
+  var remain = names.length;
+  if (!names) {
+    console.log('Can not find any packages to sync.');
     process.exit(0);
   }
-  console.log('Start sync %j.', dependencies);
+  console.log('Start sync %j.', names);
   var fail = [];
   var success = [];
-  dependencies.forEach(function (name) {
+  names.forEach(function (name) {
     queue.push(sync, name, function (err, data) {
       remain--;
       if (err) {
@@ -135,34 +144,36 @@ function syncAllDependencies() {
         success.push(name);
       }
       if (!remain) {
-        console.log('Sync all dependencies done, successed: %j, failed: %j', success, fail);
+        console.log('Sync all packages done, successed: %j, failed: %j', success, fail);
         process.exit(0);
       }
     });
   });
 }
 
-sync(name, function (err, data) {
-  if (err) {
-    throw err;
-  }
-  if (data.statusCode === 404) {
-    console.error('Can not found package %s in official registry', name);
-    if (args[1]) {
-      process.exit(1);
+function syncByPackage(packageName) {
+  sync(packageName, function (err, data) {
+    if (err) {
+      throw err;
     }
-    var des = '\n  Do you want to sync all dependencies and devDependencies of ' + name + '?(y/n)';
-    return confirm(des, function (yes) {
-      if (!yes) {
+    if (data.statusCode === 404) {
+      console.error('Can not found package %s in official registry', packageName);
+      if (args[1]) {
         process.exit(1);
       }
-      syncAllDependencies();
-    });
-  }
+      var des = '\n  Do you want to sync all dependencies and devDependencies of ' + packageName + '?(y/n)';
+      return confirm(des, function (yes) {
+        if (!yes) {
+          process.exit(1);
+        }
+        syncByNames(dependencies);
+      });
+    }
 
-  if (!data.ok) {
-    console.error('Sync error, statusCode %d, response data: %s', data.statusCode, data.data.toString());
-    process.exit(1);
-  }
-  process.exit(0);
-});
+    if (!data.ok) {
+      console.error('Sync error, statusCode %d, response data: %s', data.statusCode, data.data.toString());
+      process.exit(1);
+    }
+    process.exit(0);
+  });
+}
