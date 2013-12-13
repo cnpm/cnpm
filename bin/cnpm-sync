@@ -66,6 +66,7 @@ npm.load({
   registry: registry,
   cache: config.cache,
   loglevel: 'warn',
+  userconfig: config.userconfig,
 }, function (err) {
   npm.registry.request('PUT', name + '/sync', {}, function (err, result) {
     if (err) {

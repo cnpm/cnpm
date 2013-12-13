@@ -28,6 +28,8 @@ var CWD = process.cwd();
 
 args.unshift('--registry=' + program.registry);
 args.unshift('--cache=' + config.cache);
+args.unshift('--userconfig=' + config.userconfig);
+
 var cmd = 'npm';
 if (process.platform === "win32") {
   cmd = 'npm.cmd';
