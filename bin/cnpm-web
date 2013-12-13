@@ -18,8 +18,9 @@
 
 var open = require('open');
 var config = require('../config');
+var argv = require('../parse_argv')();
 
-open(config.cnpmHost, function (err, stdout, stderr) {
+open(argv.registryweb, function (err, stdout, stderr) {
   if (err) {
     console.log('Can not open browser, please open your browser to visit: ' + config.cnpmHost);
     process.exit(0);

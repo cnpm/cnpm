@@ -16,6 +16,7 @@
 
 var path = require('path');
 var fs = require('fs');
+var program = require('commander');
 
 var root;
 if (process.platform === 'win32') {

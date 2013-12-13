@@ -21,11 +21,10 @@ var urllib = require('urllib');
 var open = require('open');
 var npm = require('npm');
 var config = require('../config');
-var parseArgv = require('../parse_argv');
+var argv = require('../parse_argv')();
 
-var program = parseArgv();
-var args = program.args;
-var registry = program.registry;
+var args = argv.args;
+var registry = argv.registry;
 
 var name;
 try {
@@ -64,9 +63,9 @@ function showlog() {
 
 npm.load({
   registry: registry,
-  cache: config.cache,
+  cache: argv.cachepath,
   loglevel: 'warn',
-  userconfig: config.userconfig,
+  userconfig: argv.userconfig,
 }, function (err) {
   npm.registry.request('PUT', name + '/sync', {}, function (err, result) {
     if (err) {

@@ -17,9 +17,8 @@
  */
 
 var open = require('open');
-var config = require('../config');
-
-var docurl = config.cnpmHost + '/package/' + process.argv[2];
+var argv = require('../parse_argv')();
+var docurl = argv.registryweb + '/package/' + argv.args[1];
 
 open(docurl, function (err, stdout, stderr) {
   if (err) {
@@ -31,4 +30,3 @@ open(docurl, function (err, stdout, stderr) {
   }
   process.exit(0);
 });
-
