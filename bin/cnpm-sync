@@ -8,30 +8,43 @@
  *
  * Authors:
  *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
  */
-
-'use strict';
 
 /**
  * Module dependencies.
  */
 
 var path = require('path');
-var urllib = require('urllib');
+var request = require('../lib/request');
 var open = require('open');
 var npm = require('npm');
 var config = require('../config');
 var argv = require('../parse_argv')();
+var Bagpipe = require('bagpipe');
 
 var args = argv.args;
 var registry = argv.registry;
 
-var name;
-try {
-  name = args[0] || require(path.join(process.cwd(), 'package.json')).name;
-} catch (err) {
-  console.log('Read `package.json` file error: %s', err.message);
-  process.exit(1);
+var name = args[1];
+var dependencies = [];
+if (!name) {
+  try {
+    console.log('Parse `package.json` file now...');
+    var pkg = require(path.join(process.cwd(), 'package.json'));
+    name = pkg.name;
+    var dependenciesMap = {};
+    for (var key in (pkg.dependencies || {})) {
+      dependenciesMap[key] = pkg.dependencies[key];
+    }
+    for (var key in (pkg.devDependencies || {})) {
+      dependenciesMap[key] = pkg.devDependencies[key];
+    }
+    dependencies = Object.keys(dependenciesMap);
+  } catch (err) {
+    console.log('Parse `package.json` file error: %s', err.message);
+    process.exit(1);
+  }
 }
 
 if (!name) {
@@ -39,41 +52,117 @@ if (!name) {
   process.exit(1);
 }
 
-var logurl;
-var lastLines = 0;
+var syncInfo = {};
 
-function showlog() {
-  npm.registry.request('GET', logurl + '?offset=' + lastLines, function (err, info) {
+function showlog(done) {
+  request('GET', syncInfo.logurl + '?offset=' + syncInfo.lastLines, function (err, info) {
     if (err) {
-      throw err;
+      return done(err);
     }
     var log = info.log.trim();
     if (!log) {
-      return setTimeout(showlog, 2000);
+      return setTimeout(showlog.bind(null, done), 2000);
     }
     console.log(log);
-    lastLines += log.split('\n').length;
-    if (log.indexOf('[done] Sync ' + name) >= 0) {
-      process.exit(0);
+    syncInfo.lastLines += log.split('\n').length;
+    if (log.indexOf('[done] Sync ' + syncInfo.name) >= 0) {
+      done();
     } else {
-      setTimeout(showlog, 2000);
+      setTimeout(showlog.bind(null, done), 2000);
     }
   });
 }
 
-npm.load({
-  registry: registry,
-  cache: argv.cachepath,
-  loglevel: 'warn',
-  userconfig: argv.userconfig,
-}, function (err) {
-  npm.registry.request('PUT', name + '/sync', {}, function (err, result) {
-    if (err) {
-      throw err;
-    }
-    logurl = name + '/sync/log/' + result.logId;
-    console.log('logurl: %s/%s', registry, logurl);
-    showlog();
-  });
-});
+/**
+ * Confirm for user input
+ */
+function confirm(desc, callback) {
+  process.stdout.write('\033[90m' + desc + '\033[0m');
+  process.stdin.setEncoding('utf8');
+  process.stdin.once('data', function (data) {
+    data = String(data).trim().toLowerCase();
+    callback(data === 'y' || data === 'yes');
+  }).resume();
+}
 
+function sync(name, callback) {
+  request('PUT', name + '/sync', {}, function (err, result, data, res) {
+    if (err) {
+      return callback(err);
+    }
+    if (res.statusCode === 404 || !result || !result.ok) {
+      return callback(null, {
+        ok: false,
+        statusCode: res.statusCode,
+        result: result,
+        data: data
+      });
+    }
+    syncInfo = {
+      name: name,
+      lastLines: 0,
+      logurl: name + '/sync/log/' + result.logId
+    };
+    console.log('logurl: %s/%s', registry, syncInfo.logurl);
+    showlog(function (err) {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, {ok: true});
+    });
+  });
+}
+
+function syncAllDependencies() {
+  var queue = new Bagpipe(1);
+  var remain = name.length;
+  if (!dependencies) {
+    console.log('Can not find any dependencies of %s', name);
+    process.exit(0);
+  }
+  console.log('Start sync %j.', dependencies);
+  var fail = [];
+  var success = [];
+  dependencies.forEach(function (name) {
+    queue.push(sync, name, function (err, data) {
+      remain--;
+      if (err) {
+        console.error(err.message);
+        fail.push(name);
+      } else if (!data.ok) {
+        fail.push(name);
+      } else {
+        success.push(name);
+      }
+      if (!remain) {
+        console.log('Sync all dependencies done, successed: %j, failed: %j', success, fail);
+        process.exit(0);
+      }
+    });
+  });
+}
+
+sync(name, function (err, data) {
+  if (err) {
+    throw err;
+  }
+  if (data.statusCode === 404) {
+    console.error('Can not found package %s in official registry', name);
+    if (args[1]) {
+      process.exit(1);
+    }
+    var des = '\n  Do you want to sync all dependencies and devDependencies of ' + name + '?(y/n)';
+    return confirm(des, function (yes) {
+      if (!yes) {
+        process.exit(1);
+      }
+      syncAllDependencies();
+    });
+  }
+
+  if (!data.ok) {
+    console.error('Sync error, statusCode %d, response data: %s', data.statusCode, data.data.toString());
+    process.exit(1);
+  }
+  process.exit(0);
+});
