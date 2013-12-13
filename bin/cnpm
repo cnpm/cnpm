@@ -19,8 +19,7 @@
 var program = require('commander');
 var child_process = require('child_process');
 var pkg = require('../package.json');
-var config = require('../config');
-
+var argv = require('../parse_argv')();
 var help = {
   'help': 1,
   '-h': 1,
@@ -28,7 +27,7 @@ var help = {
   'usage': 1
 };
 
-var action = process.argv[2];
+var action = argv.args[0];
 
 if (!action || help[action]) {
   var helpInfo = 'Usage: cnpm <command>\n' +
@@ -40,7 +39,7 @@ if (!action || help[action]) {
 '    sync [moduleName]              sync module from source npm (ex.: cnpm sync urllib)\n' +
 '    user [username]                open user profile page (ex.: cnpm user fengmk2)\n' +
 '\n' +
-'  npm command use --registry=' + config.cnpmRegistry + '\n' +
+'  npm command use --registry=' + argv.registry + '\n' +
 '    where <command> is one of:\n' +
 '    add-user, adduser, apihelp, author, bin, bugs, c, cache,\n' +
 '    completion, config, ddp, dedupe, deprecate, docs, edit,\n' +
@@ -60,7 +59,7 @@ if (!action || help[action]) {
 '      npm help npm     involved overview\n\n' +
 
 '      Specify configs in the ini-formatted file:\n' +
-'          ' + config.customConfig + '\n' +
+'          ' + argv.userconfig + '\n' +
 '      or on the command line via: npm <command> --key value\n' +
 '      Config info can be viewed via: npm help config';
   console.log(helpInfo);
@@ -81,14 +80,7 @@ var extendsMethd = {
 };
 
 if (extendsMethd[action]) {
-  program
-    .command('web', 'open cnpm web')
-    .command('check', 'check the dependencies in project')
-    .command('doc [modulename]', 'open document page')
-    .command('sync [moduleName]', 'sync module from source npm')
-    .command('user [username]', 'open user profile page')
-    .parse(process.argv);
-  return;
+  return require('./cnpm-' + action);
 }
 
 //origin npm with taobao registry

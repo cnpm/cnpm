@@ -18,8 +18,9 @@
 
 var open = require('open');
 var config = require('../config');
+var argv = require('../parse_argv')();
 
-var userURL = config.cnpmHost + '/~' + process.argv[2];
+var userURL = argv.registryweb + '/~' + argv.args[1];
 
 open(userURL, function (err, stdout, stderr) {
   if (err) {
