@@ -6,6 +6,7 @@
  *
  * Authors:
  *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
  */
 
 'use strict';
@@ -22,13 +23,13 @@ var parseArgv = require('./parse_argv');
 
 var program = parseArgv();
 
-var args = process.argv.slice(2);
+var args = program.args;
 
 var CWD = process.cwd();
 
 args.unshift('--registry=' + program.registry);
-args.unshift('--cache=' + config.cache);
-args.unshift('--userconfig=' + config.userconfig);
+args.unshift('--cache=' + program.cache);
+args.unshift('--userconfig=' + program.userconfig);
 
 var cmd = 'npm';
 if (process.platform === "win32") {
