@@ -28,19 +28,5 @@ var config = module.exports = {
   cnpmHost: 'http://cnpmjs.org',
   cnpmRegistry: 'http://registry.cnpmjs.org',
   cache: path.join(root, '.npm/.cache/cnpm'),  //cache folder name
-  customConfig: path.join(root, '.cnpmrc.json')
+  userconfig: path.join(root, '.cnpmrc')
 };
-
-if (fs.existsSync(config.customConfig)) {
-  var custom;
-  try {
-    custom = require(config.customConfig);
-  } catch (e) {
-    custom = null;
-  }
-  if (custom) {
-    for (var k in custom) {
-      config[k] = custom[k];
-    }
-  }
-}
