@@ -31,13 +31,13 @@ $ npm install cnpm -g
 #then alias it
 $ alias tnpm='cnpm --registry=http://registry.npm.alibaba-inc.com\
  --registryweb=http://npm.alibaba-inc.com\
- --cachepath=$HOME/.npm/.cache/tnpm\
+ --cache=$HOME/.npm/.cache/tnpm\
  --userconfig=$HOME/.tnpmrc'
 
 #or put this in your .zshrc / .bashrc
 $ echo "alias tnpm='cnpm --registry=http://registry.npm.alibaba-inc.com\
  --registryweb=http://npm.alibaba-inc.com\
- --cachepath=$HOME/.npm/.cache/tnpm\
+ --cache=$HOME/.npm/.cache/tnpm\
  --userconfig=$HOME/.tnpmrc'" >> $HOME/.zshrc && source $HOME/.zshrc
 ```
 

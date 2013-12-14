@@ -26,13 +26,13 @@ module.exports = function () {
   argv = program
     .option('-r, --registry [registry]', 'registry url, default is ' + config.cnpmRegistry)
     .option('-w, --registryweb [registryweb]', 'website url, default is ' + config.cnpmHost)
-    .option('-c, --cachepath [cachepath]', 'cache folder, default is ' + config.cache)
+    .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
     .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
     .parse(process.argv);
 
   argv.registry = argv.registry || config.cnpmRegistry;
   argv.registryweb = argv.registryweb || config.cnpmHost;
-  argv.cachepath = argv.cachepath || config.cache;
+  argv.cache = argv.cache || config.cache;
   argv.userconfig = argv.userconfig || config.userconfig;
   return argv;
 };

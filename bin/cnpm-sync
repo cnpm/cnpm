@@ -18,7 +18,6 @@
 var path = require('path');
 var request = require('../lib/request');
 var open = require('open');
-var npm = require('npm');
 var config = require('../config');
 var argv = require('../parse_argv')();
 var Bagpipe = require('bagpipe');
