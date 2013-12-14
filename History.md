@@ -1,4 +1,10 @@
 
+0.0.13 / 2013-12-14 
+==================
+
+  * support $ cnpm sync [moduleName1 moduleName2 ...], fixed #10
+  * fix origin_npm, use --cache instead of --cachepath
+
 0.0.12 / 2013-12-13 
 ==================
 
