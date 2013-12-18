@@ -29,6 +29,7 @@ var CWD = process.cwd();
 
 args.unshift('--registry=' + program.registry);
 args.unshift('--cache=' + program.cache);
+args.unshift('--disturl=' + program.disturl);
 args.unshift('--userconfig=' + program.userconfig);
 
 var cmd = 'npm';
