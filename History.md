@@ -1,4 +1,9 @@
 
+0.0.14 / 2013-12-18 
+==================
+
+  * use default disturl alias http://dist.u.qiniudn.com
+
 0.0.13 / 2013-12-14 
 ==================
 
