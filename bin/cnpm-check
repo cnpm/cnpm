@@ -54,7 +54,7 @@ function checkUpdate() {
       }
 
       var localVersion = String(pkg.dependencies[name] || '*')
-      var localVersionCheck = localVersion.replace(/[^\.\d]+/g, '');
+      var localVersionCheck = localVersion.replace(/^[^\.\d]+/g, '');
       var remoteVersion = result && result.version || 'unknow';
       if (remoteVersion !== localVersionCheck) {
         console.log('[' + name.yellow + '] new version: ' + remoteVersion.green + ', local version: ' + localVersion.yellow);
