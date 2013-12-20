@@ -29,6 +29,7 @@ module.exports = function () {
     .option('-w, --registryweb [registryweb]', 'website url, default is ' + config.cnpmHost)
     .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
     .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
+    .option('-y, --yes', 'yes all confirm')
     .parse(process.argv);
 
   argv.registry = argv.registry || config.cnpmRegistry;

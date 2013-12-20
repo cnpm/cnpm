@@ -160,6 +160,10 @@ function syncByPackage(packageName) {
       if (args[1]) {
         process.exit(1);
       }
+      if (argv.yes) {
+        return syncByNames(dependencies);
+      }
+
       var des = '\n  Do you want to sync all dependencies and devDependencies of ' + packageName + '?(y/n)';
       return confirm(des, function (yes) {
         if (!yes) {
