@@ -1,4 +1,10 @@
 
+0.0.15 / 2013-12-20 
+==================
+
+  * Merge pull request #12 from fengmk2/fix-source-npm-command
+  * fix origin npm commands
+
 0.0.14 / 2013-12-18 
 ==================
 
