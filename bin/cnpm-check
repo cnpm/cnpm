@@ -52,10 +52,12 @@ function checkUpdate() {
         console.log('[' + name.red + '] check version error: ' + err.message.red);
         return next();
       }
-      var version = pkg.dependencies[name];
-      if (!result.version || result.version !== version) {
-        result.version = String(result.version);
-        console.log('[' + name.yellow + '] new version: ' + result.version.green + ', local version: ' + version.yellow);
+
+      var localVersion = String(pkg.dependencies[name] || '*')
+      var localVersionCheck = localVersion.replace(/[^\.\d]+/g, '');
+      var remoteVersion = result && result.version || 'unknow';
+      if (remoteVersion !== localVersionCheck) {
+        console.log('[' + name.yellow + '] new version: ' + remoteVersion.green + ', local version: ' + localVersion.yellow);
       }
       next();
     });
