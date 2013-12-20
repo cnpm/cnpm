@@ -23,7 +23,7 @@ var parseArgv = require('./parse_argv');
 
 var program = parseArgv();
 
-var args = program.args;
+var args = program.rawArgs.slice(2);
 
 var CWD = process.cwd();
 
