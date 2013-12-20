@@ -17,7 +17,6 @@
  */
 
 var program = require('commander');
-var child_process = require('child_process');
 var pkg = require('../package.json');
 var argv = require('../parse_argv')();
 var help = {
@@ -27,12 +26,12 @@ var help = {
   'usage': 1
 };
 
-var action = argv.args[0];
+var action = argv.rawArgs[2];
 
 if (!action || help[action]) {
   var helpInfo = 'Usage: cnpm <command>\n' +
 'Help: http://cnpmjs.org/help/cnpm\n\n' +
-'  Extend command\n' +
+'  Extend commands:\n' +
 '    web                            open cnpm web (ex.: tnpm web)\n' +
 '    check [ingoreupdate]           check project dependencies, add ignoreupdate will not check modules\' latest version(ex.: cnpm check, cnpm check -i)\n' +
 '    doc [moduleName]               open document page (ex.: cnpm doc urllib)\n' +
