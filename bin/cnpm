@@ -48,7 +48,7 @@ if (!action || help[action]) {
 '    publish, r, rb, rebuild, remove, restart, rm, root,\n' +
 '    run-script, s, se, search, set, show, shrinkwrap, star,\n' +
 '    start, stop, submodule, tag, test, tst, un, uninstall,\n' +
-'    unlink, unpublish, unstar, up, update, version, view,\n' +
+'    unlink, unpublish, unstar, up, update, v, version, view,\n' +
 '    whoami\n' +
 
 '      npm <cmd> -h     quick help on <cmd>\n' +
