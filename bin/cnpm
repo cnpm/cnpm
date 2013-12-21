@@ -23,8 +23,6 @@ var argv = require('../parse_argv')();
 
 var action = argv.args[0];
 
-console.log(argv);
-
 var extendsMethd = {
   web: 1,
   check: 1,
