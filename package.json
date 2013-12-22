@@ -21,7 +21,8 @@
     "cnpm-sync": "./bin/cnpm-sync",
     "cnpm-web": "./bin/cnpm-web",
     "cnpm-user": "./bin/cnpm-user",
-    "cnpm-doc": "./bin/cnpm-doc"
+    "cnpm-doc": "./bin/cnpm-doc",
+    "cnpm-search": "./bin/cnpm-search"
   },
   "dependencies": {
     "urllib": ">=0.5.5",

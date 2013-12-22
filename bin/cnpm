@@ -29,6 +29,7 @@ var extendsMethd = {
   doc: 1,
   sync: 1,
   user: 1,
+  search: 1,
 };
 
 if (extendsMethd[action]) {
