@@ -32,12 +32,11 @@ module.exports = function () {
     .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
     .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
     .option('-y, --yes', 'yes all confirm');
-  
+
   // commander's bug, fix here
   // https://github.com/visionmedia/commander.js/pull/189
   var cacheInfo;
   argv.on('cache', function (cache) {
-    console.log(cache);
     if (typeof cache === 'string') {
       cacheInfo = cache;
       return;
