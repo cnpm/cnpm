@@ -47,14 +47,15 @@ $ echo "alias tnpm='cnpm --registry=http://registry.npm.alibaba-inc.com\
 $ git summary
 
  project  : cnpm
- repo age : 11 days
- active   : 14 days
- commits  : 44
- files    : 17
+ repo age : 13 days
+ active   : 18 days
+ commits  : 50
+ files    : 19
  authors  :
-    38  fengmk2                 86.4%
-     5  dead_horse              11.4%
-     1  不四                  2.3%
+    40  fengmk2                 80.0%
+     8  dead_horse              16.0%
+     1  Jakukyo Friel           2.0%
+     1  不四                  2.0%
 ```
 
 ## License

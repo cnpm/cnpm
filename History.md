@@ -1,4 +1,11 @@
 
+0.0.19 / 2013-12-22 
+==================
+
+  * fix cannot get sub command with options, fixed #16
+  * fix help info output error, fixed #15
+  * cnpm --help: add command `v` (@weakish)
+
 0.0.18 / 2013-12-20 
 ==================
 
