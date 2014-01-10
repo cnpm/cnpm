@@ -16,16 +16,19 @@
  */
 
 var path = require('path');
-var request = require('../lib/request');
 var open = require('open');
-var config = require('../config');
-var argv = require('../parse_argv')();
 var Bagpipe = require('bagpipe');
 var fs = require('fs');
+var querystring = require('querystring');
+var request = require('../lib/request');
+var config = require('../config');
+var argv = require('../parse_argv')();
 
 var args = argv.args;
 var registry = argv.registry;
 var registryweb = argv.registryweb;
+var nodeps = argv.deps ? false: true;
+var publish = argv.publish ? true : false;
 
 var names = args.slice(1);
 var packageName;
@@ -56,7 +59,10 @@ if (names && names.length) {
 } else if (packageName) {
   syncByPackage(packageName);
 } else {
-  console.log('Usage: $ cnpm sync [moduleName1 moduleName2 ...]');
+  console.log('Usage: $ cnpm sync [moduleName1 moduleName2 ...]\n\n\
+Options:\n\
+  --publish        sync as publish\n\
+  --no-deps        do not sync dependencies and devDependencies\n');
   process.exit(1);
 }
 
@@ -94,11 +100,20 @@ function confirm(desc, callback) {
 }
 
 function sync(name, callback) {
-  request('PUT', name + '/sync', {}, function (err, result, data, res) {
+  var url = name + '/sync?';
+  url += querystring.stringify({
+    publish: publish,
+    nodeps: nodeps,
+  });
+  console.log('sync %s, PUT %s', name, url);
+  request('PUT', url, {}, function (err, result, data, res) {
     if (err) {
       return callback(err);
     }
     if (res.statusCode === 404 || !result || !result.ok) {
+      if (result.reason) {
+        console.error('[%s] %s: %s', res.statusCode, result.error, result.reason);
+      }
       return callback(null, {
         ok: false,
         statusCode: res.statusCode,
