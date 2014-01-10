@@ -3,7 +3,7 @@ cnpm
 
 [![NPM](https://nodei.co/npm/cnpm.png?downloads=true&stars=true)](https://nodei.co/npm/cnpm/)
 
-![logo](https://raw.github.com/fengmk2/cnpmjs.org/master/logo.png)
+![logo](https://raw.github.com/cnpm/cnpmjs.org/master/logo.png)
 
 cnpm: npm client for [cnpmjs.org](http://cnpmjs.org)
 
@@ -25,7 +25,7 @@ $ cnpm sync [moduleName]
 
 ## Build your own private registry npm cli
 
-```
+```bash
 $ npm install cnpm -g
 
 #then alias it
