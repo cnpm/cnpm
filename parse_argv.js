@@ -31,7 +31,10 @@ module.exports = function () {
     .option('-w, --registryweb [registryweb]', 'website url, default is ' + config.cnpmHost)
     .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
     .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
-    .option('-y, --yes', 'yes all confirm');
+    .option('-y, --yes', 'yes all confirm')
+    .option('--publish', '[sync options] sync as publish')
+    .option('--no-deps', '[sync options] do not sync dependencies and devDependencies')
+    ;
 
   // commander's bug, fix here
   // https://github.com/visionmedia/commander.js/pull/189
