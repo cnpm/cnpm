@@ -27,6 +27,7 @@ module.exports = function () {
   argv = program
     .version(pkg.version, '-v, --version')
     .option('-r, --registry [registry]', 'registry url, default is ' + config.cnpmRegistry)
+    .option('-w, --registryweb [registryweb]', 'registry web url, default is ' + config.cnpmHost)
     .option('--disturl [disturl]', 'dist url for node-gyp, default is ' + config.disturl)
     .option('-w, --registryweb [registryweb]', 'website url, default is ' + config.cnpmHost)
     .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
