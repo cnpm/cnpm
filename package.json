@@ -34,6 +34,7 @@
     "urllib": "0.5.5"
   },
   "devDependencies": {
+    "autod": "*",
     "blanket": "*",
     "coveralls": "*",
     "mocha": "*",
