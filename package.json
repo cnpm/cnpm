@@ -25,21 +25,22 @@
     "cnpm-search": "./bin/cnpm-search"
   },
   "dependencies": {
-    "urllib": ">=0.5.5",
-    "open": "0.0.4",
+    "bagpipe": "0.3.5",
     "colors": "0.6.2",
-    "debug": ">=0.7.4",
     "commander": "2.1.0",
-    "utility": ">=0.1.9",
-    "bagpipe": "0.3.5"
+    "debug": "0.7.4",
+    "npm-request": "0.0.3",
+    "open": "0.0.4",
+    "urllib": "0.5.5"
   },
   "devDependencies": {
-    "should": "*",
+    "autod": "*",
     "blanket": "*",
-    "travis-cov": "*",
     "coveralls": "*",
+    "mocha": "*",
     "mocha-lcov-reporter": "*",
-    "mocha": "*"
+    "should": "*",
+    "travis-cov": "*"
   },
   "homepage": "https://github.com/fengmk2/cnpm",
   "repository": {

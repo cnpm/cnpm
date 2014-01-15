@@ -20,7 +20,7 @@ var open = require('open');
 var Bagpipe = require('bagpipe');
 var fs = require('fs');
 var querystring = require('querystring');
-var request = require('../lib/request');
+var request = require('npm-request');
 var config = require('../config');
 var argv = require('../parse_argv')();
 
@@ -33,6 +33,11 @@ var publish = argv.publish ? true : false;
 var names = args.slice(1);
 var packageName;
 var dependencies = [];
+
+var NPM_OPTIONS = {
+  registry: registry,
+  configFile: argv.userconfig
+};
 
 var packagePath = path.join(process.cwd(), 'package.json');
 if (!names.length && fs.existsSync(packagePath)) {
@@ -69,7 +74,10 @@ Options:\n\
 var syncInfo = {};
 
 function showlog(done) {
-  request('GET', syncInfo.logurl + '?offset=' + syncInfo.lastLines, function (err, info) {
+  request({
+    method: 'GET',
+    path: syncInfo.logurl + '?offset=' + syncInfo.lastLines
+  }, NPM_OPTIONS, function (err, info) {
     if (err) {
       return done(err);
     }
@@ -106,7 +114,11 @@ function sync(name, callback) {
     nodeps: nodeps,
   });
   console.log('sync %s, PUT %s', name, url);
-  request('PUT', url, {}, function (err, result, data, res) {
+  request({
+    method: 'PUT',
+    path: url,
+    data: {}
+  }, NPM_OPTIONS, function (err, result, data, res) {
     if (err) {
       return callback(err);
     }

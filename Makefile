@@ -6,6 +6,10 @@ MOCHA_OPTS =
 install:
 	@npm install --registry=http://registry.cnpmjs.org
 
+autod:
+	@./node_modules/.bin/autod -w
+	@$(MAKE) install
+
 test: install
 	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
 		--reporter $(REPORTER) \
@@ -28,4 +32,3 @@ test-coveralls: test
 test-all: test test-cov
 
 .PHONY: test
-
