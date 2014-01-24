@@ -15,6 +15,7 @@
       "threshold": 90
     }
   },
+  "preferGlobal": true,
   "bin": {
     "cnpm": "./bin/cnpm",
     "cnpm-check": "./bin/cnpm-check",
