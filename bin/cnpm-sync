@@ -28,7 +28,7 @@ var args = argv.args;
 var registry = argv.registry;
 var registryweb = argv.registryweb;
 var nodeps = argv.deps ? false: true;
-var publish = argv.publish ? true : false;
+var publish = argv.syncPublish ? true : false;
 
 var names = args.slice(1);
 var packageName;

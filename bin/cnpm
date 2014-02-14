@@ -16,6 +16,7 @@
  * Module dependencies.
  */
 
+var debug = require('debug')('cnpm');
 var program = require('commander');
 var child_process = require('child_process');
 var pkg = require('../package.json');
@@ -32,9 +33,11 @@ var extendsMethd = {
   search: 1,
 };
 
+debug('cnpm %s', action);
+
 if (extendsMethd[action]) {
   return require('./cnpm-' + action);
 }
 
-//origin npm with taobao registry
+debug('origin npm with orgian registry: $ npm %s', action);
 require('../origin_npm.js');

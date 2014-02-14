@@ -20,6 +20,7 @@ var config = require('./config');
 var pkg = require('./package.json');
 var help = require('./help');
 var argv;
+
 module.exports = function () {
   if (argv) {
     return argv;
@@ -33,7 +34,7 @@ module.exports = function () {
     .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
     .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
     .option('-y, --yes', 'yes all confirm')
-    .option('--publish', '[sync options] sync as publish')
+    .option('--sync-publish', '[sync options] sync as publish')
     .option('--no-deps', '[sync options] do not sync dependencies and devDependencies')
     ;
 
