@@ -28,16 +28,18 @@ $ cnpm sync [moduleName]
 ```bash
 $ npm install cnpm -g
 
-#then alias it
-$ alias tnpm='cnpm --registry=http://registry.npm.alibaba-inc.com\
- --registryweb=http://npm.alibaba-inc.com\
- --cache=$HOME/.npm/.cache/tnpm\
+# then alias it
+$ alias tnpm='cnpm --registry=http://registry.npm.example.com \
+ --disturl=http://dist.cnpmjs.org \
+ --registryweb=http://npm.example.com \
+ --cache=$HOME/.npm/.cache/tnpm \
  --userconfig=$HOME/.tnpmrc'
 
-#or put this in your .zshrc / .bashrc
-$ echo "alias tnpm='cnpm --registry=http://registry.npm.alibaba-inc.com\
- --registryweb=http://npm.alibaba-inc.com\
- --cache=$HOME/.npm/.cache/tnpm\
+# or put this in your .zshrc / .bashrc
+$ echo "alias tnpm='cnpm --registry=http://registry.npm.example.com \
+ --disturl=http://dist.cnpmjs.org \
+ --registryweb=http://npm.example.com \
+ --cache=$HOME/.npm/.cache/tnpm \
  --userconfig=$HOME/.tnpmrc'" >> $HOME/.zshrc && source $HOME/.zshrc
 ```
 

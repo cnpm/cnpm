@@ -1,6 +1,6 @@
 {
   "name": "cnpm",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "scripts": {
@@ -32,7 +32,7 @@
     "debug": "0.7.4",
     "npm-request": "0.0.3",
     "open": "0.0.4",
-    "urllib": "0.5.6"
+    "urllib": "0.5.8"
   },
   "devDependencies": {
     "autod": "*",
