@@ -4,9 +4,9 @@ TIMEOUT = 1000
 MOCHA_OPTS =
 
 install:
-	@npm install --registry=http://registry.cnpmjs.org
+	@npm install --registry=http://registry.cnpmjs.org --disturl=http://dist.cnpmjs.org
 
-autod:
+autod: install
 	@./node_modules/.bin/autod -w
 	@$(MAKE) install
 
