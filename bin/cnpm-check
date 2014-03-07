@@ -53,7 +53,7 @@ function checkUpdate() {
         return next();
       }
 
-      var localVersion = String(pkg.dependencies[name] || '*')
+      var localVersion = String(pkg.dependencies[name] || '*');
       var localVersionCheck = localVersion.replace(/^[^\.\d]+/g, '');
       var remoteVersion = result && result.version || 'unknow';
       if (remoteVersion !== localVersionCheck) {

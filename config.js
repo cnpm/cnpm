@@ -28,7 +28,7 @@ if (process.platform === 'win32') {
 var config = module.exports = {
   cnpmHost: 'http://cnpmjs.org',
   cnpmRegistry: 'http://r.cnpmjs.org',
-  disturl: 'http://cnpmjs.org/dist', // download dist tarball for node-gyp
-  cache: path.join(root, '.npm/.cache/cnpm'),  //cache folder name
+  disturl: 'http://dist.cnpmjs.org', // download dist tarball for node-gyp
+  cache: path.join(root, '.npm/.cache_cnpm'),  //cache folder name
   userconfig: path.join(root, '.cnpmrc')
 };

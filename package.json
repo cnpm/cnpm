@@ -32,12 +32,13 @@
     "debug": "0.7.4",
     "npm-request": "0.0.3",
     "open": "0.0.4",
-    "urllib": "0.5.5"
+    "urllib": "0.5.6"
   },
   "devDependencies": {
     "autod": "*",
     "blanket": "*",
     "coveralls": "*",
+    "jshint": "*",
     "mocha": "*",
     "mocha-lcov-reporter": "*",
     "should": "*",

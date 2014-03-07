@@ -10,6 +10,9 @@ autod:
 	@./node_modules/.bin/autod -w
 	@$(MAKE) install
 
+jshint: install
+	@./node_modules/.bin/jshint .
+
 test: install
 	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
 		--reporter $(REPORTER) \
@@ -29,6 +32,6 @@ test-coveralls: test
 	@echo TRAVIS_JOB_ID $(TRAVIS_JOB_ID)
 	@-$(MAKE) test MOCHA_OPTS='--require blanket' REPORTER=mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
 
-test-all: test test-cov
+test-all: jshint test test-cov
 
 .PHONY: test
