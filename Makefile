@@ -7,7 +7,7 @@ install:
 	@npm install --registry=http://registry.cnpmjs.org --disturl=http://dist.cnpmjs.org
 
 autod: install
-	@./node_modules/.bin/autod -w
+	@./node_modules/.bin/autod -w -k npm-beta
 	@$(MAKE) install
 
 jshint: install
