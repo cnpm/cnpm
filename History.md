@@ -1,4 +1,11 @@
 
+0.0.29 / 2014-03-13 
+==================
+
+  * update to deps npm-beta, use latest version of npm
+  * Release 0.0.28
+  * update urllib
+
 0.0.28 / 2014-03-07 
 ==================
 
