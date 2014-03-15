@@ -48,7 +48,7 @@ if (process.platform === "win32") {
 cmd = path.join(nodeModulesDir, cmd);
 
 // if npm-beta not exists, use npm. happen on `$ cnpm install cnpm`
-if (!fs.existsSync(cmd)) {
+if (!fs.existsSync(cmd) || args.join(' ').indexOf(' cnpm') >= 0) {
   cmd = 'npm';
   if (process.platform === "win32") {
     cmd = 'npm.cmd';
