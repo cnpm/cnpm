@@ -23,6 +23,13 @@ Support all commands just like `npm`.
 $ cnpm sync [moduleName]
 ```
 
+### Open package document or git web url
+
+```bash
+$ cnpm doc [name]
+$ cnpm doc -g [name] # open git web url directly
+```
+
 ## Build your own private registry npm cli
 
 ```bash
