@@ -16,17 +16,39 @@
  * Module dependencies.
  */
 
-var open = require('open');
-var argv = require('../parse_argv')();
-var docurl = argv.registryweb + '/package/' + argv.args[1];
+var request = require('npm-request');
+var giturl = require('giturl');
+var utils = require('../utils');
+var argv = require('../parse_argv')('doc');
+var pkgName = argv.args[1];
+var docurl = argv.registryweb + '/package/' + pkgName;
 
-open(docurl, function (err, stdout, stderr) {
+if (!pkgName) {
+  return argv.help();
+}
+
+console.log('getting "%s" package info...', pkgName);
+request({
+  method: 'GET',
+  path: pkgName + '/latest'
+}, {
+  registry: argv.registry
+}, function (err, info) {
   if (err) {
-    console.log('Can not open browser, please open your browser to visit: ' + docurl);
+    console.error(err);
+    process.exit(-1);
+  }
+
+  if (!info.name) {
+    console.log('"%s" package not exists', name);
     process.exit(0);
   }
-  if (stdout || stderr) {
-    console.log(stdout, stderr);
+
+  var repository = info.repository;
+  if (!repository || !repository.url) {
+    return utils.openurl(docurl);
   }
-  process.exit(0);
+
+  var url = giturl.parse(repository.url) || docurl;
+  utils.openurl(url);
 });

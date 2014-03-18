@@ -11,18 +11,19 @@
  *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
  */
 
+'use strict';
+
 /**
  * Module dependencies.
  */
 
 var path = require('path');
-var open = require('open');
 var Bagpipe = require('bagpipe');
 var fs = require('fs');
 var querystring = require('querystring');
 var request = require('npm-request');
 var config = require('../config');
-var argv = require('../parse_argv')();
+var argv = require('../parse_argv')('sync');
 
 var args = argv.args;
 var registry = argv.registry;
@@ -99,7 +100,7 @@ function showlog(done) {
  * Confirm for user input
  */
 function confirm(desc, callback) {
-  process.stdout.write('\033[90m' + desc + '\033[0m');
+  process.stdout.write('\u0033[90m' + desc + '\u0033[0m');
   process.stdin.setEncoding('utf8');
   process.stdin.once('data', function (data) {
     data = String(data).trim().toLowerCase();

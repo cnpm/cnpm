@@ -19,24 +19,26 @@ var program = require('commander');
 var config = require('./config');
 var pkg = require('./package.json');
 var help = require('./help');
-var argv;
+var argv = null;
 
-module.exports = function () {
-  if (argv) {
-    return argv;
+module.exports = function (cmd) {
+  if (!argv) {
+    argv = program.version(pkg.version, '-v, --version')
+      .option('-r, --registry [registry]', 'registry url, default is ' + config.cnpmRegistry)
+      .option('-w, --registryweb [registryweb]', 'registry web url, default is ' + config.cnpmHost)
+      .option('--disturl [disturl]', 'dist url for node-gyp, default is ' + config.disturl)
+      .option('-w, --registryweb [registryweb]', 'website url, default is ' + config.cnpmHost)
+      .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
+      .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
+      .option('-y, --yes', 'yes all confirm');
   }
-  argv = program
-    .version(pkg.version, '-v, --version')
-    .option('-r, --registry [registry]', 'registry url, default is ' + config.cnpmRegistry)
-    .option('-w, --registryweb [registryweb]', 'registry web url, default is ' + config.cnpmHost)
-    .option('--disturl [disturl]', 'dist url for node-gyp, default is ' + config.disturl)
-    .option('-w, --registryweb [registryweb]', 'website url, default is ' + config.cnpmHost)
-    .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
-    .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
-    .option('-y, --yes', 'yes all confirm')
-    .option('--sync-publish', '[sync options] sync as publish')
-    .option('--no-deps', '[sync options] do not sync dependencies and devDependencies')
-    ;
+
+  if (cmd === 'doc') {
+    argv.option('-g, --git', '[doc options] open git url');
+  } else if (cmd === 'sync') {
+    argv.option('--sync-publish', '[sync options] sync as publish')
+      .option('--no-deps', '[sync options] do not sync dependencies and devDependencies');
+  }
 
   // commander's bug, fix here
   // https://github.com/visionmedia/commander.js/pull/189
@@ -61,7 +63,7 @@ module.exports = function () {
   argv.on('--help', function () {
     help(helpInfo);
   });
-  argv.parse(process.argv);
+  argv.parse(process.argv.slice());
 
   if (!argv.args.length) {
     argv.help();
@@ -74,4 +76,3 @@ module.exports = function () {
   argv.userconfig = argv.userconfig || config.userconfig;
   return argv;
 };
-

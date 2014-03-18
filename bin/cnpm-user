@@ -16,20 +16,10 @@
  * Module dependencies.
  */
 
-var open = require('open');
+var utils = require('../utils');
 var config = require('../config');
 var argv = require('../parse_argv')();
 
 var userURL = argv.registryweb + '/~' + argv.args[1];
 
-open(userURL, function (err, stdout, stderr) {
-  if (err) {
-    console.log('Can not open browser, please open your browser to visit: ' + userURL);
-    process.exit(0);
-  }
-  if (stdout || stderr) {
-    console.log(stdout, stderr);
-  }
-  process.exit(0);
-});
-
+utils.openurl(userURL);

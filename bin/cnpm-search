@@ -16,17 +16,8 @@
  * Module dependencies.
  */
 
-var open = require('open');
+var utils = require('../utils');
 var argv = require('../parse_argv')();
 var searchurl = argv.registryweb + '/browse/keyword/' + argv.args[1];
 
-open(searchurl, function (err, stdout, stderr) {
-  if (err) {
-    console.log('Can not open browser, please open your browser to visit: ' + searchurl);
-    process.exit(0);
-  }
-  if (stdout || stderr) {
-    console.log(stdout, stderr);
-  }
-  process.exit(0);
-});
+utils.openurl(searchurl);
