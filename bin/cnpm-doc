@@ -27,6 +27,10 @@ if (!pkgName) {
   return argv.help();
 }
 
+if (!argv.git) {
+  return utils.openurl(docurl);
+}
+
 console.log('getting "%s" package info...', pkgName);
 request({
   method: 'GET',
