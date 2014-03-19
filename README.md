@@ -10,7 +10,7 @@ cnpm: npm client for [cnpmjs.org](http://cnpmjs.org)
 ## Install
 
 ```bash
-$ npm install cnpm -g
+$ npm install cnpm -g --registry=http://r.cnpmjs.org
 ```
 
 ## Usage
