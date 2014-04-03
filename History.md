@@ -1,4 +1,10 @@
 
+0.0.34 / 2014-04-03
+==================
+
+ * deps npm instead of npm-beta
+ * update install from cnpm
+
 0.0.33 / 2014-03-18 
 ==================
 
