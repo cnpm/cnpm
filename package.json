@@ -28,13 +28,13 @@
   "dependencies": {
     "bagpipe": "0.3.5",
     "colors": "0.6.2",
-    "commander": "2.1.0",
-    "debug": "0.7.4",
+    "commander": "2.2.0",
+    "debug": "0.8.0",
     "giturl": "0.0.2",
-    "npm-beta": ">=1.4.8",
+    "npm": ">=1.4.6",
     "npm-request": "0.0.4",
     "open": "0.0.4",
-    "urllib": "0.5.11"
+    "urllib": "0.5.13"
   },
   "devDependencies": {
     "autod": "*",

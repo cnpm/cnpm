@@ -16,7 +16,7 @@
  */
 
 require('colors');
-var debug = require('debug')('cnpm');
+var debug = require('debug')('cnpm:origin');
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 var path = require('path');
@@ -41,9 +41,9 @@ args.unshift('--disturl=' + program.disturl);
 args.unshift('--userconfig=' + program.userconfig);
 
 var nodeModulesDir = path.join(__dirname, 'node_modules', '.bin');
-var cmd = 'npm-beta';
+var cmd = 'npm';
 if (process.platform === "win32") {
-  cmd = 'npm-beta.cmd';
+  cmd = 'npm.cmd';
 }
 cmd = path.join(nodeModulesDir, cmd);
 
