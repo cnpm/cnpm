@@ -6,3 +6,4 @@ Makefile
 logo.png
 .jshintrc
 .jshintignore
+build/
