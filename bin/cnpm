@@ -17,7 +17,6 @@
  */
 
 var debug = require('debug')('cnpm');
-var program = require('commander');
 var pkg = require('../package.json');
 var argv = require('../parse_argv')();
 
