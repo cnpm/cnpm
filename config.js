@@ -26,8 +26,9 @@ if (process.platform === 'win32') {
 }
 
 var config = module.exports = {
-  cnpmHost: 'http://cnpmjs.org',
-  cnpmRegistry: 'http://r.cnpmjs.org',
+  cnpmHost: 'http://npm.taobao.org',
+  // cnpmRegistry: 'http://r.cnpmjs.org',
+  cnpmRegistry: 'http://registry.npm.taobao.org',
   disturl: 'http://dist.cnpmjs.org', // download dist tarball for node-gyp
   cache: path.join(root, '.npm/.cache_cnpm'),  //cache folder name
   userconfig: path.join(root, '.cnpmrc')

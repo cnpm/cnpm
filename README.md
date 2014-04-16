@@ -58,23 +58,6 @@ $ echo "alias tnpm='cnpm --registry=http://registry.npm.example.com \
  --userconfig=$HOME/.tnpmrc'" >> $HOME/.zshrc && source $HOME/.zshrc
 ```
 
-## Authors
-
-```bash
-$ git summary
-
- project  : cnpm
- repo age : 13 days
- active   : 18 days
- commits  : 50
- files    : 19
- authors  :
-    40  fengmk2                 80.0%
-     8  dead_horse              16.0%
-     1  Jakukyo Friel           2.0%
-     1  不四                  2.0%
-```
-
 ## License
 
 (The MIT License)
