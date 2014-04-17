@@ -1,4 +1,12 @@
 
+0.1.0 / 2014-04-17
+==================
+
+ * switch registry to taobao npm registry
+ * remove unused commander
+ * remove unused 'child_process' in bin/cnpm
+ * download from cdn
+
 0.0.35 / 2014-04-03
 ==================
 
