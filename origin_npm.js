@@ -16,6 +16,7 @@
  */
 
 require('colors');
+var match = require('auto-correct');
 var debug = require('debug')('cnpm:origin');
 var spawn = require('child_process').spawn;
 var fs = require('fs');
@@ -26,6 +27,12 @@ var parseArgv = require('./parse_argv');
 var program = parseArgv();
 
 var args = program.rawArgs.slice(2);
+
+for (var i = 0; i < args.length; i++) {
+  if (args[i][0] !== '-') {
+    args[i] = correct(args[i]);
+  }
+}
 
 var CWD = process.cwd();
 
@@ -70,3 +77,24 @@ var npm  = spawn(cmd, args, {
 npm.on('exit', function (code, signal) {
   process.exit(code);
 });
+
+/**
+ * correct command
+ * @return {[type]} [description]
+ */
+function correct(command) {
+  var cmds = [
+    'install',
+    'publish',
+    'adduser',
+    'author',
+    'config',
+    'unpublish',
+  ];
+  for (var i = 0; i < cmds.length; i++) {
+    if (match(command, cmds[i])) {
+      return cmds[i];
+    }
+  }
+  return command;
+}
