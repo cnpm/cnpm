@@ -26,19 +26,20 @@ var config = require('../config');
 var argv = require('../parse_argv')('sync');
 
 var args = argv.args;
-var registry = argv.registry;
-var registryweb = argv.registryweb;
+var registrys = [argv.registry];
+var registrywebs = {};
+registrywebs[argv.registry] = argv.registryweb;
+if (registrys[0].indexOf('registry.npm.taobao.org') >= 0) {
+  registrys.unshift('http://r.cnpmjs.org');
+  registrywebs['http://r.cnpmjs.org'] = 'http://cnpmjs.org';
+}
+
 var nodeps = argv.deps ? false: true;
 var publish = argv.syncPublish ? true : false;
 
 var names = args.slice(1);
 var packageName;
 var dependencies = [];
-
-var NPM_OPTIONS = {
-  registry: registry,
-  configFile: argv.userconfig
-};
 
 var packagePath = path.join(process.cwd(), 'package.json');
 if (!names.length && fs.existsSync(packagePath)) {
@@ -72,54 +73,52 @@ Options:\n\
   process.exit(1);
 }
 
-var syncInfo = {};
+// var syncInfo = {};
+// var NPM_OPTIONS = {
+//   registry: registry,
+//   configFile: argv.userconfig
+// };
 
-function showlog(done) {
+function showlog(registry, syncInfo, done) {
   request({
     method: 'GET',
     path: syncInfo.logurl + '?offset=' + syncInfo.lastLines
-  }, NPM_OPTIONS, function (err, info) {
+  }, {
+    registry: registry,
+    configFile: argv.userconfig
+  }, function (err, info) {
     if (err) {
       return done(err);
     }
     var log = info.log.trim();
     if (!log) {
-      return setTimeout(showlog.bind(null, done), 2000);
+      return setTimeout(showlog.bind(null, registry, syncInfo, done), 2000);
     }
     console.log(log);
     syncInfo.lastLines += log.split('\n').length;
     if (log.indexOf('[done] Sync ' + syncInfo.name) >= 0) {
       done();
     } else {
-      setTimeout(showlog.bind(null, done), 2000);
+      setTimeout(showlog.bind(null, registry, syncInfo, done), 2000);
     }
   });
 }
 
-/**
- * Confirm for user input
- */
-function confirm(desc, callback) {
-  process.stdout.write('\u0033[90m' + desc + '\u0033[0m');
-  process.stdin.setEncoding('utf8');
-  process.stdin.once('data', function (data) {
-    data = String(data).trim().toLowerCase();
-    callback(data === 'y' || data === 'yes');
-  }).resume();
-}
-
-function sync(name, callback) {
+function sync(registry, name, callback) {
   var url = name + '/sync?';
   url += querystring.stringify({
     publish: publish,
     nodeps: nodeps,
   });
-  console.log('sync %s, PUT %s', name, url);
+  console.log('sync %s, PUT %s/%s', name, registry, url);
   request({
     method: 'PUT',
     path: url,
     data: {}
-  }, NPM_OPTIONS, function (err, result, data, res) {
+  }, {
+    registry: registry,
+    configFile: argv.userconfig
+  }, function (err, result, data, res) {
     if (err) {
       return callback(err);
     }
@@ -134,13 +133,13 @@ function sync(name, callback) {
         data: data
       });
     }
-    syncInfo = {
+    var syncInfo = {
       name: name,
       lastLines: 0,
       logurl: name + '/sync/log/' + result.logId
     };
-    console.log('logurl: %s/sync/%s#logid=%d', registryweb, name, result.logId);
-    showlog(function (err) {
+    console.log('logurl: %s/sync/%s#logid=%d', registrywebs[registry], name, result.logId);
+    showlog(registry, syncInfo, function (err) {
       if (err) {
         return callback(err);
       }
@@ -151,7 +150,7 @@ function sync(name, callback) {
 
 function syncByNames(names) {
   var queue = new Bagpipe(1);
-  var remain = names.length;
+  var remain = names.length * registrys.length;
   if (!names) {
     console.log('Can not find any packages to sync.');
     process.exit(0);
@@ -159,52 +158,32 @@ function syncByNames(names) {
   console.log('Start sync %j.', names);
   var fail = [];
   var success = [];
-  names.forEach(function (name) {
-    queue.push(sync, name, function (err, data) {
-      remain--;
-      if (err) {
-        console.error(err.message);
-        fail.push(name);
-      } else if (!data.ok) {
-        fail.push(name);
-      } else {
-        success.push(name);
-      }
-      if (!remain) {
-        console.log('Sync all packages done, successed: %j, failed: %j', success, fail);
-        process.exit(0);
-      }
+  registrys.forEach(function (registry) {
+    names.forEach(function (name) {
+      queue.push(sync, registry, name, function (err, data) {
+        remain--;
+        if (err) {
+          console.error(err.message);
+          fail.push(name);
+        } else if (!data.ok) {
+          fail.push(name);
+        } else {
+          success.push(name);
+        }
+        if (!remain) {
+          console.log('Sync all packages done, successed: %j, failed: %j', success, fail);
+          process.exit(0);
+        }
+      });
     });
   });
 }
 
 function syncByPackage(packageName) {
-  sync(packageName, function (err, data) {
-    if (err) {
-      throw err;
-    }
-    if (data.statusCode === 404) {
-      console.error('Can not found package %s in official registry', packageName);
-      if (args[1]) {
-        process.exit(1);
-      }
-      if (argv.yes) {
-        return syncByNames(dependencies);
-      }
+  if (argv.yes) {
+    dependencies.unshift(packageName);
+    return syncByNames(dependencies);
+  }
 
-      var des = '\n  Do you want to sync all dependencies and devDependencies of ' + packageName + '?(y/n)';
-      return confirm(des, function (yes) {
-        if (!yes) {
-          process.exit(1);
-        }
-        syncByNames(dependencies);
-      });
-    }
-
-    if (!data.ok) {
-      console.error('Sync error, statusCode %d, response data: %s', data.statusCode, data.data.toString());
-      process.exit(1);
-    }
-    process.exit(0);
-  });
+  syncByNames([packageName]);
 }

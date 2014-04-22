@@ -1,7 +1,7 @@
 {
   "name": "cnpm",
   "version": "0.1.1",
-  "description": "cnpm: npm client for cnpmjs.org",
+  "description": "cnpm: npm client for http://npm.taobao.org",
   "main": "bin/cnpm",
   "scripts": {
     "test": "make test-all",
@@ -32,29 +32,23 @@
     "commander": "2.2.0",
     "debug": "0.8.0",
     "giturl": "0.0.2",
-    "npm": ">=1.4.6",
+    "npm": ">=1.4.7",
     "npm-request": "0.0.4",
     "open": "0.0.5",
-    "urllib": "0.5.13"
+    "urllib": "0.5.14"
   },
   "devDependencies": {
     "autod": "*",
-    "blanket": "*",
-    "coveralls": "*",
-    "jshint": "*",
-    "mocha": "*",
-    "mocha-lcov-reporter": "*",
-    "should": "*",
-    "travis-cov": "*"
+    "jshint": "*"
   },
-  "homepage": "https://github.com/fengmk2/cnpm",
+  "homepage": "https://github.com/cnpm/cnpm",
   "repository": {
     "type": "git",
-    "url": "git://github.com/fengmk2/cnpm.git",
-    "web": "https://github.com/fengmk2/cnpm"
+    "url": "git://github.com/cnpm/cnpm.git",
+    "web": "https://github.com/cnpm/cnpm"
   },
   "bugs": {
-    "url": "https://github.com/fengmk2/cnpm/issues",
+    "url": "https://github.com/cnpm/cnpm/issues",
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
