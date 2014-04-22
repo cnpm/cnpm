@@ -1,4 +1,10 @@
 
+0.1.2 / 2014-04-22 
+==================
+
+  * Merge pull request #32 from cnpm/sync-from-cnpm
+  * sync from cnpm and taobao npm
+
 0.1.1 / 2014-04-19
 ==================
 

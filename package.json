@@ -1,6 +1,6 @@
 {
   "name": "cnpm",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "cnpm: npm client for http://npm.taobao.org",
   "main": "bin/cnpm",
   "scripts": {
