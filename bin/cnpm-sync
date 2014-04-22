@@ -156,22 +156,29 @@ function syncByNames(names) {
     process.exit(0);
   }
   console.log('Start sync %j.', names);
-  var fail = [];
-  var success = [];
+  var fail = {};
+  var success = {};
   registrys.forEach(function (registry) {
     names.forEach(function (name) {
       queue.push(sync, registry, name, function (err, data) {
         remain--;
         if (err) {
           console.error(err.message);
-          fail.push(name);
+          fail[name] = true;
         } else if (!data.ok) {
-          fail.push(name);
+          fail[name] = true;
         } else {
-          success.push(name);
+          success[name] = true;
         }
         if (!remain) {
-          console.log('Sync all packages done, successed: %j, failed: %j', success, fail);
+
+          for (var name in success) {
+            if (fail[name]) {
+              delete success[name];
+            }
+          }
+          console.log('Sync all packages done, successed: %j, failed: %j',
+            Object.keys(success), Object.keys(fail));
           process.exit(0);
         }
       });
