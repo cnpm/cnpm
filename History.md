@@ -1,4 +1,10 @@
 
+0.1.3 / 2014-05-14
+==================
+
+ * change to npm.taobao.org/dist
+ * fix sync result display
+
 0.1.2 / 2014-04-22 
 ==================
 

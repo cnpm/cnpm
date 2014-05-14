@@ -5,10 +5,10 @@ MOCHA_OPTS =
 VERSION = $(shell cat package.json | grep version | awk -F'"' '{print $$4}')
 
 install:
-	@npm install --registry=http://registry.cnpmjs.org --disturl=http://dist.cnpmjs.org
+	@npm install --registry=http://registry.npm.taobao.org --disturl=http://npm.taobao.org/dist
 
 autod: install
-	@./node_modules/.bin/autod -w -k npm -e build
+	@./node_modules/.bin/autod -w -k npm -e build --prefix "~"
 	@$(MAKE) install
 
 jshint: install
