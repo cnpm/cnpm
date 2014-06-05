@@ -32,10 +32,10 @@
     "commander": "~2.2.0",
     "debug": "~0.8.1",
     "giturl": "~0.0.3",
-    "npm": "~1.4.10",
+    "npm": "~1.4.13",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
-    "urllib": "~0.5.15"
+    "urllib": "~0.5.16"
   },
   "devDependencies": {
     "autod": "*",

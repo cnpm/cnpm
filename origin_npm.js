@@ -64,8 +64,17 @@ if (!fs.existsSync(cmd) || args.join(' ').indexOf(' cnpm') >= 0) {
 
 debug('%s %s', cmd, args.join(' '));
 
+var env = {
+  NVM_NODEJS_ORG_MIRROR: config.disturl,
+  PHANTOMJS_CDNURL: config.disturl + '/phantomjs',
+};
+
+for (var k in process.env) {
+  env[k] = process.env[k];
+}
+
 var npm  = spawn(cmd, args, {
-  env: process.env,
+  env: env,
   cwd: CWD,
   stdio: [
     process.stdin,
