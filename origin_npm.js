@@ -67,6 +67,8 @@ debug('%s %s', cmd, args.join(' '));
 var env = {
   NVM_NODEJS_ORG_MIRROR: config.disturl,
   PHANTOMJS_CDNURL: config.disturl + '/phantomjs',
+  // set npm config: always-auth be true
+  // NPM_CONFIG_ALWAYS_AUTH: 'true',
 };
 
 for (var k in process.env) {

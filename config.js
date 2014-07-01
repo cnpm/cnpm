@@ -26,10 +26,10 @@ if (process.platform === 'win32') {
 }
 
 var config = module.exports = {
-  cnpmHost: 'http://npm.taobao.org',
+  cnpmHost: 'https://npm.taobao.org',
   // cnpmRegistry: 'http://r.cnpmjs.org',
-  cnpmRegistry: 'http://registry.npm.taobao.org',
-  disturl: 'http://npm.taobao.org/dist', // download dist tarball for node-gyp
+  cnpmRegistry: 'https://registry.npm.taobao.org',
+  disturl: 'https://npm.taobao.org/dist', // download dist tarball for node-gyp
   cache: path.join(root, '.npm/.cache_cnpm'),  //cache folder name
   userconfig: path.join(root, '.cnpmrc')
 };
