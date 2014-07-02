@@ -18,7 +18,7 @@
 require('colors');
 var debug = require('debug')('cnpm:origin');
 var match = require('auto-correct');
-var spawn = require('./spawn');
+var spawn = require('cross-spawn');
 var fs = require('fs');
 var path = require('path');
 var config = require('./config');

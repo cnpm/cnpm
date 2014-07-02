@@ -14,7 +14,7 @@
  * Module dependencies.
  */
 
-var spawn = require('../spawn');
+var spawn = require('cross-spawn');
 var should = require('should');
 var path = require('path');
 var fse = require('fs-extra');
