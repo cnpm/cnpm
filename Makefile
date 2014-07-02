@@ -1,11 +1,11 @@
 TESTS = test/*.test.js
 REPORTER = spec
-TIMEOUT = 1000
+TIMEOUT = 10000
 MOCHA_OPTS =
 VERSION = $(shell cat package.json | grep version | awk -F'"' '{print $$4}')
 
 install:
-	@npm install --registry=http://registry.npm.taobao.org --disturl=http://npm.taobao.org/dist
+	@npm install --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist
 
 autod: install
 	@./node_modules/.bin/autod -w -k npm -e build --prefix "~"
@@ -13,6 +13,18 @@ autod: install
 
 jshint: install
 	@./node_modules/.bin/jshint .
+
+test: install
+	@NODE_ENV=test ./node_modules/.bin/mocha \
+		--harmony \
+		--reporter $(REPORTER) \
+		--timeout $(TIMEOUT) \
+		--require should \
+		$(MOCHA_OPTS) \
+		$(TESTS)
+
+totoro:
+	@totoro --runner test/cnpm.test.js -b 'windowsXP/node/0.10,windowsXP/node/0.11,linux/node/0.10,linux/node/0.11'
 
 build: install
 	@rm -rf ./build

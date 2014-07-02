@@ -4,7 +4,7 @@
   "description": "cnpm: npm client for http://npm.taobao.org",
   "main": "bin/cnpm",
   "scripts": {
-    "test": "make test-all",
+    "test": "mocha test/*.test.js --timeout 10000",
     "blanket": {
       "pattern": "cnpm/lib",
       "data-cover-flags": {
@@ -39,7 +39,10 @@
   },
   "devDependencies": {
     "autod": "*",
-    "jshint": "*"
+    "fs-extra": "~0.10.0",
+    "jshint": "*",
+    "mocha": "*",
+    "should": "~4.0.4"
   },
   "homepage": "https://github.com/cnpm/cnpm",
   "repository": {
@@ -55,7 +58,7 @@
     "cnpm"
   ],
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
   "license": "MIT"

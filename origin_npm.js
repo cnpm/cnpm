@@ -16,9 +16,9 @@
  */
 
 require('colors');
-var match = require('auto-correct');
 var debug = require('debug')('cnpm:origin');
-var spawn = require('child_process').spawn;
+var match = require('auto-correct');
+var spawn = require('./spawn');
 var fs = require('fs');
 var path = require('path');
 var config = require('./config');
@@ -49,17 +49,11 @@ args.unshift('--userconfig=' + program.userconfig);
 
 var nodeModulesDir = path.join(__dirname, 'node_modules', '.bin');
 var cmd = 'npm';
-if (process.platform === "win32") {
-  cmd = 'npm.cmd';
-}
 cmd = path.join(nodeModulesDir, cmd);
 
 // if npm-beta not exists, use npm. happen on `$ cnpm install cnpm`
-if (!fs.existsSync(cmd) || args.join(' ').indexOf(' cnpm') >= 0) {
+if (!fs.existsSync(cmd)) {
   cmd = 'npm';
-  if (process.platform === "win32") {
-    cmd = 'npm.cmd';
-  }
 }
 
 debug('%s %s', cmd, args.join(' '));
