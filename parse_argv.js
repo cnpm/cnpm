@@ -15,6 +15,7 @@
  * Module dependencies.
  */
 
+var fs = require('fs');
 var program = require('commander');
 var config = require('./config');
 var pkg = require('./package.json');
@@ -25,9 +26,8 @@ module.exports = function (cmd) {
   if (!argv) {
     argv = program.version(pkg.version, '-v, --version')
       .option('-r, --registry [registry]', 'registry url, default is ' + config.cnpmRegistry)
-      .option('-w, --registryweb [registryweb]', 'registry web url, default is ' + config.cnpmHost)
+      .option('-w, --registryweb [registryweb]', 'web url, default is ' + config.cnpmHost)
       .option('--disturl [disturl]', 'dist url for node-gyp, default is ' + config.disturl)
-      .option('-w, --registryweb [registryweb]', 'website url, default is ' + config.cnpmHost)
       .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
       .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
       .option('-y, --yes', 'yes all confirm');
@@ -52,27 +52,40 @@ module.exports = function (cmd) {
   });
 
   // custom help message
-  var helpInfo = {};
-  argv.on('registry', function (registry) {
-    helpInfo.registry = registry;
-  });
-  argv.on('userconfig', function (userconfig) {
-    helpInfo.userconfig = userconfig;
-  });
   // output command help, default options help info will output by default
   argv.on('--help', function () {
-    help(helpInfo);
+    if (!argv.registry) {
+      argv.userconfig = argv.userconfig || config.userconfig;
+      argv.registry = getDefaultRegistry(argv.userconfig);
+    }
+    help(argv);
   });
   argv.parse(process.argv.slice());
 
-  if (!argv.args.length) {
-    argv.help();
+  argv.userconfig = argv.userconfig || config.userconfig;
+  if (!argv.registry) {
+    // try to use registry in uerconfig
+    argv.registry = getDefaultRegistry(argv.userconfig);
   }
-
-  argv.registry = argv.registry || config.cnpmRegistry;
   argv.disturl = argv.disturl || config.disturl;
   argv.registryweb = argv.registryweb || config.cnpmHost;
   argv.cache = cacheInfo || config.cache;
-  argv.userconfig = argv.userconfig || config.userconfig;
+
+  if (!argv.args.length) {
+    help(argv);
+  }
+
   return argv;
 };
+
+function getDefaultRegistry(userconfig) {
+  if (fs.existsSync(argv.userconfig)) {
+    var content = fs.readFileSync(argv.userconfig, 'utf8');
+    // registry = {registry-url}
+    var m = /^registry\s*=\s*(.+)$/m.exec(content);
+    if (m) {
+      return m[1];
+    }
+  }
+  return config.cnpmRegistry;
+}

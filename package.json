@@ -1,19 +1,10 @@
 {
   "name": "cnpm",
   "version": "0.2.2",
-  "description": "cnpm: npm client for http://npm.taobao.org",
+  "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "scripts": {
-    "test": "mocha test/*.test.js --timeout 10000",
-    "blanket": {
-      "pattern": "cnpm/lib",
-      "data-cover-flags": {
-        "debug": false
-      }
-    },
-    "travis-cov": {
-      "threshold": 90
-    }
+    "test": "mocha test/*.test.js --timeout 10000"
   },
   "preferGlobal": true,
   "bin": {

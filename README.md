@@ -1,6 +1,8 @@
 cnpm
 =======
 
+[![Build Status](https://travis-ci.org/cnpm/cnpm.svg?branch=master)](https://travis-ci.org/cnpm/cnpm)
+
 [![NPM](https://nodei.co/npm/cnpm.png?downloads=true&stars=true)](https://nodei.co/npm/cnpm/)
 
 ![logo](https://raw.github.com/cnpm/cnpmjs.org/master/logo.png)
@@ -44,18 +46,11 @@ $ cnpm doc -g [name] # open git web url directly
 $ npm install cnpm -g
 
 # then alias it
-$ alias tnpm='cnpm --registry=http://registry.npm.example.com \
- --disturl=http://dist.cnpmjs.org \
+$ alias mynpm='cnpm --registry=http://registry.npm.example.com \
+ --disturl=https://npm.example.com/dist \
  --registryweb=http://npm.example.com \
- --cache=$HOME/.npm/.cache/tnpm \
- --userconfig=$HOME/.tnpmrc'
-
-# or put this in your .zshrc / .bashrc
-$ echo "alias tnpm='cnpm --registry=http://registry.npm.example.com \
- --disturl=http://dist.cnpmjs.org \
- --registryweb=http://npm.example.com \
- --cache=$HOME/.npm/.cache/tnpm \
- --userconfig=$HOME/.tnpmrc'" >> $HOME/.zshrc && source $HOME/.zshrc
+ --cache=$HOME/.mynpm/.cache \
+ --userconfig=$HOME/.mynpmrc'
 ```
 
 ## License

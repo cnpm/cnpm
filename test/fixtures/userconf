@@ -1,0 +1,3 @@
+email = foo@gmail.com
+registry = http://127.0.0.1/registry
+foo = bar
