@@ -28,6 +28,9 @@ describe('cnpm.test.js', function () {
       'install',
       'pedding',
     ];
+    if (process.env.TRAVIS) {
+      args.push('--registry=https://registry.npmjs.org');
+    }
     var child = spawn('node', args).on('exit', function (code) {
       code.should.equal(0);
       done();
