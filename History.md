@@ -1,4 +1,10 @@
 
+0.3.0 / 2014-07-05
+==================
+
+ * fix #34 use userconfig registry by default
+ * use cross-spawn
+
 0.2.2 / 2014-07-02
 ==================
 
