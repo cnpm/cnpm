@@ -12,15 +12,13 @@ cnpm: npm client for [cnpmjs.org](http://cnpmjs.org)
 ## Install
 
 ```bash
-$ npm install cnpm -g --registry=http://r.cnpmjs.org
+$ npm install cnpm -g
 ```
 
-If you're in China, maybe you should download it from our China CDN:
+If you're in China, maybe you should install it from our China mirror:
 
 ```bash
-$ wget http://dist.u.qiniudn.com/cnpm/cnpm-latest.tgz
-$ tar zxvf cnpm-latest.tgz
-$ ./cnpm/bin/cnpm install anything
+$ npm install cnpm -g --registry=https://registry.npm.taobao.org
 ```
 
 ## Usage
