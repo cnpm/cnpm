@@ -1,9 +1,19 @@
 cnpm
 =======
 
-[![Build Status](https://travis-ci.org/cnpm/cnpm.svg?branch=master)](https://travis-ci.org/cnpm/cnpm)
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Gittip][gittip-image]][gittip-url]
+[![David deps][david-image]][david-url]
 
-[![NPM](https://nodei.co/npm/cnpm.png?downloads=true&stars=true)](https://nodei.co/npm/cnpm/)
+[npm-image]: https://img.shields.io/npm/v/cnpm.svg?style=flat
+[npm-url]: https://npmjs.org/package/cnpm
+[travis-image]: https://img.shields.io/travis/cnpm/cnpm.svg?style=flat
+[travis-url]: https://travis-ci.org/cnpm/cnpm
+[gittip-image]: https://img.shields.io/gittip/fengmk2.svg?style=flat
+[gittip-url]: https://www.gittip.com/fengmk2/
+[david-image]: https://img.shields.io/david/cnpm/cnpm.svg?style=flat
+[david-url]: https://david-dm.org/cnpm/cnpm
 
 ![logo](https://raw.github.com/cnpm/cnpmjs.org/master/logo.png)
 
