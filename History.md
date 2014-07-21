@@ -1,4 +1,10 @@
 
+0.4.0 / 2014-07-21
+==================
+
+ * use npm@1.5.x support scoped packages
+ * tell users in China install from taobao npm
+
 0.3.0 / 2014-07-05
 ==================
 
