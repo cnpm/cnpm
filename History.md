@@ -1,4 +1,9 @@
 
+0.5.2 / 2014-07-28
+==================
+
+  * sync dependencies if package.private = true, close #38
+
 0.5.1 / 2014-07-28
 ==================
 
