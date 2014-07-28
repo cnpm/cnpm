@@ -160,6 +160,7 @@ function syncByNames(names) {
   var success = {};
   registrys.forEach(function (registry) {
     names.forEach(function (name) {
+      console.log(name);
       queue.push(sync, registry, name, function (err, data) {
         remain--;
         if (err) {
@@ -171,10 +172,9 @@ function syncByNames(names) {
           success[name] = true;
         }
         if (!remain) {
-
-          for (var name in success) {
-            if (fail[name]) {
-              delete success[name];
+          for (var n in success) {
+            if (fail[n]) {
+              delete success[n];
             }
           }
           console.log('Sync all packages done, successed: %j, failed: %j',
