@@ -1,4 +1,9 @@
 
+0.5.0 / 2014-07-28
+==================
+
+  * bump npm to ~2.0.0-alpha-5
+
 0.4.0 / 2014-07-21
 ==================
 
@@ -32,7 +37,7 @@
  * change to npm.taobao.org/dist
  * fix sync result display
 
-0.1.2 / 2014-04-22 
+0.1.2 / 2014-04-22
 ==================
 
   * Merge pull request #32 from cnpm/sync-from-cnpm
