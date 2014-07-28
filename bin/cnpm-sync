@@ -40,6 +40,7 @@ var publish = argv.syncPublish ? true : false;
 var names = args.slice(1);
 var packageName;
 var dependencies = [];
+var isPrivate = false;
 
 var packagePath = path.join(process.cwd(), 'package.json');
 if (!names.length && fs.existsSync(packagePath)) {
@@ -55,6 +56,7 @@ if (!names.length && fs.existsSync(packagePath)) {
       dependenciesMap[key] = pkg.devDependencies[key];
     }
     dependencies = Object.keys(dependenciesMap);
+    isPrivate = !!pkg.private;
   } catch (err) {
     console.log('Parse `package.json` file error: %s', err.message);
     process.exit(1);
@@ -160,7 +162,6 @@ function syncByNames(names) {
   var success = {};
   registrys.forEach(function (registry) {
     names.forEach(function (name) {
-      console.log(name);
       queue.push(sync, registry, name, function (err, data) {
         remain--;
         if (err) {
@@ -187,6 +188,10 @@ function syncByNames(names) {
 }
 
 function syncByPackage(packageName) {
+  if (isPrivate) {
+    return syncByNames(dependencies);
+  }
+
   if (argv.yes) {
     dependencies.unshift(packageName);
     return syncByNames(dependencies);
