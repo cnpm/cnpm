@@ -24,7 +24,7 @@
     "cross-spawn": "~0.1.7",
     "debug": "~1.0.4",
     "giturl": "~0.0.3",
-    "npm": "~2.0.0-alpha-5",
+    "npm": "~2.0.0-beta.2",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
     "urllib": "~0.5.16"
