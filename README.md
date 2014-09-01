@@ -19,6 +19,8 @@ cnpm
 
 cnpm: npm client for [cnpmjs.org](http://cnpmjs.org)
 
+__CNPM is base on npm v2.0, so there is a breaking change for [prefix "^"](https://github.com/npm/node-semver/pull/92).__
+
 ## Install
 
 ```bash
