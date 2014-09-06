@@ -21,17 +21,17 @@
     "bagpipe": "~0.3.5",
     "colors": "~0.6.2",
     "commander": "~2.3.0",
-    "cross-spawn": "~0.1.7",
-    "debug": "~1.0.4",
+    "cross-spawn": "~0.2.3",
+    "debug": "~2.0.0",
     "giturl": "~0.0.3",
     "npm": "~2.0.0-beta.2",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
-    "urllib": "~0.5.16"
+    "urllib": "~1.4.1"
   },
   "devDependencies": {
     "autod": "*",
-    "fs-extra": "~0.10.0",
+    "fs-extra": "~0.11.1",
     "jshint": "*",
     "mocha": "*",
     "should": "~4.0.4"
