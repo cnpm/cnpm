@@ -29,10 +29,6 @@ var args = argv.args;
 var registrys = [argv.registry];
 var registrywebs = {};
 registrywebs[argv.registry] = argv.registryweb;
-if (registrys[0].indexOf('registry.npm.taobao.org') >= 0) {
-  registrys.unshift('http://r.cnpmjs.org');
-  registrywebs['http://r.cnpmjs.org'] = 'http://cnpmjs.org';
-}
 
 var nodeps = argv.deps ? false: true;
 var publish = argv.syncPublish ? true : false;
