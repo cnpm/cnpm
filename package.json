@@ -24,14 +24,14 @@
     "cross-spawn": "~0.2.3",
     "debug": "~2.0.0",
     "giturl": "~0.0.3",
-    "npm": "~2.0.0-beta.2",
+    "npm": "~2.0.0",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
-    "urllib": "~1.4.1"
+    "urllib": "~1.5.2"
   },
   "devDependencies": {
     "autod": "*",
-    "fs-extra": "~0.11.1",
+    "fs-extra": "~0.12.0",
     "jshint": "*",
     "mocha": "*",
     "should": "~4.0.4"
