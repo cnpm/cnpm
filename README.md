@@ -27,7 +27,7 @@ __CNPM is base on npm v2.0, so there is a breaking change for [prefix "^"](https
 $ npm install cnpm -g
 ```
 
-If you're in China, maybe you should install it from our China mirror:
+If you're in China, maybe you should install it from our [China mirror](https://npm.taobao.org):
 
 ```bash
 $ npm install cnpm -g --registry=https://registry.npm.taobao.org
@@ -57,7 +57,7 @@ $ npm install cnpm -g
 
 # then alias it
 $ alias mynpm='cnpm --registry=http://registry.npm.example.com \
- --disturl=https://npm.example.com/dist \
+ --disturl=http://npm.example.com/dist \
  --registryweb=http://npm.example.com \
  --cache=$HOME/.mynpm/.cache \
  --userconfig=$HOME/.mynpmrc'
