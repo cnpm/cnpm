@@ -7,7 +7,10 @@ install:
 	@npm install --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist
 
 autod: install
-	@./node_modules/.bin/autod -w -k npm -e build --prefix "~"
+	@./node_modules/.bin/autod -w --prefix "~" \
+		-e build \
+		-d npm \
+		-D jshint,mocha
 	@$(MAKE) install
 
 jshint: install
