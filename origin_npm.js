@@ -59,8 +59,12 @@ if (!fs.existsSync(cmd)) {
 debug('%s %s', cmd, args.join(' '));
 
 var env = {
-  NVM_NODEJS_ORG_MIRROR: config.disturl,
-  PHANTOMJS_CDNURL: config.disturl + '/phantomjs',
+  NVM_NODEJS_ORG_MIRROR: config.mirrorsUrl + '/node',
+  NVM_IOJS_ORG_MIRROR: config.mirrorsUrl + '/iojs',
+  PHANTOMJS_CDNURL: config.mirrorsUrl + '/phantomjs',
+  CHROMEDRIVER_CDNURL: config.mirrorsUrl + '/chromedriver',
+  SELENIUM_CDNURL: config.mirrorsUrl + '/selenium',
+
   // set npm config: always-auth be true
   // NPM_CONFIG_ALWAYS_AUTH: 'true',
 };
