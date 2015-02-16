@@ -28,9 +28,13 @@ var program = parseArgv();
 
 var args = program.rawArgs.slice(2);
 
+var hasCNPM = false;
 for (var i = 0; i < args.length; i++) {
   if (args[i][0] !== '-') {
     args[i] = correct(args[i]);
+    if (args[i] === 'cnpm') {
+      hasCNPM = true;
+    }
   }
 }
 
@@ -48,11 +52,16 @@ args.unshift('--disturl=' + program.disturl);
 args.unshift('--userconfig=' + program.userconfig);
 
 var nodeModulesDir = path.join(__dirname, 'node_modules', '.bin');
-var cmd = 'npm';
-cmd = path.join(nodeModulesDir, cmd);
+var cmd = path.join(nodeModulesDir, 'npm-for-cnpm');
 
-// if npm-beta not exists, use npm. happen on `$ cnpm install cnpm`
-if (!fs.existsSync(cmd)) {
+// if local npm not exists, use npm. happen on `$ cnpm install cnpm`
+if (!fs.existsSync(cmd) || hasCNPM) {
+  cmd = 'npm';
+}
+
+var isIOJS = process.execPath.indexOf('iojs') >= 0;
+if (isIOJS) {
+  // only node-gyp inside iojs can build
   cmd = 'npm';
 }
 

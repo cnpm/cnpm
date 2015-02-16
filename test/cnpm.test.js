@@ -21,22 +21,17 @@ var fse = require('fs-extra');
 var cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 var fixtures = path.join(__dirname, 'fixtures');
 
-describe('cnpm.test.js', function () {
-  it('should install padding', function (done) {
-    var args = [
-      cnpm,
-      'install',
-      'pedding',
-    ];
-    if (process.env.TRAVIS) {
-      args.push('--registry=https://registry.npmjs.org');
-    }
-    var child = spawn('node', args).on('exit', function (code) {
-      code.should.equal(0);
-      done();
-    });
-  });
+var RUN_ON_CI = process.env.TRAVIS || process.env.APPVEYOR;
 
+function run(args, callback) {
+  if (RUN_ON_CI) {
+    // dont change disturl
+    args.push('--disturl=none');
+  }
+  return spawn('node', args).on('exit', callback);
+}
+
+describe('cnpm.test.js', function () {
   it('should user custom registry in userconf', function (done) {
     var args = [
       cnpm,
@@ -60,7 +55,7 @@ describe('cnpm.test.js', function () {
       '--userconfig=' + path.join(fixtures, 'userconf'),
     ];
     var stdout = '';
-    var child = spawn('node', args).on('exit', function (code) {
+    var child = run(args, function (code) {
       stdout.should.containEql('npm command use --registry=http://127.0.0.1/registry');
       code.should.equal(0);
       done();
@@ -76,13 +71,75 @@ describe('cnpm.test.js', function () {
       '--userconfig=' + path.join(fixtures, 'userconf-no-registry'),
     ];
     var stdout = '';
-    var child = spawn('node', args).on('exit', function (code) {
+    var child = run(args, function (code) {
       stdout.should.containEql('npm command use --registry=http://registry.npm.taobao.org');
       code.should.equal(0);
       done();
     });
     child.stdout.on('data', function (data) {
       stdout += data.toString();
+    });
+  });
+
+  it('should install padding', function (done) {
+    var args = [
+      cnpm,
+      'install',
+      'pedding',
+    ];
+    if (RUN_ON_CI) {
+      args.push('--registry=https://registry.npmjs.org');
+    }
+    run(args, function (code) {
+      code.should.equal(0);
+      done();
+    });
+  });
+
+
+  it('should install cnpm', function (done) {
+    var args = [
+      cnpm,
+      'install',
+      'pedding',
+    ];
+    if (RUN_ON_CI) {
+      args.push('--registry=https://registry.npmjs.org');
+    }
+    run(args, function (code) {
+      code.should.equal(0);
+      done();
+    });
+  });
+
+  it('should install npm', function (done) {
+    var args = [
+      cnpm,
+      'install',
+      'pedding',
+    ];
+    if (RUN_ON_CI) {
+      args.push('--registry=https://registry.npmjs.org');
+    }
+    run(args, function (code) {
+      code.should.equal(0);
+      done();
+    });
+  });
+
+  it('should install and build cpp module', function (done) {
+    var args = [
+      cnpm,
+      'install',
+      'node-murmurhash',
+      '--build-from-source'
+    ];
+    if (RUN_ON_CI) {
+      args.push('--registry=https://registry.npmjs.org');
+    }
+    run(args, function (code) {
+      code.should.equal(0);
+      done();
     });
   });
 });
