@@ -31,6 +31,6 @@ var config = module.exports = {
   disturl: 'http://npm.taobao.org/mirrors/node', // download dist tarball for node-gyp
   iojsDisturl: 'http://npm.taobao.org/mirrors/iojs',
   mirrorsUrl: 'http://npm.taobao.org/mirrors',
-  cache: path.join(root, '.npm/.cache_cnpm'),  //cache folder name
+  cache: path.join(root, '.cnpm'),  //cache folder name
   userconfig: path.join(root, '.cnpmrc')
 };

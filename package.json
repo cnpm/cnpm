@@ -4,7 +4,8 @@
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "scripts": {
-    "test": "mocha test/*.test.js --timeout 120000"
+    "test": "mocha test/*.test.js --timeout 120000",
+    "cnpm": "npm i --registry=http://registry.npm.taobao.org"
   },
   "preferGlobal": true,
   "bin": {
