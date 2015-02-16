@@ -1,4 +1,10 @@
 
+2.0.0 / 2015-02-16
+==================
+
+ * support iojs and cpp build
+ * feat(mirrors): add node, iojs, chromedriver, selenium mirrors
+
 1.2.0 / 2014-10-05
 ==================
 
