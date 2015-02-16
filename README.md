@@ -3,6 +3,7 @@ cnpm
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
+[![appveyor build status][appveyor-image]][appveyor-url]
 [![Gittip][gittip-image]][gittip-url]
 [![David deps][david-image]][david-url]
 
@@ -10,6 +11,8 @@ cnpm
 [npm-url]: https://npmjs.org/package/cnpm
 [travis-image]: https://img.shields.io/travis/cnpm/cnpm.svg?style=flat
 [travis-url]: https://travis-ci.org/cnpm/cnpm
+[appveyor-image]: https://ci.appveyor.com/api/projects/status/17kfr8eitdi7rljr?svg=true
+[appveyor-url]: https://ci.appveyor.com/project/fengmk2/urllib
 [gittip-image]: https://img.shields.io/gittip/fengmk2.svg?style=flat
 [gittip-url]: https://www.gittip.com/fengmk2/
 [david-image]: https://img.shields.io/david/cnpm/cnpm.svg?style=flat
