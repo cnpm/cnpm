@@ -4,7 +4,7 @@
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "scripts": {
-    "test": "mocha test/*.test.js --timeout 10000"
+    "test": "mocha test/*.test.js --timeout 120000"
   },
   "preferGlobal": true,
   "bin": {
@@ -21,20 +21,20 @@
     "bagpipe": "~0.3.5",
     "colors": "~1.0.3",
     "commander": "~2.6.0",
-    "cross-spawn": "~0.2.3",
+    "cross-spawn": "~0.2.6",
     "debug": "~2.1.1",
     "giturl": "~0.0.3",
-    "npm": "~2.1.18",
+    "npm-for-cnpm": "~2.6.0",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
-    "urllib": "~2.2.1"
+    "urllib": "~2.3.0"
   },
   "devDependencies": {
-    "autod": "1",
-    "fs-extra": "~0.14.0",
-    "jshint": "~2.5.11",
+    "autod": "*",
+    "fs-extra": "~0.16.3",
+    "jshint": "~2.6.0",
     "mocha": "~2.1.0",
-    "should": "~4.6.1"
+    "should": "~5.0.0"
   },
   "homepage": "https://github.com/cnpm/cnpm",
   "repository": {
@@ -44,7 +44,7 @@
   },
   "bugs": {
     "url": "https://github.com/cnpm/cnpm/issues",
-    "email": "fengmk2@gmail.com"
+    "email": "m@fengmk2.com"
   },
   "keywords": [
     "cnpm"
@@ -52,6 +52,6 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
+  "author": "fengmk2 <m@fengmk2.com> (http://fengmk2.com)",
   "license": "MIT"
 }

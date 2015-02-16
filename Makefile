@@ -1,18 +1,16 @@
 TESTS = test/*.test.js
 REPORTER = spec
-TIMEOUT = 10000
+TIMEOUT = 60000
 MOCHA_OPTS =
 
 install:
-	@npm install --registry=https://registry.npm.taobao.org \
-		--disturl=https://npm.taobao.org/mirrors/node
+	@npm install --registry=http://registry.npm.taobao.org
 
 autod: install
 	@./node_modules/.bin/autod -w --prefix "~" \
 		-e build \
 		-d npm \
 		-D jshint,mocha
-	@$(MAKE) install
 
 jshint: install
 	@./node_modules/.bin/jshint .

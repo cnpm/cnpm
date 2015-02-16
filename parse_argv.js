@@ -67,7 +67,13 @@ module.exports = function (cmd) {
     // try to use registry in uerconfig
     argv.registry = getDefaultRegistry(argv.userconfig);
   }
-  argv.disturl = argv.disturl || config.disturl;
+  if (!argv.disturl) {
+    var isIOJS = process.execPath.indexOf('iojs') >= 0;
+    argv.disturl = isIOJS ? config.iojsDisturl : config.disturl;
+  }
+  if (argv.disturl === 'none') {
+    delete argv.disturl;
+  }
   argv.registryweb = argv.registryweb || config.cnpmHost;
   argv.cache = cacheInfo || config.cache;
 
