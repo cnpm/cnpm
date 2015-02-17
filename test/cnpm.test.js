@@ -127,19 +127,23 @@ describe('cnpm.test.js', function () {
     });
   });
 
-  it('should install and build cpp module', function (done) {
-    var args = [
-      cnpm,
-      'install',
-      'node-murmurhash',
-      '--build-from-source'
-    ];
-    if (RUN_ON_CI) {
-      args.push('--registry=https://registry.npmjs.org');
-    }
-    run(args, function (code) {
-      code.should.equal(0);
-      done();
+  if (process.platform !== 'win32') {
+    it('should install and build cpp module', function (done) {
+      var args = [
+        cnpm,
+        'install',
+        'node-murmurhash',
+        '--build-from-source',
+      ];
+      if (RUN_ON_CI) {
+        args.push('--registry=https://registry.npmjs.org');
+      }
+      var child = run(args, function (code) {
+        code.should.equal(0);
+        done();
+      });
+      child.stdout.pipe(process.stdout);
+      child.stderr.pipe(process.stderr);
     });
-  });
+  }
 });
