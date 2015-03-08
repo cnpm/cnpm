@@ -9,7 +9,7 @@ install:
 autod: install
 	@./node_modules/.bin/autod -w --prefix "~" \
 		-e build \
-		-d npm \
+		-d npm,pangyp \
 		-D jshint,mocha
 
 jshint: install

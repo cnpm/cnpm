@@ -46,26 +46,23 @@ if (program.userconfig && !fs.existsSync(program.userconfig)) {
   fs.writeFileSync(program.userconfig, 'email =\n');
 }
 
+var nodeModulesDir = path.join(__dirname, 'node_modules');
+var pangyp = path.join(nodeModulesDir, 'pangyp', 'bin', 'node-gyp.js');
+
+args.unshift('--node-gyp=' + pangyp);
 args.unshift('--registry=' + program.registry);
 args.unshift('--cache=' + program.cache);
 args.unshift('--disturl=' + program.disturl);
 args.unshift('--userconfig=' + program.userconfig);
 
-var nodeModulesDir = path.join(__dirname, 'node_modules', '.bin');
 // node-pre-gyp will try to resolve node_modules/npm, so rename it
 // see https://github.com/mapbox/node-pre-gyp/issues/144
-var cmd = path.join(nodeModulesDir, 'npm-for-cnpm');
+var cmd = path.join(nodeModulesDir, '.bin', 'npm');
 var originalNpm = path.join(path.dirname(process.execPath), 'npm');
 
 // if local npm not exists, use npm. happen on `$ cnpm install cnpm`
 if (!fs.existsSync(cmd) || hasCNPM) {
   cmd = originalNpm;
-} else {
-  var isIOJS = process.execPath.indexOf('iojs') >= 0;
-  if (isIOJS) {
-    // only node-gyp inside iojs can build
-    cmd = originalNpm;
-  }
 }
 
 debug('%s %s', cmd, args.join(' '));
