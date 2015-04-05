@@ -1,4 +1,9 @@
 
+3.0.1 / 2015-04-05
+==================
+
+ * Resolve npm command to local npm bin, not global. (@qiu8310)
+
 3.0.0 / 2015-03-09
 ==================
 
