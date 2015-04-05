@@ -5,7 +5,7 @@
  * MIT Licensed
  *
  * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)
  *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
  */
 
@@ -55,17 +55,30 @@ args.unshift('--cache=' + program.cache);
 args.unshift('--disturl=' + program.disturl);
 args.unshift('--userconfig=' + program.userconfig);
 
+var originalNpmBin = path.join(path.dirname(process.execPath), 'npm');
+
 // node-pre-gyp will try to resolve node_modules/npm, so rename it
 // see https://github.com/mapbox/node-pre-gyp/issues/144
-var cmd = path.join(nodeModulesDir, '.bin', 'npm');
-var originalNpm = path.join(path.dirname(process.execPath), 'npm');
-
-// if local npm not exists, use npm. happen on `$ cnpm install cnpm`
-if (!fs.existsSync(cmd) || hasCNPM) {
-  cmd = originalNpm;
+function findNpmBin() {
+  var npmBin;
+  try {
+    npmBin = require.resolve('npm');
+    // $HOME/git/smart-npm/node_modules/npm/lib/npm.js
+    npmBin = path.join(npmBin, '..', '..', '..', '.bin', 'npm');
+  } catch (_) {
+    npmBin = originalNpmBin;
+  }
+  return npmBin;
 }
 
-debug('%s %s', cmd, args.join(' '));
+var npmBin = findNpmBin();
+
+// if local npm not exists, use npm. happen on `$ cnpm install cnpm`
+if (hasCNPM) {
+  npmBin = originalNpmBin;
+}
+
+debug('%s %s', npmBin, args.join(' '));
 
 var env = {
   NVM_NODEJS_ORG_MIRROR: config.mirrorsUrl + '/node',
@@ -82,7 +95,7 @@ for (var k in process.env) {
   env[k] = process.env[k];
 }
 
-var npm  = spawn(cmd, args, {
+var npm  = spawn(npmBin, args, {
   env: env,
   cwd: CWD,
   stdio: [

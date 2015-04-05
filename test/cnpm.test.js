@@ -72,7 +72,7 @@ describe('cnpm.test.js', function () {
     ];
     var stdout = '';
     var child = run(args, function (code) {
-      stdout.should.containEql('npm command use --registry=http://registry.npm.taobao.org');
+      stdout.should.containEql('npm command use --registry=https://registry.npm.taobao.org');
       code.should.equal(0);
       done();
     });

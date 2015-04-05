@@ -21,22 +21,22 @@
     "auto-correct": "~1.0.0",
     "bagpipe": "~0.3.5",
     "colors": "~1.0.3",
-    "commander": "~2.6.0",
-    "cross-spawn": "~0.2.6",
-    "debug": "~2.1.2",
+    "commander": "~2.7.1",
+    "cross-spawn": "~0.2.8",
+    "debug": "~2.1.3",
     "giturl": "~0.0.3",
-    "npm": "~2.7.0",
+    "npm": "~2.7.5",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
     "pangyp": "~2.1.0",
-    "urllib": "~2.3.1"
+    "urllib": "~2.3.3"
   },
   "devDependencies": {
     "autod": "*",
-    "fs-extra": "~0.16.4",
+    "fs-extra": "~0.18.0",
     "jshint": "~2.6.3",
-    "mocha": "~2.2.0",
-    "should": "~5.1.0"
+    "mocha": "~2.2.1",
+    "should": "~5.2.0"
   },
   "homepage": "https://github.com/cnpm/cnpm",
   "repository": {

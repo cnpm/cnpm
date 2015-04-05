@@ -4,7 +4,7 @@ TIMEOUT = 60000
 MOCHA_OPTS =
 
 install:
-	@npm install --registry=http://registry.npm.taobao.org
+	@npm install --registry=https://registry.npm.taobao.org
 
 autod: install
 	@./node_modules/.bin/autod -w --prefix "~" \

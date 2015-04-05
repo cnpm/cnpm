@@ -7,7 +7,7 @@
  * MIT Licensed
  *
  * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)
  */
 
 'use strict';
@@ -37,5 +37,5 @@ if (extendsMethd[action]) {
   return require('./cnpm-' + action);
 }
 
-debug('origin npm with orgian registry: $ npm %s', action);
+debug('origin npm with origin registry: $ npm %s', action);
 require('../origin_npm.js');
