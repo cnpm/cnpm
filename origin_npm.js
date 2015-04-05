@@ -57,7 +57,17 @@ args.unshift('--userconfig=' + program.userconfig);
 
 // node-pre-gyp will try to resolve node_modules/npm, so rename it
 // see https://github.com/mapbox/node-pre-gyp/issues/144
-var cmd = path.join(nodeModulesDir, '.bin', 'npm');
+function findNodeModuleBin(module, bin) {
+  var main = require.resolve(module);
+  var parts = main.split(path.sep);
+  bin = bin || module;
+  var ref = parts.pop();
+  while (ref && (module !== ref || parts[parts.length - 1] !== 'node_modules')) {
+    ref = parts.pop();
+  }
+  return path.join(parts.join(path.sep), '.bin', bin);
+}
+var cmd = findNodeModuleBin('npm');
 var originalNpm = path.join(path.dirname(process.execPath), 'npm');
 
 // if local npm not exists, use npm. happen on `$ cnpm install cnpm`
