@@ -86,6 +86,7 @@ var env = {
   PHANTOMJS_CDNURL: config.mirrorsUrl + '/phantomjs',
   CHROMEDRIVER_CDNURL: config.mirrorsUrl + '/chromedriver',
   SELENIUM_CDNURL: config.mirrorsUrl + '/selenium',
+  ELECTRON_MIRROR: config.mirrorsUrl + '/electron/',
 
   // set npm config: always-auth be true
   // NPM_CONFIG_ALWAYS_AUTH: 'true',
