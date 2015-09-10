@@ -47,9 +47,9 @@ if (program.userconfig && !fs.existsSync(program.userconfig)) {
 }
 
 var nodeModulesDir = path.join(__dirname, 'node_modules');
-var pangyp = path.join(nodeModulesDir, 'pangyp', 'bin', 'node-gyp.js');
+var nodegyp = path.join(nodeModulesDir, 'node-gyp', 'bin', 'node-gyp.js');
 
-args.unshift('--node-gyp=' + pangyp);
+args.unshift('--node-gyp=' + nodegyp);
 args.unshift('--registry=' + program.registry);
 args.unshift('--cache=' + program.cache);
 args.unshift('--disturl=' + program.disturl);
