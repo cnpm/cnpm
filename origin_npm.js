@@ -84,7 +84,7 @@ var env = {
   NVM_NODEJS_ORG_MIRROR: config.mirrorsUrl + '/node',
   NVM_IOJS_ORG_MIRROR: config.mirrorsUrl + '/iojs',
   PHANTOMJS_CDNURL: config.mirrorsUrl + '/phantomjs',
-  CHROMEDRIVER_CDNURL: config.mirrorsUrl + '/chromedriver',
+  CHROMEDRIVER_CDNURL: 'http://oss.npm.taobao.org/dist/chromedriver',
   SELENIUM_CDNURL: config.mirrorsUrl + '/selenium',
   ELECTRON_MIRROR: config.mirrorsUrl + '/electron/',
 

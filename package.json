@@ -23,13 +23,13 @@
     "colors": "~1.0.3",
     "commander": "~2.7.1",
     "cross-spawn": "~0.2.8",
-    "debug": "~2.2.0",
+    "debug": "^2.2.0",
     "giturl": "~0.0.3",
     "npm": "~2.14.2",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
-    "node-gyp": "~3.0.1",
-    "urllib": "~2.4.0"
+    "node-gyp": "~3.0.3",
+    "urllib": "^2.5.0"
   },
   "devDependencies": {
     "autod": "*",
