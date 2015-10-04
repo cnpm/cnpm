@@ -18,14 +18,36 @@ var path = require('path');
 var fse = require('fs-extra');
 var cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 var fixtures = path.join(__dirname, 'fixtures');
+var cwd = path.join(fixtures, 'foo');
 
 var RUN_ON_CI = process.env.TRAVIS || process.env.APPVEYOR;
 
 function run(args, callback) {
-  return spawn('node', args).on('exit', callback);
+  return spawn('node', args, {
+    cwd: cwd,
+  }).on('exit', callback);
 }
 
 describe('cnpm.test.js', function () {
+  after(function() {
+    fse.removeSync(path.join(cwd, 'node_modules'));
+  });
+
+  it('should show all cnpm config', function (done) {
+    var args = [
+      cnpm,
+      'config',
+      'ls',
+      '-l'
+    ];
+    var stdout = '';
+    var child = spawn('node', args).on('exit', function (code) {
+      code.should.equal(0);
+      done();
+    });
+    child.stdout.pipe(process.stdout);
+  });
+
   it('should user custom registry in userconf', function (done) {
     var args = [
       cnpm,

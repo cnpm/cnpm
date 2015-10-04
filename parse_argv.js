@@ -82,6 +82,27 @@ module.exports = function (cmd) {
     help(argv);
   }
 
+  // filter rawArgs
+  var rawArgs = argv.rawArgs;
+  var needs = [];
+  for (var i = 0; i < rawArgs.length; i++) {
+    var arg = rawArgs[i];
+    if (arg.indexOf('--userconfig=') === 0 || arg.indexOf('-u=') === 0) {
+      continue;
+    }
+    if (arg.indexOf('--disturl=') === 0) {
+      continue;
+    }
+    if (arg.indexOf('--registryweb=') === 0 || arg.indexOf('-w=') === 0) {
+      continue;
+    }
+    if (arg.indexOf('--registry=') === 0 || arg.indexOf('-r=') === 0) {
+      continue;
+    }
+    needs.push(arg);
+  }
+  argv.rawArgs = needs;
+
   return argv;
 };
 
