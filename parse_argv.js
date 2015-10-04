@@ -1,11 +1,9 @@
 /**!
- * cnpm - parse_argv.js
- *
  * Copyright(c) cnpmjs.org and other contributors.
  * MIT Licensed
  *
  * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)
  *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
  */
 
@@ -74,6 +72,9 @@ module.exports = function (cmd) {
   if (argv.disturl === 'none') {
     delete argv.disturl;
   }
+  if (argv.userconfig === 'none') {
+    delete argv.userconfig;
+  }
   argv.registryweb = argv.registryweb || config.cnpmHost;
   argv.cache = cacheInfo || config.cache;
 
@@ -81,11 +82,32 @@ module.exports = function (cmd) {
     help(argv);
   }
 
+  // filter rawArgs
+  var rawArgs = argv.rawArgs;
+  var needs = [];
+  for (var i = 0; i < rawArgs.length; i++) {
+    var arg = rawArgs[i];
+    if (arg.indexOf('--userconfig=') === 0 || arg.indexOf('-u=') === 0) {
+      continue;
+    }
+    if (arg.indexOf('--disturl=') === 0) {
+      continue;
+    }
+    if (arg.indexOf('--registryweb=') === 0 || arg.indexOf('-w=') === 0) {
+      continue;
+    }
+    if (arg.indexOf('--registry=') === 0 || arg.indexOf('-r=') === 0) {
+      continue;
+    }
+    needs.push(arg);
+  }
+  argv.rawArgs = needs;
+
   return argv;
 };
 
 function getDefaultRegistry(userconfig) {
-  if (fs.existsSync(argv.userconfig)) {
+  if (argv.userconfig !== 'none' && fs.existsSync(argv.userconfig)) {
     var content = fs.readFileSync(argv.userconfig, 'utf8');
     // registry = {registry-url}
     var m = /^registry\s*=\s*(.+)$/m.exec(content);

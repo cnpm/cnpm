@@ -1,6 +1,4 @@
 /**!
- * cnpm - origin_npm.js
- *
  * Copyright(c) cnpmjs.org and other contributors.
  * MIT Licensed
  *
@@ -26,16 +24,18 @@ var parseArgv = require('./parse_argv');
 
 var program = parseArgv();
 
-var args = program.rawArgs.slice(2);
-
+var rawArgs = program.rawArgs.slice(2);
+var args = [];
 var hasCNPM = false;
-for (var i = 0; i < args.length; i++) {
-  if (args[i][0] !== '-') {
-    args[i] = correct(args[i]);
-    if (args[i] === 'cnpm') {
+for (var i = 0; i < rawArgs.length; i++) {
+  var arg = rawArgs[i];
+  if (arg[0] !== '-') {
+    arg = correct(arg);
+    if (arg === 'cnpm') {
       hasCNPM = true;
     }
   }
+  args.push(arg);
 }
 
 var CWD = process.cwd();
@@ -52,8 +52,12 @@ var nodegyp = path.join(nodeModulesDir, 'node-gyp', 'bin', 'node-gyp.js');
 args.unshift('--node-gyp=' + nodegyp);
 args.unshift('--registry=' + program.registry);
 args.unshift('--cache=' + program.cache);
-args.unshift('--disturl=' + program.disturl);
-args.unshift('--userconfig=' + program.userconfig);
+if (program.disturl) {
+  args.unshift('--disturl=' + program.disturl);
+}
+if (program.userconfig) {
+  args.unshift('--userconfig=' + program.userconfig);
+}
 
 var originalNpmBin = path.join(path.dirname(process.execPath), 'npm');
 
@@ -84,7 +88,7 @@ var env = {
   NVM_NODEJS_ORG_MIRROR: config.mirrorsUrl + '/node',
   NVM_IOJS_ORG_MIRROR: config.mirrorsUrl + '/iojs',
   PHANTOMJS_CDNURL: config.mirrorsUrl + '/phantomjs',
-  CHROMEDRIVER_CDNURL: config.mirrorsUrl + '/chromedriver',
+  CHROMEDRIVER_CDNURL: 'http://oss.npm.taobao.org/dist/chromedriver',
   SELENIUM_CDNURL: config.mirrorsUrl + '/selenium',
   ELECTRON_MIRROR: config.mirrorsUrl + '/electron/',
 
