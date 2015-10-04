@@ -1,7 +1,5 @@
 /**!
- * cnpm - test/cnpm.test.js
- *
- * Copyright(c) fengmk2 and other contributors.
+ * Copyright(c) cnpm and other contributors.
  * MIT Licensed
  *
  * Authors:
@@ -24,10 +22,6 @@ var fixtures = path.join(__dirname, 'fixtures');
 var RUN_ON_CI = process.env.TRAVIS || process.env.APPVEYOR;
 
 function run(args, callback) {
-  if (RUN_ON_CI) {
-    // dont change disturl
-    args.push('--disturl=none');
-  }
   return spawn('node', args).on('exit', callback);
 }
 
@@ -81,7 +75,7 @@ describe('cnpm.test.js', function () {
     });
   });
 
-  it('should install padding', function (done) {
+  it('should install pedding', function (done) {
     var args = [
       cnpm,
       'install',
@@ -89,6 +83,8 @@ describe('cnpm.test.js', function () {
     ];
     if (RUN_ON_CI) {
       args.push('--registry=https://registry.npmjs.org');
+      args.push('--disturl=none');
+      args.push('--userconfig=none');
     }
     run(args, function (code) {
       code.should.equal(0);
@@ -101,10 +97,12 @@ describe('cnpm.test.js', function () {
     var args = [
       cnpm,
       'install',
-      'pedding',
+      'cnpm',
     ];
     if (RUN_ON_CI) {
       args.push('--registry=https://registry.npmjs.org');
+      args.push('--disturl=none');
+      args.push('--userconfig=none');
     }
     run(args, function (code) {
       code.should.equal(0);
@@ -116,10 +114,12 @@ describe('cnpm.test.js', function () {
     var args = [
       cnpm,
       'install',
-      'pedding',
+      'npm',
     ];
     if (RUN_ON_CI) {
       args.push('--registry=https://registry.npmjs.org');
+      args.push('--disturl=none');
+      args.push('--userconfig=none');
     }
     run(args, function (code) {
       code.should.equal(0);
@@ -131,10 +131,13 @@ describe('cnpm.test.js', function () {
     var args = [
       cnpm,
       'install',
-      'node-murmurhash'
+      'node-murmurhash',
+      '--loglevel=http',
     ];
     if (RUN_ON_CI) {
       args.push('--registry=https://registry.npmjs.org');
+      args.push('--disturl=none');
+      args.push('--userconfig=none');
     }
     var child = run(args, function (code) {
       code.should.equal(0);
@@ -143,23 +146,4 @@ describe('cnpm.test.js', function () {
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
   });
-
-  // if (process.platform !== 'win32') {
-  //   it('should install and build cpp module', function (done) {
-  //     var args = [
-  //       cnpm,
-  //       'install',
-  //       'node-murmurhash@1.0.1'
-  //     ];
-  //     if (RUN_ON_CI) {
-  //       args.push('--registry=https://registry.npmjs.org');
-  //     }
-  //     var child = run(args, function (code) {
-  //       code.should.equal(0);
-  //       done();
-  //     });
-  //     child.stdout.pipe(process.stdout);
-  //     child.stderr.pipe(process.stderr);
-  //   });
-  // }
 });

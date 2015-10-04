@@ -2,7 +2,7 @@ test/
 coverage.html
 lib-cov/
 Makefile
-.travis.yml
+*.yml
 logo.png
 .jshintrc
 .jshintignore
