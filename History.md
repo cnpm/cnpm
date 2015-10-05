@@ -1,4 +1,11 @@
 
+3.2.3 / 2015-10-05
+==================
+
+ * fix: ignore --disturl and --userconfig=none
+ * test: appveyor test node v4
+ * fix: install chromedriver from oss directly
+
 3.2.2 / 2015-09-11
 ==================
 
