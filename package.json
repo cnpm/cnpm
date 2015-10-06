@@ -24,8 +24,8 @@
     "commander": "~2.7.1",
     "cross-spawn": "~0.2.8",
     "debug": "^2.2.0",
-    "giturl": "~1.0.0",
-    "npm": "~2.14.2",
+    "giturl": "^1.0.0",
+    "npm": "^3.3.6",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
     "node-gyp": "~3.0.3",
@@ -55,5 +55,8 @@
     "node": ">= 0.10.0"
   },
   "author": "fengmk2 <m@fengmk2.com> (http://fengmk2.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "tag": "beta"
+  }
 }
