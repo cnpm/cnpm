@@ -15,6 +15,7 @@
 var spawn = require('cross-spawn');
 var should = require('should');
 var path = require('path');
+var fs = require('fs');
 var fse = require('fs-extra');
 var cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 var fixtures = path.join(__dirname, 'fixtures');
@@ -154,7 +155,6 @@ describe('cnpm.test.js', function () {
       cnpm,
       'install',
       'node-murmurhash',
-      '--loglevel=http',
     ];
     if (RUN_ON_CI) {
       args.push('--registry=https://registry.npmjs.org');
@@ -168,4 +168,27 @@ describe('cnpm.test.js', function () {
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
   });
+
+  // WTF? TRAVIS download from taobao npm is too slow! skip this!
+  if (!RUN_ON_CI) {
+    it('should install node-sass from mirror', function (done) {
+      var args = [
+        cnpm,
+        'install',
+        'node-sass',
+      ];
+      if (RUN_ON_CI) {
+        args.push('--registry=https://registry.npmjs.org');
+        args.push('--disturl=none');
+        args.push('--userconfig=none');
+      }
+      var child = run(args, function (code) {
+        code.should.equal(0);
+        fs.existsSync(path.join(cwd, 'node_modules/node-sass'));
+        done();
+      });
+      child.stdout.pipe(process.stdout);
+      child.stderr.pipe(process.stderr);
+    });
+  }
 });
