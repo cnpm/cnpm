@@ -91,7 +91,7 @@ var env = {
   CHROMEDRIVER_CDNURL: 'http://oss.npm.taobao.org/dist/chromedriver',
   SELENIUM_CDNURL: config.mirrorsUrl + '/selenium',
   ELECTRON_MIRROR: config.mirrorsUrl + '/electron/',
-
+  SASS_BINARY_SITE: config.mirrorsUrl + '/node-sass',
   // set npm config: always-auth be true
   // NPM_CONFIG_ALWAYS_AUTH: 'true',
 };
