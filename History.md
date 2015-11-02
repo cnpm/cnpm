@@ -1,4 +1,10 @@
 
+4.1.0 / 2015-11-02
+==================
+
+ * test: add node v5
+ * feat: install node-sass from China mirror
+
 4.0.0 / 2015-10-06
 ==================
 

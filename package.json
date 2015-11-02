@@ -1,6 +1,6 @@
 {
   "name": "cnpm",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "scripts": {
