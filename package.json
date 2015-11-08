@@ -24,7 +24,7 @@
     "commander": "~2.7.1",
     "cross-spawn": "~0.2.8",
     "debug": "^2.2.0",
-    "giturl": "~0.0.3",
+    "giturl": "~1.0.0",
     "npm": "~2.14.2",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
