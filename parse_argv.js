@@ -28,7 +28,8 @@ module.exports = function (cmd) {
       .option('--disturl [disturl]', 'dist url for node-gyp, default is ' + config.disturl)
       .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
       .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
-      .option('-y, --yes', 'yes all confirm');
+      .option('-y, --yes', 'yes all confirm')
+      .option('--proxy [proxy]', 'set a http proxy, no default');
   }
 
   if (cmd === 'doc') {
