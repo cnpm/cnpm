@@ -30,5 +30,6 @@ var config = module.exports = {
   iojsDisturl: 'https://npm.taobao.org/mirrors/iojs',
   mirrorsUrl: 'https://npm.taobao.org/mirrors',
   cache: path.join(root, '.cnpm'),  //cache folder name
-  userconfig: path.join(root, '.cnpmrc')
+  userconfig: path.join(root, '.cnpmrc'),
+  proxy: ''
 };
