@@ -28,7 +28,8 @@ module.exports = function (cmd) {
       .option('--disturl [disturl]', 'dist url for node-gyp, default is ' + config.disturl)
       .option('-c, --cache [cache]', 'cache folder, default is ' + config.cache)
       .option('-u, --userconfig [userconfig]', 'userconfig file, default is ' + config.userconfig)
-      .option('-y, --yes', 'yes all confirm');
+      .option('-y, --yes', 'yes all confirm')
+      .option('--proxy [proxy]', 'set a http proxy, no default');
   }
 
   if (cmd === 'doc') {
@@ -68,6 +69,9 @@ module.exports = function (cmd) {
   if (!argv.disturl) {
     var isIOJS = process.execPath.indexOf('iojs') >= 0;
     argv.disturl = isIOJS ? config.iojsDisturl : config.disturl;
+  }
+  if (!argv.proxy) {
+    argv.proxy = config.proxy;
   }
   if (argv.disturl === 'none') {
     delete argv.disturl;
