@@ -58,6 +58,9 @@ if (program.disturl) {
 if (program.userconfig) {
   args.unshift('--userconfig=' + program.userconfig);
 }
+if (program.proxy) {
+  args.unshift('--proxy=' + program.proxy);
+}
 
 var originalNpmBin = path.join(path.dirname(process.execPath), 'npm');
 
