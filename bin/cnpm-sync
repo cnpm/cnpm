@@ -88,10 +88,10 @@ function showlog(registry, syncInfo, done) {
     if (err) {
       return done(err);
     }
-    var log = info.log.trim();
-    if (!log) {
+    if (!info || !info.log) {
       return setTimeout(showlog.bind(null, registry, syncInfo, done), 2000);
     }
+    var log = info.log.trim();
     console.log(log);
     syncInfo.lastLines += log.split('\n').length;
     if (log.indexOf('[done] Sync ' + syncInfo.name) >= 0) {
