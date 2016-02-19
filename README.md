@@ -20,7 +20,7 @@ cnpm
 
 ![logo](https://raw.github.com/cnpm/cnpmjs.org/master/logo.png)
 
-cnpm: npm client for [cnpmjs.org](http://cnpmjs.org)
+cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 
 ## Install
 
@@ -58,7 +58,6 @@ $ npm install cnpm -g
 
 # then alias it
 $ alias mynpm='cnpm --registry=http://registry.npm.example.com \
- --disturl=http://npm.example.com/dist \
  --registryweb=http://npm.example.com \
  --cache=$HOME/.mynpm/.cache \
  --userconfig=$HOME/.mynpmrc'
