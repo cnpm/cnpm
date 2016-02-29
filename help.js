@@ -19,7 +19,7 @@ module.exports = function outputHelp(argv) {
   var helpInfo = 'Usage: cnpm [option] <command>\n' +
   'Help: http://cnpmjs.org/help/cnpm\n\n' +
   '  Extend command\n' +
-  '    web                            open cnpm web (ex.: tnpm web)\n' +
+  '    web                            open cnpm web (ex.: cnpm web)\n' +
   '    check [ingoreupdate]           check project dependencies, add ignoreupdate will not check modules\' latest version(ex.: cnpm check, cnpm check -i)\n' +
   '    doc [moduleName]               open document page (ex.: cnpm doc urllib)\n' +
   '    sync [moduleName]              sync module from source npm (ex.: cnpm sync urllib)\n' +
