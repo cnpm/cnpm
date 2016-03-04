@@ -1,5 +1,5 @@
-/**!
- * Copyright(c) cnpmjs.org and other contributors.
+/**
+ * Copyright(c) cnpm and other contributors.
  * MIT Licensed
  *
  * Authors:
@@ -13,7 +13,6 @@
  * Module dependencies.
  */
 
-require('colors');
 var debug = require('debug')('cnpm:origin');
 var match = require('auto-correct');
 var spawn = require('cross-spawn');
@@ -27,6 +26,7 @@ var program = parseArgv();
 var rawArgs = program.rawArgs.slice(2);
 var args = [];
 var hasCNPM = false;
+var isInstall = false;
 for (var i = 0; i < rawArgs.length; i++) {
   var arg = rawArgs[i];
   if (arg[0] !== '-') {
@@ -34,6 +34,10 @@ for (var i = 0; i < rawArgs.length; i++) {
     if (arg === 'cnpm') {
       hasCNPM = true;
     }
+  }
+  if (i === 0 && (arg === 'i' || arg === 'install')) {
+    isInstall = true;
+    continue;
   }
   args.push(arg);
 }
@@ -51,7 +55,6 @@ var nodegyp = path.join(nodeModulesDir, 'node-gyp', 'bin', 'node-gyp.js');
 
 args.unshift('--node-gyp=' + nodegyp);
 args.unshift('--registry=' + program.registry);
-args.unshift('--cache=' + program.cache);
 if (program.disturl) {
   args.unshift('--disturl=' + program.disturl);
 }
@@ -62,43 +65,24 @@ if (program.proxy) {
   args.unshift('--proxy=' + program.proxy);
 }
 
-var originalNpmBin = path.join(path.dirname(process.execPath), 'npm');
+var npmBin;
 
-// node-pre-gyp will try to resolve node_modules/npm, so rename it
-// see https://github.com/mapbox/node-pre-gyp/issues/144
-function findNpmBin() {
-  var npmBin;
-  try {
-    npmBin = require.resolve('npm');
-    // $HOME/git/smart-npm/node_modules/npm/lib/npm.js
-    npmBin = path.join(npmBin, '..', '..', '..', '.bin', 'npm');
-  } catch (_) {
-    npmBin = originalNpmBin;
+if (isInstall) {
+  // if local npm not exists, use npm. happen on `$ cnpm install cnpm`
+  if (hasCNPM) {
+    npmBin = path.join(path.dirname(process.execPath), 'npm');
+    args.unshift('install');
+  } else {
+    npmBin = path.join(__dirname, 'node_modules', '.bin', 'npminstall');
+    args.unshift('--china');
   }
-  return npmBin;
-}
-
-var npmBin = findNpmBin();
-
-// if local npm not exists, use npm. happen on `$ cnpm install cnpm`
-if (hasCNPM) {
-  npmBin = originalNpmBin;
+} else {
+  npmBin = path.join(__dirname, 'node_modules', '.bin', 'npm');
 }
 
 debug('%s %s', npmBin, args.join(' '));
 
-var env = {
-  NVM_NODEJS_ORG_MIRROR: config.mirrorsUrl + '/node',
-  NVM_IOJS_ORG_MIRROR: config.mirrorsUrl + '/iojs',
-  PHANTOMJS_CDNURL: config.mirrorsUrl + '/phantomjs',
-  CHROMEDRIVER_CDNURL: 'http://oss.npm.taobao.org/dist/chromedriver',
-  SELENIUM_CDNURL: config.mirrorsUrl + '/selenium',
-  ELECTRON_MIRROR: config.mirrorsUrl + '/electron/',
-  SASS_BINARY_SITE: config.mirrorsUrl + '/node-sass',
-  // set npm config: always-auth be true
-  // NPM_CONFIG_ALWAYS_AUTH: 'true',
-};
-
+var env = {};
 for (var k in process.env) {
   env[k] = process.env[k];
 }
@@ -119,7 +103,6 @@ npm.on('exit', function (code, signal) {
 
 /**
  * correct command
- * @return {[type]} [description]
  */
 function correct(command) {
   var cmds = [

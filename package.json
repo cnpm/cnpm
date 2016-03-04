@@ -1,11 +1,11 @@
 {
   "name": "cnpm",
-  "version": "4.1.0",
+  "version": "4.2.0-beta.3",
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "scripts": {
-    "test": "mocha test/*.test.js --timeout 600000",
-    "cnpm": "npm i --registry=http://registry.npm.taobao.org"
+    "test": "mocha test/*.test.js --timeout 60000",
+    "cnpm": "npm i --registry=https://registry.npm.taobao.org"
   },
   "preferGlobal": true,
   "bin": {
@@ -18,18 +18,19 @@
     "cnpm-search": "./bin/cnpm-search"
   },
   "dependencies": {
-    "auto-correct": "~1.0.0",
-    "bagpipe": "~0.3.5",
-    "colors": "~1.0.3",
+    "auto-correct": "^1.0.0",
+    "bagpipe": "^0.3.5",
+    "colors": "^1.0.3",
     "commander": "~2.7.1",
     "cross-spawn": "~0.2.8",
     "debug": "^2.2.0",
     "giturl": "^1.0.0",
-    "npm": "^3.3.10",
+    "npm": "^3.8.0",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
-    "node-gyp": "~3.0.3",
-    "urllib": "^2.5.0"
+    "node-gyp": "^3.3.0",
+    "urllib": "^2.8.0",
+    "npminstall": "^1.2.5"
   },
   "devDependencies": {
     "autod": "*",
@@ -52,11 +53,8 @@
     "cnpm"
   ],
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.3.2"
   },
   "author": "fengmk2 <m@fengmk2.com> (http://fengmk2.com)",
-  "license": "MIT",
-  "publishConfig": {
-    "tag": "beta"
-  }
+  "license": "MIT"
 }
