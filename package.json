@@ -28,7 +28,6 @@
     "npm": "^3.8.0",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
-    "node-gyp": "^3.3.0",
     "urllib": "^2.8.0",
     "npminstall": "^1.3.1"
   },

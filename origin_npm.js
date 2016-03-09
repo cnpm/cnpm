@@ -50,10 +50,6 @@ if (program.userconfig && !fs.existsSync(program.userconfig)) {
   fs.writeFileSync(program.userconfig, 'email =\n');
 }
 
-var nodeModulesDir = path.join(__dirname, 'node_modules');
-var nodegyp = path.join(nodeModulesDir, 'node-gyp', 'bin', 'node-gyp.js');
-
-args.unshift('--node-gyp=' + nodegyp);
 args.unshift('--registry=' + program.registry);
 if (program.disturl) {
   args.unshift('--disturl=' + program.disturl);
