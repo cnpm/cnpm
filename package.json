@@ -55,5 +55,8 @@
     "node": ">= 0.10.0"
   },
   "author": "fengmk2 <m@fengmk2.com> (http://fengmk2.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "tag": "v3"
+  }
 }
