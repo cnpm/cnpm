@@ -1,4 +1,10 @@
 
+4.2.0 / 2016-03-12
+==================
+
+  * refactor: remove node-gyp
+  * refactor: use npminstall
+
 4.1.0 / 2015-11-02
 ==================
 
