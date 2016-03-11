@@ -1,7 +1,5 @@
-/**!
- * cnpm - help.js
- *
- * Copyright(c) cnpmjs.org and other contributors.
+/**
+ * Copyright(c) cnpm and other contributors.
  * MIT Licensed
  *
  * Authors:

@@ -4,7 +4,6 @@ cnpm
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![appveyor build status][appveyor-image]][appveyor-url]
-[![Gittip][gittip-image]][gittip-url]
 [![David deps][david-image]][david-url]
 
 [npm-image]: https://img.shields.io/npm/v/cnpm.svg?style=flat
@@ -13,8 +12,6 @@ cnpm
 [travis-url]: https://travis-ci.org/cnpm/cnpm
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/17kfr8eitdi7rljr?svg=true
 [appveyor-url]: https://ci.appveyor.com/project/fengmk2/urllib
-[gittip-image]: https://img.shields.io/gittip/fengmk2.svg?style=flat
-[gittip-url]: https://www.gittip.com/fengmk2/
 [david-image]: https://img.shields.io/david/cnpm/cnpm.svg?style=flat
 [david-url]: https://david-dm.org/cnpm/cnpm
 
@@ -58,9 +55,8 @@ $ npm install cnpm -g
 
 # then alias it
 $ alias mynpm='cnpm --registry=http://registry.npm.example.com \
- --registryweb=http://npm.example.com \
- --cache=$HOME/.mynpm/.cache \
- --userconfig=$HOME/.mynpmrc'
+  --registryweb=http://npm.example.com \
+  --userconfig=$HOME/.mynpmrc'
 ```
 
 ## License

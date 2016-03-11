@@ -1,11 +1,9 @@
-/**!
- * cnpm - config.js
- *
- * Copyright(c) cnpmjs.org and other contributors.
+/**
+ * Copyright(c) cnpm and other contributors.
  * MIT Licensed
  *
  * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
+ *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)
  */
 
 'use strict';
@@ -30,8 +28,7 @@ var config = module.exports = {
   cnpmRegistry: 'https://registry.npm.taobao.org',
   disturl: 'https://npm.taobao.org/mirrors/node', // download dist tarball for node-gyp
   iojsDisturl: 'https://npm.taobao.org/mirrors/iojs',
-  mirrorsUrl: 'https://npm.taobao.org/mirrors',
   cache: path.join(root, '.cnpm'),  //cache folder name
   userconfig: path.join(root, '.cnpmrc'),
-  proxy: ''
+  proxy: '',
 };

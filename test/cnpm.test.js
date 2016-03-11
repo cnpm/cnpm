@@ -1,4 +1,4 @@
-/**!
+/**
  * Copyright(c) cnpm and other contributors.
  * MIT Licensed
  *
@@ -21,7 +21,7 @@ var cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 var fixtures = path.join(__dirname, 'fixtures');
 var cwd = path.join(fixtures, 'foo');
 
-var RUN_ON_CI = process.env.TRAVIS || process.env.APPVEYOR;
+var RUN_ON_CI = process.env.CI || process.env.CI;
 
 function run(args, callback) {
   return spawn('node', args, {
