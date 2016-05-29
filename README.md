@@ -19,6 +19,13 @@ cnpm
 
 cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 
+
+## Requirements
+
+|        | Minimum | Recommended |
+|--------|---------|-------------|
+| NodeJS | 4.0.0   | stable      |
+
 ## Install
 
 ```bash
