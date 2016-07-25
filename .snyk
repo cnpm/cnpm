@@ -1,0 +1,6 @@
+version: v1.5.0
+ignore: {}
+patch:
+  'npm:tough-cookie:20160722':
+    - npm > request > tough-cookie:
+        patched: '2016-07-25T10:14:14.218Z'
