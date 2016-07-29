@@ -1,4 +1,10 @@
 
+4.3.0 / 2016-07-29
+==================
+
+  * feat: use npminstall@beta (#131)
+  * chore: add NodeJS version requirements (#116)
+
 4.2.0 / 2016-03-12
 ==================
 
