@@ -20,15 +20,15 @@
     "auto-correct": "^1.0.0",
     "bagpipe": "^0.3.5",
     "colors": "^1.0.3",
-    "commander": "~2.7.1",
+    "commander": "^2.9.0",
     "cross-spawn": "~0.2.8",
     "debug": "^2.2.0",
     "giturl": "^1.0.0",
-    "npm": "^3.8.0",
+    "npm": "^3.10.5",
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
     "urllib": "^2.8.0",
-    "npminstall": "beta"
+    "npminstall": "^2.0.1"
   },
   "devDependencies": {
     "autod": "*",
