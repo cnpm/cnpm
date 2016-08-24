@@ -28,7 +28,7 @@
     "npm-request": "~0.0.4",
     "open": "~0.0.5",
     "urllib": "^2.8.0",
-    "npminstall": "^2.0.1"
+    "npminstall": "^2.1.0"
   },
   "devDependencies": {
     "autod": "*",
