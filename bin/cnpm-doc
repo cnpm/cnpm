@@ -1,20 +1,6 @@
 #!/usr/bin/env node
 
-/**!
- * cnpm - bin/cnpm-doc
- *
- * Copyright(c) cnpmjs.org and other contributors.
- * MIT Licensed
- *
- * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
- */
-
 'use strict';
-
-/**
- * Module dependencies.
- */
 
 var request = require('npm-request');
 var giturl = require('giturl');

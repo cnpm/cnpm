@@ -1,17 +1,6 @@
-/**
- * Copyright(c) cnpm and other contributors.
- * MIT Licensed
- *
- * Authors:
- *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
- */
-
 'use strict';
 
-/**
- * Module dependencies.
- */
-var config = require('./config');
+const config = require('./config');
 
 module.exports = function outputHelp(argv) {
   var helpInfo = 'Usage: cnpm [option] <command>\n' +

@@ -1,34 +1,23 @@
-/**
- * Copyright(c) cnpm and other contributors.
- * MIT Licensed
- *
- * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)
- *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
- */
-
 'use strict';
 
-/**
- * Module dependencies.
- */
+const debug = require('debug')('cnpm:origin');
+const match = require('auto-correct');
+const spawn = require('cross-spawn');
+const fs = require('fs');
+const path = require('path');
+const config = require('./config');
+const parseArgv = require('./parse_argv');
 
-var debug = require('debug')('cnpm:origin');
-var match = require('auto-correct');
-var spawn = require('cross-spawn');
-var fs = require('fs');
-var path = require('path');
-var config = require('./config');
-var parseArgv = require('./parse_argv');
+const program = parseArgv();
 
-var program = parseArgv();
+const rawArgs = program.rawArgs.slice(2);
+const args = [];
+let hasCNPM = false;
+let isInstall = false;
+let installer = 'npminstall';
 
-var rawArgs = program.rawArgs.slice(2);
-var args = [];
-var hasCNPM = false;
-var isInstall = false;
-for (var i = 0; i < rawArgs.length; i++) {
-  var arg = rawArgs[i];
+for (let i = 0; i < rawArgs.length; i++) {
+  let arg = rawArgs[i];
   if (arg[0] !== '-') {
     arg = correct(arg);
     if (arg === 'cnpm') {
@@ -39,6 +28,13 @@ for (var i = 0; i < rawArgs.length; i++) {
     isInstall = true;
     continue;
   }
+
+  // support `$ cnpm i --by=npm`
+  if (arg.indexOf('--by=') === 0) {
+    installer = arg.split('=', 2)[1];
+    continue;
+  }
+
   args.push(arg);
 }
 
@@ -69,8 +65,17 @@ if (isInstall) {
     npmBin = path.join(path.dirname(process.execPath), 'npm');
     args.unshift('install');
   } else {
-    npmBin = path.join(__dirname, 'node_modules', '.bin', 'npminstall');
-    args.unshift('--china');
+    npmBin = path.join(__dirname, 'node_modules', '.bin', installer);
+    if (installer === 'npminstall') {
+      args.unshift('--china');
+    } else {
+      // other installer, like npm
+      args.unshift('install');
+    }
+    // maybe outside installer, just use installer as binary name
+    if (!fs.existsSync(npmBin)) {
+      npmBin = installer;
+    }
   }
 } else {
   npmBin = path.join(__dirname, 'node_modules', '.bin', 'npm');
@@ -78,12 +83,12 @@ if (isInstall) {
 
 debug('%s %s', npmBin, args.join(' '));
 
-var env = {};
-for (var k in process.env) {
+const env = {};
+for (const k in process.env) {
   env[k] = process.env[k];
 }
 
-var npm  = spawn(npmBin, args, {
+const npm = spawn(npmBin, args, {
   env: env,
   cwd: CWD,
   stdio: [
@@ -93,7 +98,7 @@ var npm  = spawn(npmBin, args, {
   ]
 });
 
-npm.on('exit', function (code, signal) {
+npm.on('exit', (code, signal) => {
   process.exit(code);
 });
 
@@ -101,7 +106,7 @@ npm.on('exit', function (code, signal) {
  * correct command
  */
 function correct(command) {
-  var cmds = [
+  const cmds = [
     'install',
     'publish',
     'adduser',
@@ -109,9 +114,9 @@ function correct(command) {
     'config',
     'unpublish',
   ];
-  for (var i = 0; i < cmds.length; i++) {
-    if (match(command, cmds[i])) {
-      return cmds[i];
+  for (const cmd of cmds) {
+    if (match(command, cmd)) {
+      return cmd;
     }
   }
   return command;

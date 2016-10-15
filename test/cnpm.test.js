@@ -1,16 +1,4 @@
-/**
- * Copyright(c) cnpm and other contributors.
- * MIT Licensed
- *
- * Authors:
- *   fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)
- */
-
 'use strict';
-
-/**
- * Module dependencies.
- */
 
 var spawn = require('cross-spawn');
 var should = require('should');
@@ -21,7 +9,7 @@ var cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 var fixtures = path.join(__dirname, 'fixtures');
 var cwd = path.join(fixtures, 'foo');
 
-var RUN_ON_CI = process.env.CI || process.env.CI;
+var RUN_ON_CI = process.env.CI;
 
 function run(args, callback) {
   return spawn('node', args, {
@@ -29,8 +17,8 @@ function run(args, callback) {
   }).on('exit', callback);
 }
 
-describe('cnpm.test.js', function () {
-  after(function() {
+describe('test/cnpm.test.js', () => {
+  after(() => {
     fse.removeSync(path.join(cwd, 'node_modules'));
   });
 

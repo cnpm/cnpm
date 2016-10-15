@@ -1,25 +1,11 @@
 #!/usr/bin/env node
 
-/**!
- * cnpm - bin/cnpm-user
- *
- * Copyright(c) cnpmjs.org and other contributors.
- * MIT Licensed
- *
- * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
- */
-
 'use strict';
 
-/**
- * Module dependencies.
- */
+const utils = require('../utils');
+const config = require('../config');
+const argv = require('../parse_argv')();
 
-var utils = require('../utils');
-var config = require('../config');
-var argv = require('../parse_argv')();
-
-var userURL = argv.registryweb + '/~' + argv.args[1];
+const userURL = argv.registryweb + '/~' + argv.args[1];
 
 utils.openurl(userURL);
