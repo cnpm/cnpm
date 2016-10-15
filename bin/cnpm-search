@@ -1,23 +1,9 @@
 #!/usr/bin/env node
 
-/**!
- * cnpm - bin/cnpm-search
- *
- * Copyright(c) cnpmjs.org and other contributors.
- * MIT Licensed
- *
- * Authors:
- *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
- */
-
 'use strict';
 
-/**
- * Module dependencies.
- */
-
-var utils = require('../utils');
-var argv = require('../parse_argv')();
-var searchurl = argv.registryweb + '/browse/keyword/' + argv.args[1];
+const utils = require('../utils');
+const argv = require('../parse_argv')();
+const searchurl = argv.registryweb + '/browse/keyword/' + argv.args[1];
 
 utils.openurl(searchurl);

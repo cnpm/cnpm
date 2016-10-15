@@ -1,7 +1,7 @@
 environment:
   matrix:
+    - nodejs_version: "6"
     - nodejs_version: "4"
-    - nodejs_version: "5"
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -12,10 +12,6 @@ install:
 
 # Post-install test scripts.
 test_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
-  # run tests
   - npm test
 
 # Don't actually build.
