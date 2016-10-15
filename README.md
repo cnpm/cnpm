@@ -66,6 +66,16 @@ $ alias mynpm='cnpm --registry=http://registry.npm.example.com \
   --userconfig=$HOME/.mynpmrc'
 ```
 
+## Install with orginal npm cli
+
+cnpm using [npminstall](https://github.com/cnpm/npminstall) by default.
+If you don't like symlink mode for `node_modules`, you can change the installer to orginal npm.
+But you will lose the fatest install speed.
+
+```bash
+$ cnpm i --by=npm react-native
+```
+
 ## License
 
 [MIT](LICENSE.txt)

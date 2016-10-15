@@ -1,4 +1,5 @@
 coverage.html
+coverage/
 *.seed
 *.log
 *.csv

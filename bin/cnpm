@@ -1,28 +1,14 @@
 #!/usr/bin/env node
 
-/**!
- * cnpm - bin/cnpm
- *
- * Copyright(c) cnpmjs.org and other contributors.
- * MIT Licensed
- *
- * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)
- */
-
 'use strict';
 
-/**
- * Module dependencies.
- */
+const debug = require('debug')('cnpm');
+const pkg = require('../package.json');
+const argv = require('../parse_argv')();
 
-var debug = require('debug')('cnpm');
-var pkg = require('../package.json');
-var argv = require('../parse_argv')();
+const action = argv.args[0];
 
-var action = argv.args[0];
-
-var extendsMethd = {
+const extendsMethd = {
   web: 1,
   check: 1,
   doc: 1,

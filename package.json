@@ -4,37 +4,36 @@
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "scripts": {
-    "test": "mocha test/*.test.js --timeout 60000"
+    "test": "mocha -t 60000 test/*.test.js",
+    "lint": "jshint .",
+    "ci": "npm run lint && npm run test",
+    "autod": "autod"
   },
   "preferGlobal": true,
   "bin": {
-    "cnpm": "./bin/cnpm",
-    "cnpm-check": "./bin/cnpm-check",
-    "cnpm-sync": "./bin/cnpm-sync",
-    "cnpm-web": "./bin/cnpm-web",
-    "cnpm-user": "./bin/cnpm-user",
-    "cnpm-doc": "./bin/cnpm-doc",
-    "cnpm-search": "./bin/cnpm-search"
+    "cnpm": "bin/cnpm"
   },
   "dependencies": {
     "auto-correct": "^1.0.0",
     "bagpipe": "^0.3.5",
-    "colors": "^1.0.3",
+    "colors": "^1.1.2",
     "commander": "^2.9.0",
     "cross-spawn": "~0.2.8",
     "debug": "^2.2.0",
     "giturl": "^1.0.0",
-    "npm": "^3.10.5",
-    "npm-request": "~0.0.4",
-    "open": "~0.0.5",
-    "urllib": "^2.8.0",
-    "npminstall": "^2.1.0"
+    "npm": "^3.10.8",
+    "npm-request": "^1.0.0",
+    "open": "^0.0.5",
+    "urllib": "^2.17.0",
+    "npminstall": "^2.7.0"
   },
   "devDependencies": {
-    "autod": "*",
+    "autod": "^2.7.1",
+    "coffee": "^3.3.0",
     "fs-extra": "0",
     "jshint": "2",
-    "mocha": "2",
+    "mocha": "3",
+    "rimraf": "^2.5.4",
     "should": "5"
   },
   "homepage": "https://github.com/cnpm/cnpm",
@@ -48,10 +47,12 @@
     "email": "m@fengmk2.com"
   },
   "keywords": [
-    "cnpm"
+    "cnpm",
+    "npm",
+    "npminstall"
   ],
   "engines": {
-    "node": ">= 4.3.2"
+    "node": ">= 4.0.0"
   },
   "author": "fengmk2 <m@fengmk2.com> (http://fengmk2.com)",
   "license": "MIT"

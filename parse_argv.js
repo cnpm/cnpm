@@ -1,26 +1,14 @@
-/**
- * Copyright(c) cnpm and other contributors.
- * MIT Licensed
- *
- * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)
- *  dead_horse <dead_horse@qq.com> (http://deadhorse.me)
- */
-
 'use strict';
 
-/**
- * Module dependencies.
- */
+const fs = require('fs');
+const program = require('commander');
+const config = require('./config');
+const pkg = require('./package.json');
+const help = require('./help');
 
-var fs = require('fs');
-var program = require('commander');
-var config = require('./config');
-var pkg = require('./package.json');
-var help = require('./help');
-var argv = null;
+let argv = null;
 
-module.exports = function (cmd) {
+module.exports = cmd => {
   if (!argv) {
     argv = program.version(pkg.version, '-v, --version')
       .option('-r, --registry [registry]', 'registry url, default is ' + config.cnpmRegistry)
