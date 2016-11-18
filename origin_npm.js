@@ -9,10 +9,8 @@ const config = require('./config');
 const parseArgv = require('./parse_argv');
 
 const program = parseArgv();
-
 const rawArgs = program.rawArgs.slice(2);
 const args = [];
-let hasCNPM = false;
 let isInstall = false;
 let installer = 'npminstall';
 
@@ -20,9 +18,6 @@ for (let i = 0; i < rawArgs.length; i++) {
   let arg = rawArgs[i];
   if (arg[0] !== '-') {
     arg = correct(arg);
-    if (arg === 'cnpm') {
-      hasCNPM = true;
-    }
   }
   if (i === 0 && (arg === 'i' || arg === 'install')) {
     isInstall = true;
@@ -60,22 +55,16 @@ if (program.proxy) {
 var npmBin;
 
 if (isInstall) {
-  // if local npm not exists, use npm. happen on `$ cnpm install cnpm`
-  if (hasCNPM) {
-    npmBin = path.join(path.dirname(process.execPath), 'npm');
-    args.unshift('install');
+  npmBin = path.join(__dirname, 'node_modules', '.bin', installer);
+  if (installer === 'npminstall') {
+    args.unshift('--china');
   } else {
-    npmBin = path.join(__dirname, 'node_modules', '.bin', installer);
-    if (installer === 'npminstall') {
-      args.unshift('--china');
-    } else {
-      // other installer, like npm
-      args.unshift('install');
-    }
-    // maybe outside installer, just use installer as binary name
-    if (!fs.existsSync(npmBin)) {
-      npmBin = installer;
-    }
+    // other installer, like npm
+    args.unshift('install');
+  }
+  // maybe outside installer, just use installer as binary name
+  if (!fs.existsSync(npmBin)) {
+    npmBin = installer;
   }
 } else {
   npmBin = path.join(__dirname, 'node_modules', '.bin', 'npm');
@@ -83,10 +72,7 @@ if (isInstall) {
 
 debug('%s %s', npmBin, args.join(' '));
 
-const env = {};
-for (const k in process.env) {
-  env[k] = process.env[k];
-}
+const env = Object.assign({}, process.env);
 
 const npm = spawn(npmBin, args, {
   env: env,
@@ -102,9 +88,6 @@ npm.on('exit', (code, signal) => {
   process.exit(code);
 });
 
-/**
- * correct command
- */
 function correct(command) {
   const cmds = [
     'install',
