@@ -20,15 +20,17 @@ describe('test/custom-installer.test.js', () => {
       args.push('--userconfig=none');
     }
 
+    const testRE = process.platform === 'win32' ? /\\node_modules\\\.bin\\npm/ : /\/node_modules\/\.bin\/npm i/;
+
     return coffee.fork(cnpmbin, args, {
         cwd,
         env: Object.assign({}, process.env, {
           DEBUG: 'cnpm:origin',
         }),
       })
-      // .debug()
+      .debug()
       .expect('code', 0)
-      .expect('stderr', /\/node_modules\/\.bin\/npm i/)
+      .expect('stderr', testRE)
       .expect('stderr', /npm WARN npm-installer@ No description/)
       .end();
   });

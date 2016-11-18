@@ -4,7 +4,7 @@
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "scripts": {
-    "test": "mocha -t 60000 test/*.test.js",
+    "test": "mocha -t 120000 test/*.test.js",
     "lint": "jshint .",
     "ci": "npm run lint && npm run test",
     "autod": "autod"
