@@ -1,4 +1,11 @@
 
+4.4.1 / 2016-11-19
+==================
+
+  * test: fix invaild regex on windows
+  * test: add node v7
+  * fix: cnpm can install itself now
+
 4.4.0 / 2016-10-15
 ==================
 
