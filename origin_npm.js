@@ -3,6 +3,7 @@
 const debug = require('debug')('cnpm:origin');
 const match = require('auto-correct');
 const spawn = require('cross-spawn');
+const cp = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const config = require('./config');
@@ -33,7 +34,8 @@ for (let i = 0; i < rawArgs.length; i++) {
   args.push(arg);
 }
 
-var CWD = process.cwd();
+const env = Object.assign({}, process.env);
+const CWD = process.cwd();
 
 if (program.userconfig && !fs.existsSync(program.userconfig)) {
   // make sure userconfig exists
@@ -52,11 +54,21 @@ if (program.proxy) {
   args.unshift('--proxy=' + program.proxy);
 }
 
-var npmBin;
+let npmBin;
+let execMethod = spawn;
+const stdio = [
+  process.stdin,
+  process.stdout,
+  process.stderr,
+];
 
 if (isInstall) {
   npmBin = path.join(__dirname, 'node_modules', '.bin', installer);
   if (installer === 'npminstall') {
+    // use fork to spawn can fix install cnpm itself fail on Windows
+    execMethod = cp.fork;
+    stdio.push('ipc');
+    npmBin = require.resolve('npminstall/bin/install.js');
     args.unshift('--china');
   } else {
     // other installer, like npm
@@ -72,19 +84,13 @@ if (isInstall) {
 
 debug('%s %s', npmBin, args.join(' '));
 
-const env = Object.assign({}, process.env);
-
-const npm = spawn(npmBin, args, {
+const child = execMethod(npmBin, args, {
   env: env,
   cwd: CWD,
-  stdio: [
-    process.stdin,
-    process.stdout,
-    process.stderr,
-  ]
+  stdio: stdio,
 });
 
-npm.on('exit', (code, signal) => {
+child.on('exit', (code, signal) => {
   process.exit(code);
 });
 
