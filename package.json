@@ -23,9 +23,9 @@
     "giturl": "^1.0.0",
     "npm": "^3.10.8",
     "npm-request": "^1.0.0",
+    "npminstall": "^2.7.0",
     "open": "^0.0.5",
-    "urllib": "^2.17.0",
-    "npminstall": "^2.7.0"
+    "urllib": "^2.17.0"
   },
   "devDependencies": {
     "autod": "^2.7.1",
