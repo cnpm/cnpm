@@ -91,6 +91,14 @@ const child = execMethod(npmBin, args, {
 });
 
 child.on('exit', (code, signal) => {
+  if (code === 0 && isInstall && installer === 'npminstall') {
+    // make sure node_modules/.npminstall.done exists
+    const doneFile = path.join(CWD, 'node_modules', '.npminstall.done');
+    if (!fs.existsSync(doneFile)) {
+      console.warn('[cnpm] npminstall exit code 0, but %s not exists, install fail!', doneFile);
+      code = 2;
+    }
+  }
   process.exit(code);
 });
 
