@@ -19,23 +19,23 @@
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "cross-spawn": "~0.2.8",
-    "debug": "^2.2.0",
+    "debug": "^2.6.0",
     "giturl": "^1.0.0",
-    "npm": "^3.10.8",
+    "npm": "^3.10.10",
     "npm-request": "^1.0.0",
-    "npminstall": "^2.7.0",
+    "npminstall": "^2.18.1",
     "open": "^0.0.5",
-    "urllib": "^2.17.0"
+    "urllib": "^2.19.0"
   },
   "devDependencies": {
     "autod": "^2.7.1",
     "coffee": "^3.3.0",
     "egg-ci": "^1.1.0",
-    "fs-extra": "0",
+    "fs-extra": "^2.0.0",
     "jshint": "2",
     "mocha": "3",
     "rimraf": "^2.5.4",
-    "should": "5"
+    "should": "^11.1.2"
   },
   "homepage": "https://github.com/cnpm/cnpm",
   "repository": {
@@ -44,8 +44,7 @@
     "web": "https://github.com/cnpm/cnpm"
   },
   "bugs": {
-    "url": "https://github.com/cnpm/cnpm/issues",
-    "email": "m@fengmk2.com"
+    "url": "https://github.com/cnpm/cnpm/issues"
   },
   "keywords": [
     "cnpm",
@@ -58,6 +57,6 @@
   "ci": {
     "version": "4, 6, 7"
   },
-  "author": "fengmk2 <m@fengmk2.com> (http://fengmk2.com)",
+  "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)",
   "license": "MIT"
 }

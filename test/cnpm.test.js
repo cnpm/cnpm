@@ -103,7 +103,6 @@ describe('test/cnpm.test.js', () => {
     });
   });
 
-
   it('should install cnpm', function (done) {
     var args = [
       cnpm,

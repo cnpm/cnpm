@@ -14,6 +14,7 @@ const rawArgs = program.rawArgs.slice(2);
 const args = [];
 let isInstall = false;
 let installer = 'npminstall';
+let isGlobal = false;
 
 for (let i = 0; i < rawArgs.length; i++) {
   let arg = rawArgs[i];
@@ -29,6 +30,10 @@ for (let i = 0; i < rawArgs.length; i++) {
   if (arg.indexOf('--by=') === 0) {
     installer = arg.split('=', 2)[1];
     continue;
+  }
+
+  if (arg === '-g' || arg === '--global') {
+    isGlobal = true;
   }
 
   args.push(arg);
@@ -91,6 +96,14 @@ const child = execMethod(npmBin, args, {
 });
 
 child.on('exit', (code, signal) => {
+  if (!isGlobal && code === 0 && isInstall && installer === 'npminstall') {
+    // make sure node_modules/.npminstall.done exists
+    const doneFile = path.join(CWD, 'node_modules', '.npminstall.done');
+    if (!fs.existsSync(doneFile)) {
+      console.warn('[cnpm] npminstall exit code 0, but %s not exists, install fail!', doneFile);
+      code = 2;
+    }
+  }
   process.exit(code);
 });
 
