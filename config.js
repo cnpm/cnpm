@@ -1,8 +1,9 @@
 'use strict';
 
+var debug = require('debug')('cnpm:config');
 var path = require('path');
 var fs = require('fs');
-var program = require('commander');
+var cp = require('child_process');
 
 var root;
 if (process.platform === 'win32') {
@@ -11,7 +12,15 @@ if (process.platform === 'win32') {
   root = process.env.HOME || process.env.TMPDIR || '/tmp';
 }
 
-var config = module.exports = {
+var prefix = null;
+try {
+  prefix = cp.execSync('npm config get prefix').toString().trim();
+} catch (err) {
+  // ignore it
+  debug('npm config cli error: %s', err);
+}
+
+module.exports = {
   cnpmHost: 'https://npm.taobao.org',
   cnpmRegistry: 'https://registry.npm.taobao.org',
   disturl: 'https://npm.taobao.org/mirrors/node', // download dist tarball for node-gyp
@@ -19,4 +28,5 @@ var config = module.exports = {
   cache: path.join(root, '.cnpm'),  //cache folder name
   userconfig: path.join(root, '.cnpmrc'),
   proxy: '',
+  prefix: prefix,
 };

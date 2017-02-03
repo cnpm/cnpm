@@ -138,6 +138,24 @@ describe('test/cnpm.test.js', () => {
     });
   });
 
+  it('should show full versions', function (done) {
+    var args = [
+      cnpm,
+      '-v',
+    ];
+    if (RUN_ON_CI) {
+      args.push('--registry=https://registry.npmjs.org');
+      args.push('--disturl=none');
+      args.push('--userconfig=none');
+    }
+    var child = run(args, function (code) {
+      code.should.equal(0);
+      done();
+    });
+    child.stdout.pipe(process.stdout);
+    child.stderr.pipe(process.stderr);
+  });
+
   it('should install and pre-build cpp module', function (done) {
     var args = [
       cnpm,

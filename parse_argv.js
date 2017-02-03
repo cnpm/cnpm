@@ -1,5 +1,6 @@
 'use strict';
 
+const os = require('os');
 const fs = require('fs');
 const program = require('commander');
 const config = require('./config');
@@ -10,7 +11,8 @@ let argv = null;
 
 module.exports = cmd => {
   if (!argv) {
-    argv = program.version(pkg.version, '-v, --version')
+    argv = program
+      .option('-v, --version', 'show full versions')
       .option('-r, --registry [registry]', 'registry url, default is ' + config.cnpmRegistry)
       .option('-w, --registryweb [registryweb]', 'web url, default is ' + config.cnpmHost)
       .option('--disturl [disturl]', 'dist url for node-gyp, default is ' + config.disturl)
@@ -36,6 +38,31 @@ module.exports = cmd => {
       return;
     }
     argv.args = ['cache'].concat(cache || []);
+  });
+
+  argv.on('version', function() {
+    console.log('cnpm@%s (%s)%snpm@%s (%s)%snode@%s (%s)%snpminstall@%s (%s)%sprefix=%s %s%s %s %s %sregistry=%s',
+      pkg.version,
+      __filename,
+      os.EOL,
+      require('npm/package.json').version,
+      require.resolve('npm'),
+      os.EOL,
+      process.version.substring(1),
+      process.execPath,
+      os.EOL,
+      require('npminstall/package.json').version,
+      require.resolve('npminstall'),
+      os.EOL,
+      config.prefix,
+      os.EOL,
+      os.platform(),
+      os.arch(),
+      os.release(),
+      os.EOL,
+      config.cnpmRegistry
+    );
+    process.exit(0);
   });
 
   // custom help message
