@@ -25,7 +25,7 @@ describe('test/custom-installer.test.js', () => {
     return coffee.fork(cnpmbin, args, {
         cwd,
         env: Object.assign({}, process.env, {
-          DEBUG: 'cnpm:origin',
+          DEBUG: 'cnpm*',
         }),
       })
       .debug()

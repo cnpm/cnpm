@@ -41,7 +41,7 @@ args.unshift('--registry=' + program.registry);
 if (program.disturl) {
   args.unshift('--disturl=' + program.disturl);
 }
-if (program.userconfig && fs.existsSync(program.userconfig)) {
+if (program.userconfig) {
   args.unshift('--userconfig=' + program.userconfig);
 }
 if (program.proxy) {
