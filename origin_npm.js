@@ -37,17 +37,11 @@ for (let i = 0; i < rawArgs.length; i++) {
 const env = Object.assign({}, process.env);
 const CWD = process.cwd();
 
-if (program.userconfig && !fs.existsSync(program.userconfig)) {
-  // make sure userconfig exists
-  // or it will throw: npm ERR! Error: default value must be string or number
-  fs.writeFileSync(program.userconfig, 'email =\n');
-}
-
 args.unshift('--registry=' + program.registry);
 if (program.disturl) {
   args.unshift('--disturl=' + program.disturl);
 }
-if (program.userconfig) {
+if (program.userconfig && fs.existsSync(program.userconfig)) {
   args.unshift('--userconfig=' + program.userconfig);
 }
 if (program.proxy) {
