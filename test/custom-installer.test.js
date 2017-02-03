@@ -16,6 +16,8 @@ describe('test/custom-installer.test.js', () => {
     const args = [ 'i', '--by=npm' ];
     if (RUN_ON_CI) {
       args.push('--registry=https://registry.npmjs.org');
+      args.push('--disturl=none');
+      args.push('--userconfig=none');
     }
 
     const testRE = process.platform === 'win32' ? /\\node_modules\\\.bin\\npm/ : /\/node_modules\/\.bin\/npm i/;
