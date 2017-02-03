@@ -1,4 +1,11 @@
 
+4.5.0 / 2017-02-03
+==================
+
+  * test: ignore node 4 on windows test
+  * fix: dont auto create userconfig file
+  * feat: should show full versions
+
 4.4.2 / 2016-11-21
 ==================
 
