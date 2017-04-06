@@ -4,8 +4,8 @@
 
 var request = require('npm-request');
 var giturl = require('giturl');
-var utils = require('../utils');
-var argv = require('../parse_argv')('doc');
+var utils = require('../lib/utils');
+var argv = require('../lib/parse_argv')('doc');
 var pkgName = argv.args[1];
 var docurl = argv.registryweb + '/package/' + pkgName;
 

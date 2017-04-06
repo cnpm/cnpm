@@ -7,8 +7,8 @@ var Bagpipe = require('bagpipe');
 var fs = require('fs');
 var querystring = require('querystring');
 var request = require('npm-request');
-var config = require('../config');
-var argv = require('../parse_argv')('sync');
+var config = require('../lib/config');
+var argv = require('../lib/parse_argv')('sync');
 
 var args = argv.args;
 var registrys = [argv.registry];

@@ -1,26 +1,12 @@
 #!/usr/bin/env node
 
-/*!
- * cnpm - bin/cnpm-check
- *
- * Copyright(c) cnpmjs.org and other contributors.
- * MIT Licensed
- *
- * Authors:
- *  fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
- */
-
 'use strict';
-
-/**
- * Module dependencies.
- */
 
 var path = require('path');
 var urllib = require('urllib');
 var colors = require('colors');
-var config = require('../config');
-var parseArgv = require('../parse_argv');
+var config = require('../lib/config');
+var parseArgv = require('../lib/parse_argv');
 
 var program = parseArgv();
 var args = program.args;
