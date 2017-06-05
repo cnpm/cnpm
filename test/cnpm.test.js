@@ -77,7 +77,7 @@ describe('test/cnpm.test.js', () => {
     ];
     var stdout = '';
     var child = run(args, function (code) {
-      stdout.should.containEql('npm command use --registry=https://registry.npm.taobao.org');
+      stdout.should.match(/npm command use --registry=https?:\/\/registry.npm.taobao.org/);
       code.should.equal(0);
       done();
     });
