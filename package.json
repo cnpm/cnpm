@@ -47,6 +47,9 @@
     "url": "https://github.com/cnpm/cnpm/issues",
     "email": "m@fengmk2.com"
   },
+  "publishConfig": {
+    "tag": "release-4"
+  },
   "keywords": [
     "cnpm",
     "npm",
