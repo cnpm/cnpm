@@ -1,4 +1,11 @@
 
+5.0.0 / 2017-06-13
+==================
+
+  * test: node 8
+  * fix: taobao npm registry use http protocol to support gzip
+  * feat: [BREAKING_CHANGE] use npminstall@3
+
 4.5.0 / 2017-02-03
 ==================
 
