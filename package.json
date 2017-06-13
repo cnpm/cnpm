@@ -48,7 +48,7 @@
     "email": "m@fengmk2.com"
   },
   "publishConfig": {
-    "tag": "release-4"
+    "tag": "latest-4"
   },
   "keywords": [
     "cnpm",
