@@ -1,4 +1,14 @@
 
+4.5.1 / 2017-08-07
+==================
+
+**fixes**
+  * [[`eb2e7a6`](http://github.com/cnpm/cnpm/commit/eb2e7a63d6b10f8061bfd2d1a4993582594ef798)] - fix: downgrade commander to 2.10.0 (#212) (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`34c4050`](http://github.com/cnpm/cnpm/commit/34c4050f937c07cf3ae0d1dee8fa31ac2183abd4)] - chore: npm publish tag set to latest-4 (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`3e2935e`](http://github.com/cnpm/cnpm/commit/3e2935e4fb84c84d6d417d2dee45eb39e205b199)] - chore: add release tag 4 (fengmk2 <<fengmk2@gmail.com>>)
+
 4.5.0 / 2017-02-03
 ==================
 
