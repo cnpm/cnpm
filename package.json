@@ -17,7 +17,7 @@
     "auto-correct": "^1.0.0",
     "bagpipe": "^0.3.5",
     "colors": "^1.1.2",
-    "commander": "^2.9.0",
+    "commander": "~2.10.0",
     "cross-spawn": "~0.2.8",
     "debug": "^2.2.0",
     "giturl": "^1.0.0",
@@ -44,8 +44,7 @@
     "web": "https://github.com/cnpm/cnpm"
   },
   "bugs": {
-    "url": "https://github.com/cnpm/cnpm/issues",
-    "email": "m@fengmk2.com"
+    "url": "https://github.com/cnpm/cnpm/issues"
   },
   "publishConfig": {
     "tag": "latest-4"
@@ -59,8 +58,8 @@
     "node": ">= 4.0.0"
   },
   "ci": {
-    "version": "4, 6, 7"
+    "version": "4, 6, 8"
   },
-  "author": "fengmk2 <m@fengmk2.com> (http://fengmk2.com)",
+  "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)",
   "license": "MIT"
 }
