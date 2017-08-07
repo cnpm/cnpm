@@ -1,4 +1,10 @@
 
+5.1.1 / 2017-08-07
+==================
+
+**fixes**
+  * [[`289be77`](http://github.com/cnpm/cnpm/commit/289be774159575a6a28ac7983ee730fca0ab02ff)] - fix: downgrade commander to 2.10.0 (#211) (fengmk2 <<fengmk2@gmail.com>>)
+
 5.1.0 / 2017-08-02
 ==================
 
