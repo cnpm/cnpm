@@ -5,6 +5,7 @@ var should = require('should');
 var path = require('path');
 var fs = require('fs');
 var fse = require('fs-extra');
+var coffee = require('coffee');
 var cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 var fixtures = path.join(__dirname, 'fixtures');
 var cwd = path.join(fixtures, 'foo');
@@ -20,6 +21,14 @@ function run(args, callback) {
 describe('test/cnpm.test.js', () => {
   after(() => {
     fse.removeSync(path.join(cwd, 'node_modules'));
+  });
+
+  it('should version', () => {
+    return coffee.fork(cnpm, [ '-v' ])
+      .debug()
+      .expect('stdout', /cnpm@\d+\.\d+\.\d+ \(/)
+      .expect('code', 0)
+      .end();
   });
 
   it('should show all cnpm config', function (done) {
