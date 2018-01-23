@@ -95,6 +95,23 @@ describe('test/cnpm.test.js', () => {
     });
   });
 
+  it('should ingore custom user config', function (done) {
+    var args = [
+      cnpm,
+      '--help',
+      '--ignore-custom-config',
+    ];
+    var stdout = '';
+    var child = run(args, function (code) {
+      stdout.should.match(/npm command use --registry=https?:\/\/registry.npm.taobao.org/);
+      code.should.equal(0);
+      done();
+    });
+    child.stdout.on('data', function (data) {
+      stdout += data.toString();
+    });
+  });
+
   it('should install pedding', function (done) {
     var args = [
       cnpm,
