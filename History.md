@@ -1,4 +1,10 @@
 
+5.2.0 / 2018-01-24
+==================
+
+**features**
+  * [[`ceec3e7`](http://github.com/cnpm/cnpm/commit/ceec3e79a4004c1aaa256ba3b412040188ab6f16)] - feat: add --ignore-custom-config to ignore npmrc and cnpmrc (#241) (fengmk2 <<fengmk2@gmail.com>>)
+
 5.1.1 / 2017-08-07
 ==================
 
