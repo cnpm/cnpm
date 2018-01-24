@@ -12,9 +12,14 @@ var cwd = path.join(fixtures, 'foo');
 
 var RUN_ON_CI = process.env.CI;
 
-function run(args, callback) {
+function run(args, env, callback) {
+  if (typeof env === 'function') {
+    callback = env;
+    env = {};
+  }
   return spawn('node', args, {
     cwd: cwd,
+    env: Object.assign({}, process.env, env),
   }).on('exit', callback);
 }
 
@@ -93,6 +98,28 @@ describe('test/cnpm.test.js', () => {
     child.stdout.on('data', function (data) {
       stdout += data.toString();
     });
+  });
+
+  it('should ingore custom user config', function (done) {
+    var args = [
+      cnpm,
+      'config',
+      'get',
+      'registry',
+      '--ignore-custom-config',
+    ];
+    var stdout = '';
+    var child = run(args, {
+      HOME: path.join(fixtures, 'home'),
+    }, function (code) {
+      stdout.should.match(/https?:\/\/registry.npm.taobao.org/);
+      code.should.equal(0);
+      done();
+    });
+    child.stdout.on('data', function (data) {
+      stdout += data.toString();
+    });
+    child.stderr.pipe(process.stderr);
   });
 
   it('should install pedding', function (done) {
