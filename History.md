@@ -1,4 +1,10 @@
 
+5.3.0 / 2018-05-04
+==================
+
+**features**
+  * [[`e63a5f9`](http://github.com/cnpm/cnpm/commit/e63a5f9eb810427acce820d2fc4b7a2c802b02b6)] - feat: support auto fix bug-versions (#252) (fengmk2 <<fengmk2@gmail.com>>)
+
 5.2.0 / 2018-01-24
 ==================
 
