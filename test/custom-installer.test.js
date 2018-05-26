@@ -23,11 +23,11 @@ describe('test/custom-installer.test.js', () => {
     const testRE = process.platform === 'win32' ? /\\node_modules\\\.bin\\npm/ : /\/node_modules\/\.bin\/npm i/;
 
     return coffee.fork(cnpmbin, args, {
-        cwd,
-        env: Object.assign({}, process.env, {
-          DEBUG: 'cnpm*',
-        }),
-      })
+      cwd,
+      env: Object.assign({}, process.env, {
+        DEBUG: 'cnpm*',
+      }),
+    })
       .debug()
       .expect('code', 0)
       .expect('stderr', testRE)

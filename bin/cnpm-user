@@ -3,7 +3,6 @@
 'use strict';
 
 const utils = require('../lib/utils');
-const config = require('../lib/config');
 const argv = require('../lib/parse_argv')();
 
 const userURL = argv.registryweb + '/~' + argv.args[1];

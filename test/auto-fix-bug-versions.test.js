@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs');
 const coffee = require('coffee');
 const rimraf = require('rimraf');
 const cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
@@ -18,11 +17,11 @@ describe('test/auto-fix-bug-versions.test.js', () => {
 
   it('should ignore bug version', () => {
     return coffee.fork(cnpm, [
-        'i',
-        'is-my-json-valid@2.17.0',
-      ], {
-        cwd: root,
-      })
+      'i',
+      'is-my-json-valid@2.17.0',
+    ], {
+      cwd: root,
+    })
       .debug()
       .expect('stderr', /use is-my-json-valid@2\.17\.1 instead/)
       .expect('code', 0)

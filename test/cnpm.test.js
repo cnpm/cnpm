@@ -1,16 +1,16 @@
 'use strict';
 
-var spawn = require('cross-spawn');
-var should = require('should');
-var path = require('path');
-var fs = require('fs');
-var fse = require('fs-extra');
-var coffee = require('coffee');
-var cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
-var fixtures = path.join(__dirname, 'fixtures');
-var cwd = path.join(fixtures, 'foo');
+const assert = require('assert');
+const spawn = require('cross-spawn');
+const path = require('path');
+const fs = require('fs');
+const fse = require('fs-extra');
+const coffee = require('coffee');
+const cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
+const fixtures = path.join(__dirname, 'fixtures');
+const cwd = path.join(fixtures, 'foo');
 
-var RUN_ON_CI = process.env.CI;
+const RUN_ON_CI = process.env.CI;
 
 function run(args, env, callback) {
   if (typeof env === 'function') {
@@ -18,7 +18,7 @@ function run(args, env, callback) {
     env = {};
   }
   return spawn('node', args, {
-    cwd: cwd,
+    cwd,
     env: Object.assign({}, process.env, env),
   }).on('exit', callback);
 }
@@ -36,94 +36,93 @@ describe('test/cnpm.test.js', () => {
       .end();
   });
 
-  it('should show all cnpm config', function (done) {
-    var args = [
+  it('should show all cnpm config', function(done) {
+    const args = [
       cnpm,
       'config',
       'ls',
-      '-l'
+      '-l',
     ];
-    var stdout = '';
-    var child = spawn('node', args).on('exit', function (code) {
-      code.should.equal(0);
+    const child = spawn('node', args).on('exit', function(code) {
+      assert(code === 0);
       done();
     });
     child.stdout.pipe(process.stdout);
   });
 
-  it('should user custom registry in userconf', function (done) {
-    var args = [
+  it('should user custom registry in userconf', function(done) {
+    const args = [
       cnpm,
       '--userconfig=' + path.join(fixtures, 'userconf'),
     ];
-    var stdout = '';
-    var child = spawn('node', args).on('exit', function (code) {
-      stdout.should.containEql('npm command use --registry=http://127.0.0.1/registry');
-      code.should.equal(0);
+    let stdout = '';
+    const child = spawn('node', args).on('exit', function(code) {
+      assert(stdout.includes('npm command use --registry=http://127.0.0.1/registry'));
+      assert(code === 0);
       done();
     });
-    child.stdout.on('data', function (data) {
+    child.stdout.on('data', function(data) {
       stdout += data.toString();
     });
   });
 
-  it('should --help user custom registry in userconf', function (done) {
-    var args = [
+  it('should --help user custom registry in userconf', function(done) {
+    const args = [
       cnpm,
       '--help',
       '--userconfig=' + path.join(fixtures, 'userconf'),
     ];
-    var stdout = '';
-    var child = run(args, function (code) {
-      stdout.should.containEql('npm command use --registry=http://127.0.0.1/registry');
-      code.should.equal(0);
+    let stdout = '';
+    const child = run(args, function(code) {
+      assert(stdout.includes('npm command use --registry=http://127.0.0.1/registry'));
+      assert(code === 0);
       done();
     });
-    child.stdout.on('data', function (data) {
+    child.stdout.on('data', function(data) {
       stdout += data.toString();
     });
   });
 
-  it('should user default registry in userconf dont contain registry', function (done) {
-    var args = [
+  it('should user default registry in userconf dont contain registry', function(done) {
+    const args = [
       cnpm,
       '--userconfig=' + path.join(fixtures, 'userconf-no-registry'),
     ];
-    var stdout = '';
-    var child = run(args, function (code) {
-      stdout.should.match(/npm command use --registry=https?:\/\/registry.npm.taobao.org/);
-      code.should.equal(0);
+    let stdout = '';
+    const child = run(args, function(code) {
+      assert(stdout.match(/npm command use --registry=https?:\/\/registry.npm.taobao.org/));
+      assert(code === 0);
       done();
     });
-    child.stdout.on('data', function (data) {
+    child.stdout.on('data', function(data) {
       stdout += data.toString();
     });
   });
 
-  it('should ingore custom user config', function (done) {
-    var args = [
+  it('should ingore custom user config', function(done) {
+    const args = [
       cnpm,
       'config',
       'get',
       'registry',
       '--ignore-custom-config',
     ];
-    var stdout = '';
-    var child = run(args, {
+    let stdout = '';
+    const child = run(args, {
       HOME: path.join(fixtures, 'home'),
-    }, function (code) {
-      stdout.should.match(/https?:\/\/registry.npm.taobao.org/);
-      code.should.equal(0);
+    }, function(code) {
+      assert(stdout.match(/https?:\/\/registry.npm.taobao.org/));
+      assert(code === 0);
       done();
     });
-    child.stdout.on('data', function (data) {
+    child.stdout.on('data', function(data) {
       stdout += data.toString();
     });
     child.stderr.pipe(process.stderr);
   });
 
-  it('should install pedding', function (done) {
-    var args = [
+  it('should install pedding', function(done) {
+    const args = [
       cnpm,
       'install',
       'pedding',
@@ -133,15 +132,15 @@ describe('test/cnpm.test.js', () => {
       args.push('--disturl=none');
       args.push('--userconfig=none');
     }
-    run(args, function (code) {
-      code.should.equal(0);
+    run(args, function(code) {
+      assert(code === 0);
       done();
     });
   });
 
 
-  it('should install cnpm', function (done) {
-    var args = [
+  it('should install cnpm', function(done) {
+    const args = [
       cnpm,
       'install',
       'cnpm',
@@ -151,14 +150,14 @@ describe('test/cnpm.test.js', () => {
       args.push('--disturl=none');
       args.push('--userconfig=none');
     }
-    run(args, function (code) {
-      code.should.equal(0);
+    run(args, function(code) {
+      assert(code === 0);
       done();
     });
   });
 
-  it('should install npm', function (done) {
-    var args = [
+  it('should install npm', function(done) {
+    const args = [
       cnpm,
       'install',
       'npm',
@@ -168,14 +167,14 @@ describe('test/cnpm.test.js', () => {
       args.push('--disturl=none');
       args.push('--userconfig=none');
     }
-    run(args, function (code) {
-      code.should.equal(0);
+    run(args, function(code) {
+      assert(code === 0);
       done();
     });
   });
 
-  it('should show full versions', function (done) {
-    var args = [
+  it('should show full versions', function(done) {
+    const args = [
       cnpm,
       '-v',
     ];
@@ -184,16 +183,16 @@ describe('test/cnpm.test.js', () => {
       args.push('--disturl=none');
       args.push('--userconfig=none');
     }
-    var child = run(args, function (code) {
-      code.should.equal(0);
+    const child = run(args, function(code) {
+      assert(code === 0);
       done();
     });
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
   });
 
-  it('should install and pre-build cpp module', function (done) {
-    var args = [
+  it('should install and pre-build cpp module', function(done) {
+    const args = [
       cnpm,
       'install',
       'node-murmurhash',
@@ -203,8 +202,8 @@ describe('test/cnpm.test.js', () => {
       args.push('--disturl=none');
       args.push('--userconfig=none');
     }
-    var child = run(args, function (code) {
-      code.should.equal(0);
+    const child = run(args, function(code) {
+      assert(code === 0);
       done();
     });
     child.stdout.pipe(process.stdout);
@@ -213,8 +212,8 @@ describe('test/cnpm.test.js', () => {
 
   // WTF? TRAVIS download from taobao npm is too slow! skip this!
   if (!RUN_ON_CI) {
-    it('should install node-sass from mirror', function (done) {
-      var args = [
+    it('should install node-sass from mirror', function(done) {
+      const args = [
         cnpm,
         'install',
         'node-sass',
@@ -224,8 +223,8 @@ describe('test/cnpm.test.js', () => {
         args.push('--disturl=none');
         args.push('--userconfig=none');
       }
-      var child = run(args, function (code) {
-        code.should.equal(0);
+      const child = run(args, function(code) {
+        assert(code === 0);
         fs.existsSync(path.join(cwd, 'node_modules/node-sass'));
         done();
       });
