@@ -1,4 +1,10 @@
 
+6.0.0 / 2018-05-28
+==================
+
+**features**
+  * [[`718b5d9`](http://github.com/cnpm/cnpm/commit/718b5d956505982c41e6089feae43b3253d271c4)] - feat: [BREAKING] use npm 6.1.0 (#254) (fengmk2 <<fengmk2@gmail.com>>)
+
 5.3.0 / 2018-05-04
 ==================
 
