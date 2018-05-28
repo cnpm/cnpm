@@ -16,3 +16,4 @@ node_modules
 npm-debug.log
 build/
 package-lock.json
+test/fixtures/home/.config
