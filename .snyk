@@ -1,0 +1,38 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.12.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hoek:20180212':
+    - npm > npm-lifecycle > node-gyp > request > hawk > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npminstall > node-gyp > request > hawk > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npminstall > node-gyp > request > hawk > sntp > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npminstall > node-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > node-gyp > request > hawk > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > node-gyp > request > hawk > boom > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > node-gyp > request > hawk > sntp > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > node-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npminstall > node-gyp > request > hawk > boom > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > npm-lifecycle > node-gyp > request > hawk > boom > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > npm-lifecycle > node-gyp > request > hawk > sntp > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > npm-lifecycle > node-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > libcipm > npm-lifecycle > node-gyp > request > hawk > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > libcipm > npm-lifecycle > node-gyp > request > hawk > boom > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > libcipm > npm-lifecycle > node-gyp > request > hawk > sntp > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
+    - npm > libcipm > npm-lifecycle > node-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-22T21:32:32.679Z'
