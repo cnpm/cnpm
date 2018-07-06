@@ -12,7 +12,9 @@
     "test-local": "egg-bin test",
     "lint": "eslint bin lib test/*.js",
     "ci": "npm run lint && npm run test",
-    "autod": "autod"
+    "autod": "autod",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "preferGlobal": true,
   "bin": {
@@ -31,7 +33,8 @@
     "npm-request": "^1.0.0",
     "npminstall": "^3.0.0",
     "open": "^0.0.5",
-    "urllib": "^2.17.0"
+    "urllib": "^2.17.0",
+    "snyk": "^1.88.1"
   },
   "devDependencies": {
     "autod": "^2.7.1",
@@ -70,5 +73,6 @@
     }
   },
   "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "snyk": true
 }
