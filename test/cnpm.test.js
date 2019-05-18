@@ -28,7 +28,7 @@ describe('test/cnpm.test.js', () => {
     await rimraf(path.join(cwd, 'node_modules'));
   });
 
-  it('should version', () => {
+  it('should show version', () => {
     return coffee.fork(cnpm, [ '-v' ])
       .debug()
       .expect('stdout', /cnpm@\d+\.\d+\.\d+ \(/)
