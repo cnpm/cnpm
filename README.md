@@ -24,7 +24,7 @@ cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 
 |        | Minimum | Recommended |
 |--------|---------|-------------|
-| NodeJS | 4.0.0   | stable      |
+| NodeJS | 8.0.0   | stable      |
 
 ## Install
 

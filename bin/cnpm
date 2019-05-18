@@ -3,7 +3,6 @@
 'use strict';
 
 const debug = require('debug')('cnpm');
-const pkg = require('../package.json');
 const argv = require('../lib/parse_argv')();
 
 const action = argv.args[0];
@@ -15,6 +14,7 @@ const extendsMethd = {
   sync: 1,
   user: 1,
   search: 1,
+  update: 1,
 };
 
 debug('cnpm %s', action);
