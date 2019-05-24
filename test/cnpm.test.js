@@ -91,7 +91,7 @@ describe('test/cnpm.test.js', () => {
     ];
     var stdout = '';
     var child = run(args, function (code) {
-      stdout.should.match(/npm command use --registry=https?:\/\/registry.npm.taobao.org/);
+      stdout.should.match(/npm command use --registry=https?:\/\/r.npm.taobao.org/);
       code.should.equal(0);
       done();
     });
@@ -112,7 +112,7 @@ describe('test/cnpm.test.js', () => {
     var child = run(args, {
       HOME: path.join(fixtures, 'home'),
     }, function (code) {
-      stdout.should.match(/https?:\/\/registry.npm.taobao.org/);
+      stdout.should.match(/https?:\/\/r.npm.taobao.org/);
       code.should.equal(0);
       done();
     });
