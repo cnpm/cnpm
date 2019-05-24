@@ -27,7 +27,7 @@ if (process.platform === 'win32') {
 
 var config = module.exports = {
   cnpmHost: 'https://npm.taobao.org',
-  cnpmRegistry: 'https://registry.npm.taobao.org',
+  cnpmRegistry: 'https://r.npm.taobao.org',
   disturl: 'https://npm.taobao.org/mirrors/node', // download dist tarball for node-gyp
   iojsDisturl: 'https://npm.taobao.org/mirrors/iojs',
   mirrorsUrl: 'https://npm.taobao.org/mirrors',

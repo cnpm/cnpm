@@ -31,7 +31,7 @@ $ npm install cnpm -g
 If you're in China, maybe you should install it from our [China mirror](https://npm.taobao.org):
 
 ```bash
-$ npm install cnpm -g --registry=https://registry.npm.taobao.org
+$ npm install cnpm -g --registry=https://r.npm.taobao.org
 ```
 
 ## Usage

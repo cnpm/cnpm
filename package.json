@@ -5,7 +5,7 @@
   "main": "bin/cnpm",
   "scripts": {
     "test": "mocha test/*.test.js --timeout 600000",
-    "cnpm": "npm i --registry=http://registry.npm.taobao.org"
+    "cnpm": "npm i --registry=http://r.npm.taobao.org"
   },
   "preferGlobal": true,
   "bin": {
@@ -57,6 +57,6 @@
   "author": "fengmk2 <m@fengmk2.com> (http://fengmk2.com)",
   "license": "MIT",
   "publishConfig": {
-    "tag": "3.x-latest"
+    "tag": "latest-3"
   }
 }
