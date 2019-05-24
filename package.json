@@ -1,6 +1,6 @@
 {
   "name": "cnpm",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "files": [
@@ -51,6 +51,9 @@
   "bugs": {
     "url": "https://github.com/cnpm/cnpm/issues",
     "email": "fengmk2@gmail.com"
+  },
+  "publishConfig": {
+    "tag": "latest-5"
   },
   "keywords": [
     "cnpm",
