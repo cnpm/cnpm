@@ -1,4 +1,10 @@
 
+4.6.0 / 2019-05-24
+==================
+
+**features**
+  * [[`fa26359`](http://github.com/cnpm/cnpm/commit/fa26359c2efefafe902060f92644ec422d125129)] - feat: use cdn registry (fengmk2 <<fengmk2@gmail.com>>)
+
 4.5.1 / 2017-08-07
 ==================
 
