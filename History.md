@@ -1,4 +1,17 @@
 
+3.5.0 / 2019-05-24
+==================
+
+**features**
+  * [[`b090a50`](http://github.com/cnpm/cnpm/commit/b090a50973f92e63dea9ed3c234647442c78664b)] - feat: use cdn registry (fengmk2 <<fengmk2@gmail.com>>)
+
+**fixes**
+  * [[`d4ce8ff`](http://github.com/cnpm/cnpm/commit/d4ce8ffe2623c44976a0940b00161c4dce37c26e)] - fix: change npm tag to 3.x-latest (fengmk2 <<m@fengmk2.com>>)
+
+**others**
+  * [[`5e576cb`](http://github.com/cnpm/cnpm/commit/5e576cbff2060bd94804f5bc0706049d8384c696)] - chore: add v3 tag (fengmk2 <<m@fengmk2.com>>)
+  * [[`0993b8c`](http://github.com/cnpm/cnpm/commit/0993b8c928a9b25ce2141c2327a67756b565f886)] - typo (alsotang <<alsotang@gmail.com>>)
+
 3.4.1 / 2016-02-20
 ==================
 
