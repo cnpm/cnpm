@@ -1,4 +1,13 @@
 
+6.1.0 / 2019-05-24
+==================
+
+**features**
+  * [[`e04d4a8`](http://github.com/cnpm/cnpm/commit/e04d4a86d29ed65d6a926c5852024f1d6043d733)] - feat: use faster cdn registry (#289) (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`4a36f46`](http://github.com/cnpm/cnpm/commit/4a36f462d802c8fbf37fb8e517ce63968b06b92e)] - typo: Update README.md (#281) (0xflotus <<0xflotus@gmail.com>>)
+
 6.0.0 / 2018-05-28
 ==================
 
