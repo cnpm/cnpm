@@ -1,4 +1,10 @@
 
+6.1.1 / 2019-12-16
+==================
+
+**fixes**
+  * [[`43e9238`](http://github.com/cnpm/cnpm/commit/43e9238c4508d9d655116605e5f04a77b54d626e)] - fix: upgrade npm and npminstall to latest versions (#315) (fengmk2 <<fengmk2@gmail.com>>)
+
 6.1.0 / 2019-05-24
 ==================
 
