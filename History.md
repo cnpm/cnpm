@@ -1,4 +1,10 @@
 
+6.2.0 / 2021-04-18
+==================
+
+**features**
+  * [[`1aef820`](http://github.com/cnpm/cnpm/commit/1aef8206d16a759382108eaa00085c0ead6707cd)] - feat: change registry domain to registry.nlark.com (#341) (fengmk2 <<fengmk2@gmail.com>>)
+
 6.1.1 / 2019-12-16
 ==================
 
