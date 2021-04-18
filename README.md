@@ -2,16 +2,9 @@ cnpm
 =======
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![appveyor build status][appveyor-image]][appveyor-url]
-[![David deps][david-image]][david-url]
 
 [npm-image]: https://img.shields.io/npm/v/cnpm.svg?style=flat
 [npm-url]: https://npmjs.org/package/cnpm
-[travis-image]: https://img.shields.io/travis/cnpm/cnpm.svg?style=flat
-[travis-url]: https://travis-ci.org/cnpm/cnpm
-[david-image]: https://img.shields.io/david/cnpm/cnpm.svg?style=flat
-[david-url]: https://david-dm.org/cnpm/cnpm
 
 ![logo](https://raw.github.com/cnpm/cnpmjs.org/master/logo.png)
 
@@ -22,7 +15,7 @@ cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 
 |        | Minimum | Recommended |
 |--------|---------|-------------|
-| Node.js | 8.0.0   | stable      |
+| Node.js | 10.0.0   | stable      |
 
 ## Install
 
