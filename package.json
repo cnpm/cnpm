@@ -63,12 +63,12 @@
     "node": ">= 6.0.0"
   },
   "ci": {
-    "version": "6, 8, 10, 12",
-    "command": {
-      "travis": "ci",
-      "appveyor": "ci"
+    "type": "github",
+    "version": "10, 12, 14",
+    "os": {
+      "github": "linux, windows, macos"
     }
   },
-  "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)",
+  "author": "fengmk2 <fengmk2@gmail.com> (https://github.com/fengmk2)",
   "license": "MIT"
 }
