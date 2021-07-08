@@ -1,6 +1,6 @@
 {
   "name": "cnpm",
-  "version": "6.2.0",
+  "version": "7.0.0",
   "description": "cnpm: npm client for cnpmjs.org",
   "main": "bin/cnpm",
   "files": [
@@ -57,7 +57,7 @@
     "npminstall"
   ],
   "publishConfig": {
-    "tag": "latest-6"
+    "tag": "latest-7"
   },
   "engines": {
     "node": ">= 10.0.0"

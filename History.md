@@ -1,4 +1,10 @@
 
+7.0.0 / 2021-07-08
+==================
+
+**features**
+  * [[`4c27cff`](http://github.com/cnpm/cnpm/commit/4c27cff1321a81e598ee3fb929447c10e23034ba)] - feat: upgrade open@^8, npminstall@^5, node@>=10 (#343) (Ke Wu <<gemwuu@163.com>>)
+
 6.2.0 / 2021-04-18
 ==================
 
