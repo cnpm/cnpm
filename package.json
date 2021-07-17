@@ -64,7 +64,7 @@
   },
   "ci": {
     "type": "github",
-    "version": "10, 12, 14",
+    "version": "10, 12, 14, 16",
     "os": {
       "github": "linux, windows, macos"
     }
