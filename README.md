@@ -1,19 +1,10 @@
 cnpm
 =======
 
-[![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![appveyor build status][appveyor-image]][appveyor-url]
-[![David deps][david-image]][david-url]
-
-[npm-image]: https://img.shields.io/npm/v/cnpm.svg?style=flat
-[npm-url]: https://npmjs.org/package/cnpm
-[travis-image]: https://img.shields.io/travis/cnpm/cnpm.svg?style=flat
-[travis-url]: https://travis-ci.org/cnpm/cnpm
-[appveyor-image]: https://ci.appveyor.com/api/projects/status/17kfr8eitdi7rljr?svg=true
-[appveyor-url]: https://ci.appveyor.com/project/fengmk2/urllib
-[david-image]: https://img.shields.io/david/cnpm/cnpm.svg?style=flat
-[david-url]: https://david-dm.org/cnpm/cnpm
+[![NPM Version](https://img.shields.io/npm/v/cnpm.svg?style=flat-square)](https://npmjs.com/package/cnpm)
+[![NPM Download](https://img.shields.io/npm/dm/cnpm.svg?style=flat-square)](https://npmjs.com/package/cnpm)
+[![NPM Quality](http://npm.packagequality.com/shield/cnpm.svg?style=flat-square)](http://packagequality.com/#?package=cnpm)
+[![GitHub Actions CI](https://github.com/cnpm/cnpm/actions/workflows/nodejs.yml/badge.svg?style=flat-square)](https://github.com/cnpm/cnpm/actions/workflows/nodejs.yml)
 
 ![logo](https://raw.github.com/cnpm/cnpmjs.org/master/logo.png)
 
