@@ -24,7 +24,7 @@ cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 
 |        | Minimum | Recommended |
 |--------|---------|-------------|
-| NodeJS | 4.0.0   | stable      |
+| NodeJS | 10.0.0  | stable      |
 
 ## Install
 
@@ -32,7 +32,7 @@ cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 $ npm install cnpm -g
 ```
 
-If you're in China, maybe you should install it from our [China mirror](https://npm.taobao.org):
+If you're in China, maybe you should install it from our [China mirror](https://registry.nlark.com):
 
 ```bash
 $ npm install cnpm -g --registry=https://registry.nlark.com
@@ -61,8 +61,8 @@ $ cnpm doc -g [name] # open git web url directly
 $ npm install cnpm -g
 
 # then alias it
-$ alias mynpm='cnpm --registry=http://registry.npm.example.com \
-  --registryweb=http://npm.example.com \
+$ alias mynpm='cnpm --registry=https://registry.npm.example.com \
+  --registryweb=https://npm.example.com \
   --userconfig=$HOME/.mynpmrc'
 ```
 
