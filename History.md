@@ -1,4 +1,14 @@
 
+7.1.0 / 2021-09-27
+==================
+
+**features**
+  * [[`b3cbdc9`](http://github.com/cnpm/cnpm/commit/b3cbdc9f16a874c8292f2b5d1ecb467aa1788743)] - feat: use npmmirror.com domain instead of nlark.com (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`50672a0`](http://github.com/cnpm/cnpm/commit/50672a0b386cf87764831f3fc10406a327558600)] - chore: update badges (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`b8e3814`](http://github.com/cnpm/cnpm/commit/b8e3814434847af967385f1bdfd708553fcffd9d)] - test: run unittest on node 16 (#345) (fengmk2 <<fengmk2@gmail.com>>)
+
 7.0.0 / 2021-07-08
 ==================
 
