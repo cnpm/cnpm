@@ -90,7 +90,7 @@ describe('test/cnpm.test.js', () => {
     ];
     let stdout = '';
     const child = run(args, function(code) {
-      assert(stdout.match(/npm command use --registry=https?:\/\/registry.nlark.com/));
+      assert(stdout.match(/npm command use --registry=https?:\/\/registry.npmmirror.com/));
       assert(code === 0);
       done();
     });
@@ -111,7 +111,7 @@ describe('test/cnpm.test.js', () => {
     const child = run(args, {
       HOME: path.join(fixtures, 'home'),
     }, function(code) {
-      assert(stdout.match(/https?:\/\/registry.nlark.com/));
+      assert(stdout.match(/https?:\/\/registry.npmmirror.com/));
       assert(code === 0);
       done();
     });

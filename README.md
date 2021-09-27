@@ -23,10 +23,10 @@ cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 $ npm install cnpm -g
 ```
 
-If you're in China, maybe you should install it from our [China mirror](https://registry.nlark.com):
+If you're in China, maybe you should install it from our [China mirror](https://registry.npmmirror.com):
 
 ```bash
-$ npm install cnpm -g --registry=https://registry.nlark.com
+$ npm install cnpm -g --registry=https://registry.npmmirror.com
 ```
 
 ## Usage

@@ -29,7 +29,7 @@
     "ini": "^1.3.4",
     "npm": "^6.13.4",
     "npm-request": "^1.0.0",
-    "npminstall": "^5.0.0",
+    "npminstall": "^5.1.0",
     "open": "^8.2.1",
     "urllib": "^2.17.0"
   },
