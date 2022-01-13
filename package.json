@@ -21,7 +21,8 @@
   "dependencies": {
     "auto-correct": "^1.0.0",
     "bagpipe": "^0.3.5",
-    "colors": "^1.1.2",
+    "@dabh/colors": "^1.4.0",
+
     "commander": "~2.10.0",
     "cross-spawn": "~0.2.8",
     "debug": "^2.2.0",
