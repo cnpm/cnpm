@@ -1,4 +1,12 @@
 
+7.1.1 / 2022-02-08
+==================
+
+**others**
+  * [[`c73a27e`](http://github.com/cnpm/cnpm/commit/c73a27edf9e150768637d385957994ed236fca4d)] - 🐛 FIX: support bson id format (#358) (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`cadd3cd`](http://github.com/cnpm/cnpm/commit/cadd3cd54c22b1a157810a43ab10febdb2410ca6)] - chore: badges.implements.io (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`3d591c0`](http://github.com/cnpm/cnpm/commit/3d591c036994d38f79476d1b39bc9d1d1de73673)] - chore: add contributors (fengmk2 <<fengmk2@gmail.com>>)
+
 7.1.0 / 2021-09-27
 ==================
 
