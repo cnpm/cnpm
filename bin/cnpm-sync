@@ -121,7 +121,7 @@ function sync(registry, name, callback) {
       lastLines: 0,
       logurl: name + '/sync/log/' + result.logId
     };
-    console.log('logurl: %s/sync/%s#logid=%d', registrywebs[registry], name, result.logId);
+    console.log('logurl: %s/sync/%s#logid=%s', registrywebs[registry], name, result.logId);
     showlog(registry, syncInfo, function (err) {
       if (err) {
         return callback(err);
