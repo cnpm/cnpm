@@ -5,6 +5,7 @@ cnpm
 [![NPM Download](https://img.shields.io/npm/dm/cnpm.svg?style=flat-square)](https://npmjs.com/package/cnpm)
 [![NPM Quality](http://npm.packagequality.com/shield/cnpm.svg?style=flat-square)](http://packagequality.com/#?package=cnpm)
 [![GitHub Actions CI](https://github.com/cnpm/cnpm/actions/workflows/nodejs.yml/badge.svg?style=flat-square)](https://github.com/cnpm/cnpm/actions/workflows/nodejs.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcnpm%2Fcnpm.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcnpm%2Fcnpm?ref=badge_shield)
 
 ![logo](https://raw.github.com/cnpm/cnpmjs.org/master/logo.png)
 
@@ -71,6 +72,9 @@ $ cnpm i --by=npm react-native
 
 [MIT](LICENSE.txt)
 <!-- GITCONTRIBUTOR_START -->
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcnpm%2Fcnpm.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcnpm%2Fcnpm?ref=badge_large)
 
 ## Contributors
 
