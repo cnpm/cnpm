@@ -59,11 +59,11 @@
     "tag": "latest-7"
   },
   "engines": {
-    "node": ">= 10.0.0"
+    "node": ">= 14.0.0"
   },
   "ci": {
     "type": "github",
-    "version": "10, 12, 14, 16, 18",
+    "version": "14, 16, 18",
     "os": {
       "github": "linux, windows, macos"
     }
