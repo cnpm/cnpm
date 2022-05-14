@@ -1,3 +1,7 @@
 {
-  "name": "foo"
+  "name": "foo",
+  "dependencies": {
+    "is-my-json-valid": "^2.17.1",
+    "pedding": "^1.1.0"
+  }
 }
