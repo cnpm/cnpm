@@ -35,10 +35,10 @@
   },
   "devDependencies": {
     "coffee": "^3.3.0",
-    "egg-bin": "^4.7.0",
-    "egg-ci": "^1.1.0",
-    "eslint": "^4.19.1",
-    "eslint-config-egg": "^7.0.0",
+    "egg-bin": "^4.19.0",
+    "egg-ci": "^1.19.0",
+    "eslint": "^8.15.0",
+    "eslint-config-egg": "^11.1.0",
     "git-contributor": "^1.0.10",
     "rimraf": "^2.5.4"
   },
