@@ -11,12 +11,11 @@ cnpm
 
 cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 
-
 ## Requirements
 
-|        | Minimum | Recommended |
-|--------|---------|-------------|
-| NodeJS | 10.0.0  | stable      |
+|         | Minimum | Recommended |
+|---------|---------|-------------|
+| Node.js | 14.0.0  | LTS         |
 
 ## Install
 
@@ -71,6 +70,7 @@ $ cnpm i --by=npm react-native
 ## License
 
 [MIT](LICENSE.txt)
+
 <!-- GITCONTRIBUTOR_START -->
 
 ## Contributors
