@@ -1,4 +1,13 @@
 
+8.0.0 / 2022-05-14
+==================
+
+**others**
+  * [[`00479bc`](http://github.com/cnpm/cnpm/commit/00479bc3ea138b34f3fc7f40da4c8fb9b13ef5bc)] - 📦 NEW: Use npminstall@6 (#376) (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`86d68b4`](http://github.com/cnpm/cnpm/commit/86d68b406964e98deec8aa56fca83833ccb14877)] - Create codeql-analysis.yml (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`7e53aeb`](http://github.com/cnpm/cnpm/commit/7e53aebaebcf6f8524f1cb76adb7c743be95a902)] - chore: Add license scan report and status (#363) (fossabot <<badges@fossa.io>>)
+  * [[`d54bde4`](http://github.com/cnpm/cnpm/commit/d54bde4945e2b347d82b2871af22506c2c4364be)] - 📖 DOC: Use git-contributor instead (fengmk2 <<fengmk2@gmail.com>>)
+
 7.1.1 / 2022-02-08
 ==================
 
