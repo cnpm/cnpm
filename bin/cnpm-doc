@@ -2,43 +2,45 @@
 
 'use strict';
 
-var request = require('npm-request');
-var giturl = require('giturl');
-var utils = require('../lib/utils');
-var argv = require('../lib/parse_argv')('doc');
-var pkgName = argv.args[1];
-var docurl = argv.registryweb + '/package/' + pkgName;
+const request = require('npm-request');
+const giturl = require('giturl');
+const utils = require('../lib/utils');
+const argv = require('../lib/parse_argv')('doc');
+const pkgName = argv.args[1];
+const docurl = argv.registryweb + '/package/' + pkgName;
 
 if (!pkgName) {
-  return argv.help();
+  argv.help();
+  process.exit(0);
 }
 
 if (!argv.git) {
-  return utils.openurl(docurl);
+  utils.openurl(docurl);
+  process.exit(0);
 }
 
 console.log('getting "%s" package info...', pkgName);
 request({
   method: 'GET',
-  path: pkgName + '/latest'
+  path: pkgName + '/latest',
 }, {
-  registry: argv.registry
-}, function (err, info) {
+  registry: argv.registry,
+}, function(err, info) {
   if (err) {
     console.error(err);
     process.exit(-1);
   }
 
   if (!info.name) {
-    console.log('"%s" package not exists', name);
+    console.log('"%s" package not exists', pkgName);
     process.exit(0);
   }
 
-  var repository = info.repository;
+  const repository = info.repository;
   if (!repository || !repository.url) {
     return utils.openurl(docurl);
   }
 
-  var url = giturl.parse(repository.url) || docurl;
+  const url = giturl.parse(repository.url) || docurl;
   utils.openurl(url);
 });

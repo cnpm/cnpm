@@ -4,8 +4,9 @@ const assert = require('assert');
 const spawn = require('cross-spawn');
 const path = require('path');
 const fs = require('fs');
-const fse = require('fs-extra');
 const coffee = require('coffee');
+const rimraf = require('rimraf');
+
 const cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 const fixtures = path.join(__dirname, 'fixtures');
 const cwd = path.join(fixtures, 'foo');
@@ -25,7 +26,7 @@ function run(args, env, callback) {
 
 describe('test/cnpm.test.js', () => {
   after(() => {
-    fse.removeSync(path.join(cwd, 'node_modules'));
+    rimraf.sync(path.join(cwd, 'node_modules'));
   });
 
   it('should version', () => {
