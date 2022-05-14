@@ -3,7 +3,6 @@
 'use strict';
 
 const debug = require('debug')('cnpm');
-const pkg = require('../package.json');
 const argv = require('../lib/parse_argv')();
 
 const action = argv.args[0];
@@ -20,8 +19,8 @@ const extendsMethd = {
 debug('cnpm %s', action);
 
 if (extendsMethd[action]) {
-  return require('./cnpm-' + action);
+  require('./cnpm-' + action);
+} else {
+  debug('origin npm with origin registry: $ npm %s', action);
+  require('../lib/origin_npm');
 }
-
-debug('origin npm with origin registry: $ npm %s', action);
-require('../lib/origin_npm');

@@ -2,51 +2,46 @@
 
 'use strict';
 
-var path = require('path');
-var urllib = require('urllib');
-var colors = require('colors');
-var config = require('../lib/config');
-var parseArgv = require('../lib/parse_argv');
+const path = require('path');
+const urllib = require('urllib');
+const config = require('../lib/config');
 
-var program = parseArgv();
-var args = program.args;
-
-var pkg = require(path.join(process.cwd(), 'package.json'));
+const pkg = require(path.join(process.cwd(), 'package.json'));
 
 function checkUpdate() {
-  var names = Object.keys(pkg.dependencies);
-  var next = function () {
-    var name = names.shift();
+  const names = Object.keys(pkg.dependencies);
+  const next = function() {
+    const name = names.shift();
     if (!name) {
       return process.exit(0);
     }
-    var url = config.cnpmRegistry + '/' + name + '/latest';
-    urllib.request(url, {headers: {'user-agent': 'cnpm-check'}},
-    function (err, result) {
-      var errmsg = '';
-      if (err) {
-        errmsg = err.message;
-      } else {
-        try {
-          result = JSON.parse(result);
-        } catch (e) {
-          errmsg = 'parse origin package info error. ' + err.message;
-          result = {};
+    const url = config.cnpmRegistry + '/' + name + '/latest';
+    urllib.request(url, { headers: { 'user-agent': 'cnpm-check' } },
+      function(err, result) {
+        let errmsg = '';
+        if (err) {
+          errmsg = err.message;
+        } else {
+          try {
+            result = JSON.parse(result);
+          } catch (e) {
+            errmsg = 'parse origin package info error. ' + err.message;
+            result = {};
+          }
         }
-      }
-      if (errmsg) {
-        console.log('[' + name.red + '] check version error: ' + err.message.red);
-        return next();
-      }
+        if (errmsg) {
+          console.log('[' + name.red + '] check version error: ' + err.message.red);
+          return next();
+        }
 
-      var localVersion = String(pkg.dependencies[name] || '*');
-      var localVersionCheck = localVersion.replace(/^[^\.\d]+/g, '');
-      var remoteVersion = result && result.version || 'unknow';
-      if (remoteVersion !== localVersionCheck) {
-        console.log('[' + name.yellow + '] new version: ' + remoteVersion.green + ', local version: ' + localVersion.yellow);
-      }
-      next();
-    });
+        const localVersion = String(pkg.dependencies[name] || '*');
+        const localVersionCheck = localVersion.replace(/^[^\.\d]+/g, '');
+        const remoteVersion = result && result.version || 'unknow';
+        if (remoteVersion !== localVersionCheck) {
+          console.log('[' + name.yellow + '] new version: ' + remoteVersion.green + ', local version: ' + localVersion.yellow);
+        }
+        next();
+      });
   };
 
   next();

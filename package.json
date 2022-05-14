@@ -13,9 +13,9 @@
   ],
   "scripts": {
     "contributor": "git-contributor",
-    "test": "npm run lint -- --fix && npm run test-local",
+    "test": "npm run lint && npm run test-local",
     "test-local": "egg-bin test",
-    "lint": "eslint bin lib test/*.js",
+    "lint": "eslint bin/* lib test/*.test.js",
     "ci": "npm run lint && npm run test"
   },
   "dependencies": {

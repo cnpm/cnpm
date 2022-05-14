@@ -2,38 +2,37 @@
 
 'use strict';
 
-var path = require('path');
-var Bagpipe = require('bagpipe');
-var fs = require('fs');
-var querystring = require('querystring');
-var request = require('npm-request');
-var config = require('../lib/config');
-var argv = require('../lib/parse_argv')('sync');
+const path = require('path');
+const Bagpipe = require('bagpipe');
+const fs = require('fs');
+const querystring = require('querystring');
+const request = require('npm-request');
+const argv = require('../lib/parse_argv')('sync');
 
-var args = argv.args;
-var registrys = [argv.registry];
-var registrywebs = {};
+const args = argv.args;
+const registrys = [ argv.registry ];
+const registrywebs = {};
 registrywebs[argv.registry] = argv.registryweb;
 
-var nodeps = argv.deps ? false: true;
-var publish = argv.syncPublish ? true : false;
+const nodeps = !argv.deps;
+const publish = !!argv.syncPublish;
 
-var names = args.slice(1);
-var packageName;
-var dependencies = [];
-var isPrivate = false;
+const names = args.slice(1);
+let packageName;
+let dependencies = [];
+let isPrivate = false;
 
-var packagePath = path.join(process.cwd(), 'package.json');
+const packagePath = path.join(process.cwd(), 'package.json');
 if (!names.length && fs.existsSync(packagePath)) {
   try {
     console.log('Parse `package.json` file now...');
-    var pkg = require(packagePath);
+    const pkg = require(packagePath);
     packageName = pkg.name;
-    var dependenciesMap = {};
-    for (var key in (pkg.dependencies || {})) {
+    const dependenciesMap = {};
+    for (const key in (pkg.dependencies || {})) {
       dependenciesMap[key] = pkg.dependencies[key];
     }
-    for (var key in (pkg.devDependencies || {})) {
+    for (const key in (pkg.devDependencies || {})) {
       dependenciesMap[key] = pkg.devDependencies[key];
     }
     dependencies = Object.keys(dependenciesMap);
@@ -49,34 +48,28 @@ if (names && names.length) {
 } else if (packageName) {
   syncByPackage(packageName);
 } else {
-  console.log('Usage: $ cnpm sync [moduleName1 moduleName2 ...]\n\n\
-Options:\n\
-  --publish        sync as publish\n\
-  --no-deps        do not sync dependencies and devDependencies\n');
+  console.log(`Usage: $ cnpm sync [moduleName1 moduleName2 ...]
+Options:
+  --publish        sync as publish
+  --no-deps        do not sync dependencies and devDependencies`);
   process.exit(1);
 }
-
-// var syncInfo = {};
-// var NPM_OPTIONS = {
-//   registry: registry,
-//   configFile: argv.userconfig
-// };
 
 function showlog(registry, syncInfo, done) {
   request({
     method: 'GET',
-    path: syncInfo.logurl + '?offset=' + syncInfo.lastLines
+    path: syncInfo.logurl + '?offset=' + syncInfo.lastLines,
   }, {
-    registry: registry,
-    configFile: argv.userconfig
-  }, function (err, info) {
+    registry,
+    configFile: argv.userconfig,
+  }, function(err, info) {
     if (err) {
       return done(err);
     }
     if (!info || !info.log) {
       return setTimeout(showlog.bind(null, registry, syncInfo, done), 2000);
     }
-    var log = info.log.trim();
+    const log = info.log.trim();
     console.log(log);
     syncInfo.lastLines += log.split('\n').length;
     if (log.indexOf('[done] Sync ' + syncInfo.name) >= 0) {
@@ -88,20 +81,20 @@ function showlog(registry, syncInfo, done) {
 }
 
 function sync(registry, name, callback) {
-  var url = name + '/sync?';
+  let url = name + '/sync?';
   url += querystring.stringify({
-    publish: publish,
-    nodeps: nodeps,
+    publish,
+    nodeps,
   });
   console.log('sync %s, PUT %s/%s', name, registry, url);
   request({
     method: 'PUT',
     path: url,
-    data: {}
+    data: {},
   }, {
-    registry: registry,
-    configFile: argv.userconfig
-  }, function (err, result, data, res) {
+    registry,
+    configFile: argv.userconfig,
+  }, function(err, result, data, res) {
     if (err) {
       return callback(err);
     }
@@ -112,38 +105,38 @@ function sync(registry, name, callback) {
       return callback(null, {
         ok: false,
         statusCode: res.statusCode,
-        result: result,
-        data: data
+        result,
+        data,
       });
     }
-    var syncInfo = {
-      name: name,
+    const syncInfo = {
+      name,
       lastLines: 0,
-      logurl: name + '/sync/log/' + result.logId
+      logurl: name + '/sync/log/' + result.logId,
     };
     console.log('logurl: %s/sync/%s#logid=%s', registrywebs[registry], name, result.logId);
-    showlog(registry, syncInfo, function (err) {
+    showlog(registry, syncInfo, function(err) {
       if (err) {
         return callback(err);
       }
-      callback(null, {ok: true});
+      callback(null, { ok: true });
     });
   });
 }
 
 function syncByNames(names) {
-  var queue = new Bagpipe(1);
-  var remain = names.length * registrys.length;
+  const queue = new Bagpipe(1);
+  let remain = names.length * registrys.length;
   if (!names) {
     console.log('Can not find any packages to sync.');
     process.exit(0);
   }
   console.log('Start sync %j.', names);
-  var fail = {};
-  var success = {};
-  registrys.forEach(function (registry) {
-    names.forEach(function (name) {
-      queue.push(sync, registry, name, function (err, data) {
+  const fail = {};
+  const success = {};
+  registrys.forEach(function(registry) {
+    names.forEach(function(name) {
+      queue.push(sync, registry, name, function(err, data) {
         remain--;
         if (err) {
           console.error(err.message);
@@ -154,7 +147,7 @@ function syncByNames(names) {
           success[name] = true;
         }
         if (!remain) {
-          for (var n in success) {
+          for (const n in success) {
             if (fail[n]) {
               delete success[n];
             }
@@ -178,5 +171,5 @@ function syncByPackage(packageName) {
     return syncByNames(dependencies);
   }
 
-  syncByNames([packageName]);
+  syncByNames([ packageName ]);
 }
