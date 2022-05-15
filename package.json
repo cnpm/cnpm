@@ -16,7 +16,7 @@
     "test": "npm run lint && npm run test-local",
     "test-local": "egg-bin test",
     "lint": "eslint bin/* lib test/*.test.js",
-    "ci": "npm run lint && egg-bin cov"
+    "ci": "npm run lint && egg-bin test"
   },
   "dependencies": {
     "auto-correct": "^1.0.0",
