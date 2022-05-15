@@ -214,11 +214,11 @@ describe('test/cnpm.test.js', () => {
     child.stderr.pipe(process.stderr);
   });
 
-  it('should install node-sass from mirror', function(done) {
+  it.skip('should install node-sass from mirror', function(done) {
     const args = [
       cnpm,
       'install',
-      'node-sass@6',
+      'node-sass',
     ];
     if (RUN_ON_CI) {
       args.push('--registry=https://registry.npmjs.org');
