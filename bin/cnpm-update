@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const debug = require('debug')('cnpm:update');
+const path = require('path');
+const { fork } = require('child_process');
+const rimraf = require('rimraf');
+
+const cwd = process.cwd();
+const cnpmCli = path.join(__dirname, 'cnpm');
+const options = {
+  stdio: 'inherit',
+};
+
+const nodeModulesDir = path.join(cwd, 'node_modules');
+console.log('[cnpm:update] Removing %s', nodeModulesDir);
+rimraf.sync(nodeModulesDir);
+
+console.log('[cnpm:update] Running "cnpm install" on %s', cwd);
+fork(cnpmCli, [ 'install' ], options)
+  .on('exit', code => {
+    debug('exit %s', code);
+    process.exit(code);
+  });
+

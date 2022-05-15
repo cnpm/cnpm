@@ -10,6 +10,8 @@ const rimraf = require('rimraf');
 const cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 const fixtures = path.join(__dirname, 'fixtures');
 const cwd = path.join(fixtures, 'foo');
+const packageJSONFile = path.join(cwd, 'package.json');
+const packageJSONRaw = fs.readFileSync(packageJSONFile);
 
 const RUN_ON_CI = process.env.CI;
 
@@ -25,8 +27,9 @@ function run(args, env, callback) {
 }
 
 describe('test/cnpm.test.js', () => {
-  after(() => {
+  afterEach(() => {
     rimraf.sync(path.join(cwd, 'node_modules'));
+    fs.writeFileSync(packageJSONFile, packageJSONRaw);
   });
 
   it('should version', () => {
@@ -211,26 +214,23 @@ describe('test/cnpm.test.js', () => {
     child.stderr.pipe(process.stderr);
   });
 
-  // WTF? TRAVIS download from taobao npm is too slow! skip this!
-  if (!RUN_ON_CI) {
-    it('should install node-sass from mirror', function(done) {
-      const args = [
-        cnpm,
-        'install',
-        'node-sass',
-      ];
-      if (RUN_ON_CI) {
-        args.push('--registry=https://registry.npmjs.org');
-        args.push('--disturl=none');
-        args.push('--userconfig=none');
-      }
-      const child = run(args, function(code) {
-        assert(code === 0);
-        fs.existsSync(path.join(cwd, 'node_modules/node-sass'));
-        done();
-      });
-      child.stdout.pipe(process.stdout);
-      child.stderr.pipe(process.stderr);
+  it.skip('should install node-sass from mirror', function(done) {
+    const args = [
+      cnpm,
+      'install',
+      'node-sass',
+    ];
+    if (RUN_ON_CI) {
+      args.push('--registry=https://registry.npmjs.org');
+      args.push('--disturl=none');
+      args.push('--userconfig=none');
+    }
+    const child = run(args, function(code) {
+      assert(code === 0);
+      fs.existsSync(path.join(cwd, 'node_modules/node-sass'));
+      done();
     });
-  }
+    child.stdout.pipe(process.stdout);
+    child.stderr.pipe(process.stderr);
+  });
 });

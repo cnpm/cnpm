@@ -16,7 +16,7 @@
     "test": "npm run lint && npm run test-local",
     "test-local": "egg-bin test",
     "lint": "eslint bin/* lib test/*.test.js",
-    "ci": "npm run lint && npm run test"
+    "ci": "npm run lint && egg-bin test"
   },
   "dependencies": {
     "auto-correct": "^1.0.0",
@@ -31,6 +31,7 @@
     "npm-request": "^1.0.0",
     "npminstall": "^6.1.0",
     "open": "^8.2.1",
+    "rimraf": "^3.0.2",
     "urllib": "^2.17.0"
   },
   "devDependencies": {
@@ -39,8 +40,7 @@
     "egg-ci": "^1.19.0",
     "eslint": "^8.15.0",
     "eslint-config-egg": "^11.1.0",
-    "git-contributor": "^1.0.10",
-    "rimraf": "^2.5.4"
+    "git-contributor": "^1.0.10"
   },
   "homepage": "https://github.com/cnpm/cnpm",
   "repository": {

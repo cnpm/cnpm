@@ -1,0 +1,13 @@
+{
+  "name": "update-package",
+  "version": "1.0.0",
+  "description": "npm core",
+  "dependencies": {
+    "leoric": "^1.15.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "coffee": "^5.4.0",
+    "typescript": "^4.3.5"
+  }
+}
