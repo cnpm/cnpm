@@ -1,4 +1,11 @@
 
+8.1.0 / 2022-05-15
+==================
+
+**others**
+  * [[`6be76cc`](http://github.com/cnpm/cnpm/commit/6be76cc5af3af16d9b811221d2f5fb6694b4e2e2)] - 📦 NEW: Support "cnpm update" command (#377) (fengmk2 <<fengmk2@gmail.com>>)
+  * [[`5d66bea`](http://github.com/cnpm/cnpm/commit/5d66bea99662e584eaa86f8749cb6c10caddd703)] - 📖 DOC: Change mini version to Node.js v14 (fengmk2 <<fengmk2@gmail.com>>)
+
 8.0.0 / 2022-05-14
 ==================
 
