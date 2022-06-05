@@ -5,7 +5,7 @@
 const debug = require('debug')('cnpm:update');
 const path = require('path');
 const { fork } = require('child_process');
-const rimraf = require('rimraf');
+const { rmSync } = require('fs');
 
 const cwd = process.cwd();
 const cnpmCli = path.join(__dirname, 'cnpm');
@@ -15,7 +15,7 @@ const options = {
 
 const nodeModulesDir = path.join(cwd, 'node_modules');
 console.log('[cnpm:update] Removing %s', nodeModulesDir);
-rimraf.sync(nodeModulesDir);
+rmSync(nodeModulesDir, { force: true, recursive: true });
 
 console.log('[cnpm:update] Running "cnpm install" on %s', cwd);
 fork(cnpmCli, [ 'install' ], options)
