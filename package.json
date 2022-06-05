@@ -24,23 +24,22 @@
     "colors": "1.4.0",
     "commander": "~2.10.0",
     "cross-spawn": "~0.2.8",
-    "debug": "^2.2.0",
+    "debug": "^4.3.4",
     "giturl": "^1.0.0",
     "ini": "^1.3.4",
-    "npm": "^6.13.4",
+    "npm": "^8.12.1",
     "npm-request": "^1.0.0",
     "npminstall": "^6.1.0",
     "open": "^8.2.1",
-    "rimraf": "^3.0.2",
     "urllib": "^2.17.0"
   },
   "devDependencies": {
-    "coffee": "^3.3.0",
-    "egg-bin": "^4.19.0",
-    "egg-ci": "^1.19.0",
-    "eslint": "^8.15.0",
-    "eslint-config-egg": "^11.1.0",
-    "git-contributor": "^1.0.10"
+    "coffee": "5",
+    "egg-bin": "5",
+    "egg-ci": "2",
+    "eslint": "8",
+    "eslint-config-egg": "12",
+    "git-contributor": "1"
   },
   "homepage": "https://github.com/cnpm/cnpm",
   "repository": {
@@ -62,10 +61,10 @@
     "node": ">= 14.0.0"
   },
   "ci": {
-    "type": "github",
     "version": "14, 16, 18",
-    "os": {
-      "github": "linux, windows, macos"
+    "license": {
+      "year": "2013",
+      "fullname": "cnpm and other contributors."
     }
   },
   "author": "fengmk2 <fengmk2@gmail.com> (https://github.com/fengmk2)",

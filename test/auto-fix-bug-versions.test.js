@@ -2,17 +2,18 @@
 
 const path = require('path');
 const coffee = require('coffee');
-const rimraf = require('rimraf');
+const { rmSync } = require('fs');
+
 const cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 const fixtures = path.join(__dirname, 'fixtures');
 
 describe('test/auto-fix-bug-versions.test.js', () => {
   const root = path.join(fixtures, 'foo');
   beforeEach(() => {
-    rimraf.sync(path.join(root, 'node_modules'));
+    rmSync(path.join(root, 'node_modules'), { force: true, recursive: true });
   });
   afterEach(() => {
-    rimraf.sync(path.join(root, 'node_modules'));
+    rmSync(path.join(root, 'node_modules'), { force: true, recursive: true });
   });
 
   it('should ignore bug version', () => {

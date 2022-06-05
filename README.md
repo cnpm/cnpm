@@ -1,5 +1,4 @@
-cnpm
-=======
+# cnpm
 
 [![NPM Version](https://img.shields.io/npm/v/cnpm.svg?style=flat-square)](https://npmjs.com/package/cnpm)
 [![NPM Download](https://img.shields.io/npm/dm/cnpm.svg?style=flat-square)](https://npmjs.com/package/cnpm)
@@ -20,13 +19,13 @@ cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
 ## Install
 
 ```bash
-$ npm install cnpm -g
+npm install cnpm -g
 ```
 
 If you're in China, maybe you should install it from our [China mirror](https://registry.npmmirror.com):
 
 ```bash
-$ npm install cnpm -g --registry=https://registry.npmmirror.com
+npm install cnpm -g --registry=https://registry.npmmirror.com
 ```
 
 ## Usage
@@ -36,14 +35,14 @@ Support all commands just like `npm`.
 ### Sync packages from `npm`
 
 ```bash
-$ cnpm sync [moduleName]
+cnpm sync [moduleName]
 ```
 
 ### Open package document or git web url
 
 ```bash
-$ cnpm doc [name]
-$ cnpm doc -g [name] # open git web url directly
+cnpm doc [name]
+cnpm doc -g [name] # open git web url directly
 ```
 
 ## Build your own private registry npm cli
@@ -64,7 +63,7 @@ If you don't like symlink mode for `node_modules`, you can change the installer 
 But you will lose the fastest install speed.
 
 ```bash
-$ cnpm i --by=npm react-native
+cnpm i --by=npm react-native
 ```
 
 ## License

@@ -5,7 +5,7 @@ const spawn = require('cross-spawn');
 const path = require('path');
 const fs = require('fs');
 const coffee = require('coffee');
-const rimraf = require('rimraf');
+const { rmSync } = require('fs');
 
 const cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 const fixtures = path.join(__dirname, 'fixtures');
@@ -28,7 +28,7 @@ function run(args, env, callback) {
 
 describe('test/cnpm.test.js', () => {
   afterEach(() => {
-    rimraf.sync(path.join(cwd, 'node_modules'));
+    rmSync(path.join(cwd, 'node_modules'), { force: true, recursive: true });
     fs.writeFileSync(packageJSONFile, packageJSONRaw);
   });
 
