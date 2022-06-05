@@ -31,7 +31,6 @@ describe('test/custom-installer.test.js', () => {
       .debug()
       .expect('code', 0)
       .expect('stderr', testRE)
-      .expect('stderr', /npm WARN config/)
       .end();
   });
 });
