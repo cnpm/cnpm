@@ -1,4 +1,10 @@
 
+8.2.0 / 2022-06-05
+==================
+
+**others**
+  * [[`f2cdee2`](http://github.com/cnpm/cnpm/commit/f2cdee2956f6cb8a8442864d8e47c839fa532619)] - 📦 NEW: Use npm v8 (#381) (fengmk2 <<fengmk2@gmail.com>>)
+
 8.1.0 / 2022-05-15
 ==================
 
