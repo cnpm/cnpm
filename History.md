@@ -1,4 +1,10 @@
 
+8.3.0 / 2022-08-07
+==================
+
+**others**
+  * [[`4a6a446`](http://github.com/cnpm/cnpm/commit/4a6a4464c98954b1269b08519ffccc8399aa37c0)] - 📦 NEW: Use urllib v3 (#393) (fengmk2 <<fengmk2@gmail.com>>)
+
 8.2.0 / 2022-06-05
 ==================
 
