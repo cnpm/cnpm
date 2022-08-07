@@ -8,43 +8,31 @@ const config = require('../lib/config');
 
 const pkg = require(path.join(process.cwd(), 'package.json'));
 
-function checkUpdate() {
-  const names = Object.keys(pkg.dependencies);
-  const next = function() {
-    const name = names.shift();
-    if (!name) {
-      return process.exit(0);
+async function checkOnePackage(name) {
+  const url = config.cnpmRegistry + '/' + name + '/latest';
+  try {
+    const response = await urllib.request(url, {
+      headers: { 'user-agent': 'cnpm-check' },
+      dataType: 'json',
+    });
+    const result = response.data;
+    const localVersion = String(pkg.dependencies[name] || '*');
+    const localVersionCheck = localVersion.replace(/^[^\.\d]+/g, '');
+    const remoteVersion = result && result.version || 'unknow';
+    if (remoteVersion !== localVersionCheck) {
+      console.log('[' + name + '] new version: ' + remoteVersion + ', local version: ' + localVersion);
     }
-    const url = config.cnpmRegistry + '/' + name + '/latest';
-    urllib.request(url, { headers: { 'user-agent': 'cnpm-check' } },
-      function(err, result) {
-        let errmsg = '';
-        if (err) {
-          errmsg = err.message;
-        } else {
-          try {
-            result = JSON.parse(result);
-          } catch (e) {
-            errmsg = 'parse origin package info error. ' + err.message;
-            result = {};
-          }
-        }
-        if (errmsg) {
-          console.log('[' + name.red + '] check version error: ' + err.message.red);
-          return next();
-        }
+  } catch (err) {
+    console.error(err);
+    console.log('[' + name + '] check version error: ' + err.message);
+  }
+}
 
-        const localVersion = String(pkg.dependencies[name] || '*');
-        const localVersionCheck = localVersion.replace(/^[^\.\d]+/g, '');
-        const remoteVersion = result && result.version || 'unknow';
-        if (remoteVersion !== localVersionCheck) {
-          console.log('[' + name.yellow + '] new version: ' + remoteVersion.green + ', local version: ' + localVersion.yellow);
-        }
-        next();
-      });
-  };
-
-  next();
+async function checkUpdate() {
+  const names = Object.keys(pkg.dependencies);
+  for (const name of names) {
+    await checkOnePackage(name);
+  }
 }
 
 checkUpdate();
