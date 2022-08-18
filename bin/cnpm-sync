@@ -50,7 +50,7 @@ if (names && names.length) {
 } else {
   console.log(`Usage: $ cnpm sync [moduleName1 moduleName2 ...]
 Options:
-  --publish        sync as publish
+  --sync-publish        sync as publish
   --no-deps        do not sync dependencies and devDependencies`);
   process.exit(1);
 }
