@@ -1,4 +1,10 @@
 
+8.4.0 / 2022-10-24
+==================
+
+**features**
+  * [[`d204d36`](http://github.com/cnpm/cnpm/commit/d204d3649dd5142b8c1c3c89fddc5a3eab9f8b94)] - 👌 IMPROVE: Use new sync registry url (#399) (fengmk2 <<fengmk2@gmail.com>>)
+
 8.3.0 / 2022-08-07
 ==================
 
