@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
 const path = require('path');
 const Bagpipe = require('bagpipe');
 const fs = require('fs');
@@ -50,7 +48,7 @@ if (names && names.length) {
 } else {
   console.log(`Usage: $ cnpm sync [moduleName1 moduleName2 ...]
 Options:
-  --publish        sync as publish
+  --sync-publish        sync as publish
   --no-deps        do not sync dependencies and devDependencies`);
   process.exit(1);
 }
@@ -87,12 +85,14 @@ function sync(registry, name, callback) {
     nodeps,
   });
   console.log('sync %s, PUT %s/%s', name, registry, url);
+  const realRegistry = registry === 'https://registry.npmmirror.com' ?
+    'https://registry-direct.npmmirror.com' : registry;
   request({
     method: 'PUT',
     path: url,
     data: {},
   }, {
-    registry,
+    registry: realRegistry,
     configFile: argv.userconfig,
   }, function(err, result, data, res) {
     if (err) {
