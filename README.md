@@ -8,7 +8,7 @@
 
 ![logo](https://raw.github.com/cnpm/cnpmjs.org/master/logo.png)
 
-cnpm: npm client for [cnpmjs.org](https://cnpmjs.org)
+cnpm: npm client for [npmmirror.com](http://npmmirror.com/)
 
 ## Requirements
 
