@@ -28,7 +28,7 @@
     "ini": "^1.3.4",
     "npm": "^8.12.1",
     "npm-request": "^1.0.0",
-    "npminstall": "^6.5.0",
+    "npminstall": "beta",
     "open": "^8.2.1",
     "urllib": "^3.1.0"
   },
@@ -60,7 +60,7 @@
     "node": ">= 14.0.0"
   },
   "ci": {
-    "version": "14, 16, 18",
+    "version": "14, 16, 18, 19",
     "license": {
       "year": "2013",
       "fullname": "cnpm and other contributors."
