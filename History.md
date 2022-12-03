@@ -1,4 +1,13 @@
 
+8.5.0 / 2022-12-03
+==================
+
+**features**
+  * [[`34a805e`](http://github.com/cnpm/cnpm/commit/34a805ec5d056d902a5db7e9247c89faa88a60fd)] - 👌 IMPROVE: Try npminstall beta version (#402) (fengmk2 <<fengmk2@gmail.com>>)
+
+**others**
+  * [[`8aa7c8b`](http://github.com/cnpm/cnpm/commit/8aa7c8bdc3b50a9e7766e3a8c48a4003502fb734)] - chore: change domain (#401) (聪小陈 <<xiaohuoni@users.noreply.github.com>>)
+
 8.4.0 / 2022-10-24
 ==================
 
