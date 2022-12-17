@@ -17,3 +17,4 @@ npm-debug.log
 build/
 package-lock.json
 test/fixtures/home/.config
+.DS_Store
