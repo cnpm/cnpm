@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "coffee": "5",
-    "egg-bin": "^5.6.0",
+    "egg-bin": "^5.6.1",
     "eslint": "8",
     "eslint-config-egg": "12",
     "git-contributor": "1"
@@ -57,13 +57,6 @@
   },
   "engines": {
     "node": ">= 14.0.0"
-  },
-  "ci": {
-    "version": "14, 16, 18, 19",
-    "license": {
-      "year": "2013",
-      "fullname": "cnpm and other contributors."
-    }
   },
   "author": "fengmk2 <fengmk2@gmail.com> (https://github.com/fengmk2)",
   "license": "MIT"
