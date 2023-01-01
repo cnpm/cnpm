@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.1](https://github.com/cnpm/cnpm/compare/v9.0.0...v9.0.1) (2023-01-01)
+
+
+### Bug Fixes
+
+* use npminstall latest version ([#406](https://github.com/cnpm/cnpm/issues/406)) ([04a5c72](https://github.com/cnpm/cnpm/commit/04a5c72f7e002398a1516ed4e7cbbd161e988a69))
+
 ## [8.6.0](https://github.com/cnpm/cnpm/compare/v8.5.1...v8.6.0) (2023-01-01)
 
 
