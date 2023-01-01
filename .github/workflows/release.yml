@@ -3,7 +3,7 @@ name: Release
 on:
   # 合并后自动发布
   push:
-    branches: [ master, '8.x' ]
+    branches: [ master ]
 
   # 手动发布
   workflow_dispatch: {}
