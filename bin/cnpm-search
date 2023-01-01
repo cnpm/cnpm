@@ -1,9 +1,0 @@
-#!/usr/bin/env node
-
-'use strict';
-
-const utils = require('../lib/utils');
-const argv = require('../lib/parse_argv')();
-const searchurl = argv.registryweb + '/browse/keyword/' + argv.args[1];
-
-utils.openurl(searchurl);

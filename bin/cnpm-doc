@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
 const request = require('npm-request');
 const giturl = require('giturl');
 const utils = require('../lib/utils');

@@ -1,5 +1,3 @@
-'use strict';
-
 const assert = require('assert');
 const spawn = require('cross-spawn');
 const path = require('path');

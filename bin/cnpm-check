@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
 const path = require('path');
 const urllib = require('urllib');
 const config = require('../lib/config');

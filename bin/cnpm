@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
 const debug = require('debug')('cnpm');
 const argv = require('../lib/parse_argv')();
 
@@ -13,7 +11,6 @@ const extendsMethd = {
   doc: 1,
   sync: 1,
   user: 1,
-  search: 1,
   update: 1,
 };
 

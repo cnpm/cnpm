@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
 const debug = require('debug')('cnpm:update');
 const path = require('path');
 const { fork } = require('child_process');
