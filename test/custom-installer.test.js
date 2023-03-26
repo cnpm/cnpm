@@ -1,6 +1,6 @@
-const path = require('path');
+const path = require('node:path');
+const { rmSync } = require('node:fs');
 const coffee = require('coffee');
-const { rmSync } = require('fs');
 
 const cnpmbin = path.join(__dirname, '../bin/cnpm');
 const fixtures = path.join(__dirname, 'fixtures');
@@ -23,7 +23,7 @@ describe('test/custom-installer.test.js', () => {
     return coffee.fork(cnpmbin, args, {
       cwd,
       env: Object.assign({}, process.env, {
-        DEBUG: 'cnpm*',
+        NODE_DEBUG: 'cnpm*',
       }),
     })
       .debug()

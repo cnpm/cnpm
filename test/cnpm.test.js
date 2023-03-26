@@ -1,15 +1,14 @@
-const assert = require('assert');
+const assert = require('node:assert');
+const path = require('node:path');
+const { rmSync, writeFileSync, readFileSync, existsSync } = require('node:fs');
 const spawn = require('cross-spawn');
-const path = require('path');
-const fs = require('fs');
 const coffee = require('coffee');
-const { rmSync } = require('fs');
 
 const cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 const fixtures = path.join(__dirname, 'fixtures');
 const cwd = path.join(fixtures, 'foo');
 const packageJSONFile = path.join(cwd, 'package.json');
-const packageJSONRaw = fs.readFileSync(packageJSONFile);
+const packageJSONRaw = readFileSync(packageJSONFile);
 
 const RUN_ON_CI = process.env.CI;
 
@@ -27,7 +26,7 @@ function run(args, env, callback) {
 describe('test/cnpm.test.js', () => {
   afterEach(() => {
     rmSync(path.join(cwd, 'node_modules'), { force: true, recursive: true });
-    fs.writeFileSync(packageJSONFile, packageJSONRaw);
+    writeFileSync(packageJSONFile, packageJSONRaw);
   });
 
   it('should version', () => {
@@ -225,7 +224,7 @@ describe('test/cnpm.test.js', () => {
     }
     const child = run(args, function(code) {
       assert(code === 0);
-      fs.existsSync(path.join(cwd, 'node_modules/node-sass'));
+      existsSync(path.join(cwd, 'node_modules/node-sass'));
       done();
     });
     child.stdout.pipe(process.stdout);

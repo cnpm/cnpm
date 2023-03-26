@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const path = require('path');
+const path = require('node:path');
 const urllib = require('urllib');
 const config = require('../lib/config');
 

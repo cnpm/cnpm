@@ -1,6 +1,6 @@
-const path = require('path');
+const path = require('node:path');
+const { rmSync } = require('node:fs');
 const coffee = require('coffee');
-const { rmSync } = require('fs');
 
 const cnpm = path.join(__dirname, '..', 'bin', 'cnpm');
 const fixtures = path.join(__dirname, 'fixtures');
