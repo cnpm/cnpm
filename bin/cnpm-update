@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('cnpm:update');
-const path = require('path');
-const { fork } = require('child_process');
-const { rmSync } = require('fs');
+const debug = require('node:util').debuglog('cnpm:update');
+const path = require('node:path');
+const { fork } = require('node:child_process');
+const { rmSync } = require('node:fs');
 
 const cwd = process.cwd();
 const cnpmCli = path.join(__dirname, 'cnpm');

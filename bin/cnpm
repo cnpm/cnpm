@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('cnpm');
+const debug = require('node:util').debuglog('cnpm');
 const argv = require('../lib/parse_argv')();
 
 const action = argv.args[0];
