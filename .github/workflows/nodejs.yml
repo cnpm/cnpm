@@ -16,3 +16,5 @@ jobs:
     with:
       os: 'ubuntu-latest, macos-latest, windows-latest'
       version: '14.18.0, 14, 16, 18'
+      # try to upgrade npm to latest version
+      install: 'npm i -g npm && npm i --no-package-lock --no-fund'
