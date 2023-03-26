@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.1.0](https://github.com/cnpm/cnpm/compare/v9.0.1...v9.1.0) (2023-03-26)
+
+
+### Features
+
+* upgrade npm to v9 ([#409](https://github.com/cnpm/cnpm/issues/409)) ([af22a42](https://github.com/cnpm/cnpm/commit/af22a42c683386f302af7da3749b3d6510a18ed4))
+
 ## [9.0.1](https://github.com/cnpm/cnpm/compare/v9.0.0...v9.0.1) (2023-01-01)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "cnpm",
-  "version": "9.0.1",
+  "version": "9.1.0",
   "description": "cnpm: npm client for cnpmjs.org",
   "preferGlobal": true,
   "bin": {
