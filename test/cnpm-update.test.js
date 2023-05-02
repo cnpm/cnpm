@@ -24,6 +24,7 @@ describe('test/cnpm-update.test.js', () => {
       cwd: root,
     })
       .debug()
+      .expect('stderr', /npminstall WARN running on offline mode/)
       .expect('stdout', /\[npmupdate] removing/)
       .expect('stdout', /\[npmupdate] reinstall on /)
       .expect('code', 0)
