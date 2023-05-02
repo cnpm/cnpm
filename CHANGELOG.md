@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.0](https://github.com/cnpm/cnpm/compare/v9.1.0...v9.2.0) (2023-05-02)
+
+
+### Features
+
+* use npmupdate binary ([#414](https://github.com/cnpm/cnpm/issues/414)) ([af6fede](https://github.com/cnpm/cnpm/commit/af6fede559b808a4c9aa2c355392614b1a59dd6b))
+
 ## [9.1.0](https://github.com/cnpm/cnpm/compare/v9.0.1...v9.1.0) (2023-03-26)
 
 
