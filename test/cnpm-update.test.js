@@ -13,18 +13,20 @@ describe('test/cnpm-update.test.js', () => {
       cwd: root,
     })
       .debug()
-      .expect('stdout', /\[cnpm:update] Removing/)
-      .expect('stdout', /\[cnpm:update] Running "cnpm install" on /)
+      .expect('stdout', /\[npmupdate] removing/)
+      .expect('stdout', /\[npmupdate] reinstall on /)
       .expect('code', 0)
       .end();
     await coffee.fork(cnpm, [
       'update',
+      '--offline',
     ], {
       cwd: root,
     })
       .debug()
-      .expect('stdout', /\[cnpm:update] Removing/)
-      .expect('stdout', /\[cnpm:update] Running "cnpm install" on /)
+      .expect('stderr', /npminstall WARN running on offline mode/)
+      .expect('stdout', /\[npmupdate] removing/)
+      .expect('stdout', /\[npmupdate] reinstall on /)
       .expect('code', 0)
       .end();
   });
