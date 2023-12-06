@@ -18,6 +18,19 @@
     "lint": "eslint bin/* lib test/*.test.js",
     "ci": "npm run lint && egg-bin test"
   },
+  "bundleDependencies": [
+    "auto-correct",
+    "bagpipe",
+    "commander",
+    "cross-spawn",
+    "giturl",
+    "ini",
+    "npm",
+    "npm-request",
+    "npminstall",
+    "open",
+    "urllib"
+  ],
   "dependencies": {
     "auto-correct": "^1.0.0",
     "bagpipe": "^0.3.5",
