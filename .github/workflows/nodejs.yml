@@ -7,12 +7,10 @@ on:
   pull_request:
     branches: [ master, '8.x' ]
 
-  workflow_dispatch: {}
-
 jobs:
   Job:
     name: Node.js
-    uses: artusjs/github-actions/.github/workflows/node-test.yml@v1
+    uses: node-modules/github-actions/.github/workflows/node-test.yml@master
     with:
       os: 'ubuntu-latest, macos-latest, windows-latest'
       version: '14.18.0, 14, 16, 18, 20'
