@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.3.0](https://github.com/cnpm/cnpm/compare/v9.2.0...v9.3.0) (2023-12-06)
+
+
+### Features
+
+* bundle deps of cnpm ([#428](https://github.com/cnpm/cnpm/issues/428)) ([8cd53c0](https://github.com/cnpm/cnpm/commit/8cd53c03aa25c2204a5918207190506591c50428))
+
 ## [9.2.0](https://github.com/cnpm/cnpm/compare/v9.1.0...v9.2.0) (2023-05-02)
 
 
