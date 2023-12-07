@@ -4,7 +4,7 @@
   "description": "cnpm: npm client for cnpmjs.org",
   "preferGlobal": true,
   "bin": {
-    "cnpm": "bin/cnpm"
+    "cnpm": "bin/cnpm.js"
   },
   "main": "bin/cnpm",
   "files": [
