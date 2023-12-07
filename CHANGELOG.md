@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.3.1](https://github.com/cnpm/cnpm/compare/v9.3.0...v9.3.1) (2023-12-07)
+
+
+### Bug Fixes
+
+* bundle bin ([#430](https://github.com/cnpm/cnpm/issues/430)) ([64e02f6](https://github.com/cnpm/cnpm/commit/64e02f6eeb7d73a388fb32bbee154612a18c030d))
+
 ## [9.3.0](https://github.com/cnpm/cnpm/compare/v9.2.0...v9.3.0) (2023-12-06)
 
 
