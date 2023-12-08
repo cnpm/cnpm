@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.3.2](https://github.com/cnpm/cnpm/compare/v9.3.1...v9.3.2) (2023-12-08)
+
+
+### Bug Fixes
+
+* bin ext ([#432](https://github.com/cnpm/cnpm/issues/432)) ([6c66ba5](https://github.com/cnpm/cnpm/commit/6c66ba5197ab53d4d97cec9771f22fedf69375fc))
+
 ## [9.3.1](https://github.com/cnpm/cnpm/compare/v9.3.0...v9.3.1) (2023-12-07)
 
 
