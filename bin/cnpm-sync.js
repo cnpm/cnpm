@@ -2,10 +2,12 @@
 
 const path = require('node:path');
 const fs = require('node:fs');
+const { setTimeout } = require('node:timers/promises');
 const querystring = require('node:querystring');
 const Bagpipe = require('bagpipe');
 const request = require('npm-request');
 const argv = require('../lib/parse_argv')('sync');
+const urllib = require('urllib');
 
 const args = argv.args;
 const registrys = [ argv.registry ];
@@ -19,6 +21,8 @@ const names = args.slice(1);
 let packageName;
 let dependencies = [];
 let isPrivate = false;
+
+const LOG_FETCH_INTERVAL = 2000;
 
 const packagePath = path.join(process.cwd(), 'package.json');
 if (!names.length && fs.existsSync(packagePath)) {
@@ -53,30 +57,40 @@ Options:
   process.exit(1);
 }
 
-function showlog(registry, syncInfo, done) {
-  request({
-    method: 'GET',
-    path: syncInfo.logurl + '?offset=' + syncInfo.lastLines,
-  }, {
-    registry,
-    configFile: argv.userconfig,
-  }, function(err, info) {
-    if (err) {
-      return done(err);
-    }
-    if (!info || !info.log) {
-      return setTimeout(showlog.bind(null, registry, syncInfo, done), 2000);
-    }
-    const log = info.log.trim();
-    console.log(log);
-    syncInfo.lastLines += log.split('\n').length;
-    if (log.indexOf('[done] Sync ' + syncInfo.name) >= 0) {
-      done();
-    } else {
-      setTimeout(showlog.bind(null, registry, syncInfo, done), 2000);
-    }
+async function showLog(syncInfo, showedLines = 0) {
+
+  const stateRes = await urllib.request(syncInfo.stateUrl, {
+    dataType: 'json',
   });
+
+  const logRes = await urllib.request(syncInfo.logUrl, { followRedirect: true });
+  const currentLog = logRes.data.toString().trim();
+
+  const { state } = stateRes.data;
+  if (
+    state === 'processing' ||
+    state === 'waiting' ||
+    state === 'success'
+  ) {
+    const currentLines = currentLog.split('\n').length;
+    if (currentLines > showedLines) {
+      console.log(currentLog.split('\n').slice(showedLines).join('\n'));
+      showedLines = currentLog.split('\n').length;
+      // flush success log
+      if (state === 'success') {
+        return;
+      }
+    }
+    await setTimeout(LOG_FETCH_INTERVAL);
+    await showLog(syncInfo, showedLines);
+    return;
+  }
+
+  // other log
+  const finalLog = logRes.data.toString().trim();
+  console.log(finalLog.split('\n').slice(showedLines).join('\n'));
 }
+
 
 function sync(registry, name, callback) {
   let url = name + '/sync?';
@@ -112,15 +126,11 @@ function sync(registry, name, callback) {
     const syncInfo = {
       name,
       lastLines: 0,
-      logurl: name + '/sync/log/' + result.logId,
+      stateUrl: `${registry}/-/package/${name}/syncs/${result.logId}`,
+      logUrl: `${registry}/-/package/${name}/syncs/${result.logId}/log`,
     };
-    console.log('logurl: %s/sync/%s#logid=%s', registrywebs[registry], name, result.logId);
-    showlog(registry, syncInfo, function(err) {
-      if (err) {
-        return callback(err);
-      }
-      callback(null, { ok: true });
-    });
+    console.log('logUrl: %s', syncInfo.logUrl);
+    showLog(syncInfo).then(() => callback(null, { ok: true })).catch(callback);
   });
 }
 
