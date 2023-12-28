@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.4.0](https://github.com/cnpm/cnpm/compare/v9.3.2...v9.4.0) (2023-12-28)
+
+
+### Features
+
+* display sync log ([#434](https://github.com/cnpm/cnpm/issues/434)) ([11cfecc](https://github.com/cnpm/cnpm/commit/11cfeccfc4ff18bc40fccba41362e690cbf0df66)), closes [#427](https://github.com/cnpm/cnpm/issues/427)
+
 ## [9.3.2](https://github.com/cnpm/cnpm/compare/v9.3.1...v9.3.2) (2023-12-08)
 
 
