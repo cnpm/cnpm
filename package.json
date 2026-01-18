@@ -42,7 +42,7 @@
     "npm-request": "^1.0.0",
     "npminstall": "^7.0.0",
     "open": "^8.2.1",
-    "urllib": "^3.1.0"
+    "urllib": "^4.0.0"
   },
   "devDependencies": {
     "coffee": "5",
