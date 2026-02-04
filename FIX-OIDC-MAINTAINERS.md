@@ -10,18 +10,33 @@ Packages published via GitHub OIDC authentication (such as `@nomicfoundation/har
 ```
 
 ## Solution
-The fix has been implemented in the **cnpmcore** repository (the registry server), not in this client repository.
+The fix needs to be applied to the **cnpmcore** repository (the registry server), not this client repository.
 
-### Applying the Fix
-A patch file is included: `cnpmcore-oidc-fix.patch`
+### Creating the PR in cnpmcore
 
-To apply to cnpmcore:
+**📋 See [CNPMCORE-PR-INSTRUCTIONS.md](CNPMCORE-PR-INSTRUCTIONS.md) for complete instructions**
+
+**Quick Start:**
 ```bash
+# Option 1: Use the automated script
+git clone https://github.com/cnpm/cnpmcore.git
+cd cnpmcore
+curl -O https://raw.githubusercontent.com/cnpm/cnpm/copilot/fix-version-sync-issue/create-cnpmcore-pr.sh
+chmod +x create-cnpmcore-pr.sh
+./create-cnpmcore-pr.sh
+
+# Option 2: Manual application
 cd /path/to/cnpmcore
-git apply cnpmcore-oidc-fix.patch
+git checkout -b fix/oidc-published-packages-empty-maintainers
+curl https://raw.githubusercontent.com/cnpm/cnpm/copilot/fix-version-sync-issue/cnpmcore-oidc-fix.patch | git apply
+git commit -am "fix: handle OIDC-published packages with empty maintainers"
+git push -u origin fix/oidc-published-packages-empty-maintainers
 ```
 
-Or manually cherry-pick the changes from the patch file.
+### Files in This Repository
+- `cnpmcore-oidc-fix.patch` - Git patch file to apply to cnpmcore
+- `CNPMCORE-PR-INSTRUCTIONS.md` - Detailed instructions for creating the PR
+- `create-cnpmcore-pr.sh` - Automated script to create the PR
 
 ### Changes Made
 Modified `app/core/service/PackageSyncerService.ts` to use `_npmUser` as a fallback maintainer when:
