@@ -12,6 +12,17 @@ Packages published via GitHub OIDC authentication (such as `@nomicfoundation/har
 ## Solution
 The fix has been implemented in the **cnpmcore** repository (the registry server), not in this client repository.
 
+### Applying the Fix
+A patch file is included: `cnpmcore-oidc-fix.patch`
+
+To apply to cnpmcore:
+```bash
+cd /path/to/cnpmcore
+git apply cnpmcore-oidc-fix.patch
+```
+
+Or manually cherry-pick the changes from the patch file.
+
 ### Changes Made
 Modified `app/core/service/PackageSyncerService.ts` to use `_npmUser` as a fallback maintainer when:
 1. Package has empty maintainers array
@@ -27,8 +38,21 @@ OIDC-published packages have characteristics like:
 
 ### Code Location
 The fix is in: `cnpmcore/app/core/service/PackageSyncerService.ts`
-- Lines 690-700: First occurrence (executeTask with buffer)
-- Lines 1301-1311: Second occurrence (executeTaskWithPackument)
+- Lines ~690-700: First occurrence (executeTask with buffer)
+- Lines ~1301-1311: Second occurrence (executeTaskWithPackument)
+
+Both locations now include:
+```typescript
+// If still no maintainers, try to use _npmUser from the latest version
+// This handles packages published via GitHub OIDC or other automated publishing
+if ((!Array.isArray(maintainers) || maintainers.length === 0) && latestPackageVersion?._npmUser) {
+  const npmUser = latestPackageVersion._npmUser;
+  if (npmUser.name && npmUser.email) {
+    maintainers = [{ name: npmUser.name, email: npmUser.email }];
+    logs.push(`[${isoNow()}] 📖 Use _npmUser from version ${latestPackageVersion.version} as maintainer (${npmUser.name})`);
+  }
+}
+```
 
 ### Tests Added
 Added tests in:
@@ -36,6 +60,10 @@ Added tests in:
 - `test/core/service/PackageSyncerService/executeTaskWithPackument.test.ts`
 
 Test case: "should use _npmUser as maintainer for OIDC-published packages with empty maintainers"
+
+The tests simulate a package published via GitHub OIDC with:
+- Empty maintainers arrays
+- `_npmUser: { name: "GitHub Actions", email: "npm-oidc-no-reply@github.com" }`
 
 ## Next Steps
 This fix needs to be:

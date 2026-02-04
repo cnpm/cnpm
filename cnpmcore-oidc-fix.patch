@@ -1,0 +1,201 @@
+From 1c6e5d3e06bd3165de1bcaa419eddc586901112c Mon Sep 17 00:00:00 2001
+From: "copilot-swe-agent[bot]"
+ <copilot-swe-agent[bot]@users.noreply.github.com>
+Date: Wed, 4 Feb 2026 03:58:05 +0000
+Subject: [PATCH] fix: handle OIDC-published packages with empty maintainers
+
+- Use _npmUser as fallback maintainer when packages have empty maintainers array
+- This handles packages published via GitHub OIDC (npm-oidc-no-reply@github.com)
+- Fixes sync failure for packages like @nomicfoundation/hardhat-utils@3.0.6
+- Add tests for OIDC-published packages
+
+Fixes cnpm/cnpm#488
+---
+ app/core/service/PackageSyncerService.ts      | 20 +++++++
+ .../PackageSyncerService/executeTask.test.ts  | 60 +++++++++++++++++++
+ .../executeTaskWithPackument.test.ts          | 60 +++++++++++++++++++
+ 3 files changed, 140 insertions(+)
+
+diff --git a/app/core/service/PackageSyncerService.ts b/app/core/service/PackageSyncerService.ts
+index 4d4e8ca..e71ecec 100644
+--- a/app/core/service/PackageSyncerService.ts
++++ b/app/core/service/PackageSyncerService.ts
+@@ -687,6 +687,16 @@ data sample: ${remoteData.subarray(0, 200).toString()}`;
+           maintainers = latestPackageVersion.maintainers as AuthorType[];
+           logs.push(`[${isoNow()}] 📖 Use the latest version(${latestPackageVersion.version}) maintainers instead`);
+         }
++        
++        // If still no maintainers, try to use _npmUser from the latest version
++        // This handles packages published via GitHub OIDC or other automated publishing
++        if ((!Array.isArray(maintainers) || maintainers.length === 0) && latestPackageVersion?._npmUser) {
++          const npmUser = latestPackageVersion._npmUser;
++          if (npmUser.name && npmUser.email) {
++            maintainers = [{ name: npmUser.name, email: npmUser.email }];
++            logs.push(`[${isoNow()}] 📖 Use _npmUser from version ${latestPackageVersion.version} as maintainer (${npmUser.name})`);
++          }
++        }
+       }
+     }
+ 
+@@ -1288,6 +1298,16 @@ data sample: ${remoteData.subarray(0, 200).toString()}`;
+           maintainers = latestPackageVersion.maintainers as AuthorType[];
+           logs.push(`[${isoNow()}] 📖 Use the latest version(${latestPackageVersion.version}) maintainers instead`);
+         }
++        
++        // If still no maintainers, try to use _npmUser from the latest version
++        // This handles packages published via GitHub OIDC or other automated publishing
++        if (maintainers.length === 0 && latestPackageVersion?._npmUser) {
++          const npmUser = latestPackageVersion._npmUser;
++          if (npmUser.name && npmUser.email) {
++            maintainers = [{ name: npmUser.name, email: npmUser.email }];
++            logs.push(`[${isoNow()}] 📖 Use _npmUser from version ${latestPackageVersion.version} as maintainer (${npmUser.name})`);
++          }
++        }
+       }
+     }
+ 
+diff --git a/test/core/service/PackageSyncerService/executeTask.test.ts b/test/core/service/PackageSyncerService/executeTask.test.ts
+index 428a7c4..6ae3f5f 100644
+--- a/test/core/service/PackageSyncerService/executeTask.test.ts
++++ b/test/core/service/PackageSyncerService/executeTask.test.ts
+@@ -2034,6 +2034,66 @@ describe('test/core/service/PackageSyncerService/executeTask.test.ts', () => {
+       app.mockAgent().assertNoPendingInterceptors();
+     });
+ 
++    it('should use _npmUser as maintainer for OIDC-published packages with empty maintainers', async () => {
++      // Simulate a package published via GitHub OIDC with empty maintainers
++      const name = 'cnpmcore-test-oidc-published';
++      app.mockHttpclient(`https://registry.npmjs.org/${name}`, 'GET', {
++        data: JSON.stringify({
++          _id: name,
++          _rev: '1-abc123',
++          name,
++          'dist-tags': { latest: '1.0.0' },
++          versions: {
++            '1.0.0': {
++              name,
++              version: '1.0.0',
++              description: 'Package published via GitHub OIDC',
++              main: 'index.js',
++              _id: `${name}@1.0.0`,
++              _npmUser: {
++                name: 'GitHub Actions',
++                email: 'npm-oidc-no-reply@github.com',
++              },
++              dist: {
++                integrity: 'sha512-ptVWDP7Z39wOBk5EBwi2x8/SKZblEsVcdL0jjIsaI2KdLwVpRRRnezJSKpUsXr982nGf0j7nh6RcHSg4Wlu3AA==',
++                shasum: 'c73398ff6db39d138a56c04c7a90f35b70d7b78f',
++                tarball: `https://registry.npmjs.org/${name}/-/${name}-1.0.0.tgz`,
++              },
++              maintainers: [],
++            },
++          },
++          time: {
++            created: '2026-01-19T19:16:58.391Z',
++            '1.0.0': '2026-01-19T19:16:58.391Z',
++            modified: '2026-01-19T19:16:58.391Z',
++          },
++          maintainers: [],
++        }),
++        persist: false,
++      });
++      app.mockHttpclient(
++        `https://registry.npmjs.org/${name}/-/${name}-1.0.0.tgz`,
++        'GET',
++        {
++          data: await TestUtil.readFixturesFile('registry.npmjs.org/foobar/-/foobar-1.0.0.tgz'),
++          persist: false,
++        },
++      );
++      
++      await packageSyncerService.createTask(name);
++      const task = await packageSyncerService.findExecuteTask();
++      assert.ok(task);
++      assert.equal(task.targetName, name);
++      await packageSyncerService.executeTask(task);
++      const stream = await packageSyncerService.findTaskLog(task);
++      assert.ok(stream);
++      const log = await TestUtil.readStreamToLog(stream);
++      // console.log(log);
++      assert.ok(log.includes('📖 Use _npmUser from version 1.0.0 as maintainer (GitHub Actions)'));
++      assert.ok(log.includes('] 🔗'));
++      app.mockAgent().assertNoPendingInterceptors();
++    });
++
+     it('should stop sync when upstream blocked', async () => {
+       // sync first
+       const name = 'cnpmcore-test-block-from-upstream';
+diff --git a/test/core/service/PackageSyncerService/executeTaskWithPackument.test.ts b/test/core/service/PackageSyncerService/executeTaskWithPackument.test.ts
+index 759f130..c85a986 100644
+--- a/test/core/service/PackageSyncerService/executeTaskWithPackument.test.ts
++++ b/test/core/service/PackageSyncerService/executeTaskWithPackument.test.ts
+@@ -1958,6 +1958,66 @@ describe('test/core/service/PackageSyncerService/executeTaskWithPackument.test.t
+       app.mockAgent().assertNoPendingInterceptors();
+     });
+ 
++    it('should use _npmUser as maintainer for OIDC-published packages with empty maintainers', async () => {
++      // Simulate a package published via GitHub OIDC with empty maintainers
++      const name = 'cnpmcore-test-oidc-published';
++      app.mockHttpclient(`https://registry.npmjs.org/${name}`, 'GET', {
++        data: JSON.stringify({
++          _id: name,
++          _rev: '1-abc123',
++          name,
++          'dist-tags': { latest: '1.0.0' },
++          versions: {
++            '1.0.0': {
++              name,
++              version: '1.0.0',
++              description: 'Package published via GitHub OIDC',
++              main: 'index.js',
++              _id: `${name}@1.0.0`,
++              _npmUser: {
++                name: 'GitHub Actions',
++                email: 'npm-oidc-no-reply@github.com',
++              },
++              dist: {
++                integrity: 'sha512-ptVWDP7Z39wOBk5EBwi2x8/SKZblEsVcdL0jjIsaI2KdLwVpRRRnezJSKpUsXr982nGf0j7nh6RcHSg4Wlu3AA==',
++                shasum: 'c73398ff6db39d138a56c04c7a90f35b70d7b78f',
++                tarball: `https://registry.npmjs.org/${name}/-/${name}-1.0.0.tgz`,
++              },
++              maintainers: [],
++            },
++          },
++          time: {
++            created: '2026-01-19T19:16:58.391Z',
++            '1.0.0': '2026-01-19T19:16:58.391Z',
++            modified: '2026-01-19T19:16:58.391Z',
++          },
++          maintainers: [],
++        }),
++        persist: false,
++      });
++      app.mockHttpclient(
++        `https://registry.npmjs.org/${name}/-/${name}-1.0.0.tgz`,
++        'GET',
++        {
++          data: await TestUtil.readFixturesFile('registry.npmjs.org/foobar/-/foobar-1.0.0.tgz'),
++          persist: false,
++        },
++      );
++      
++      await packageSyncerService.createTask(name);
++      const task = await packageSyncerService.findExecuteTask();
++      assert.ok(task);
++      assert.equal(task.targetName, name);
++      await packageSyncerService.executeTask(task);
++      const stream = await packageSyncerService.findTaskLog(task);
++      assert.ok(stream);
++      const log = await TestUtil.readStreamToLog(stream);
++      // console.log(log);
++      assert.ok(log.includes('📖 Use _npmUser from version 1.0.0 as maintainer (GitHub Actions)'));
++      assert.ok(log.includes('] 🔗'));
++      app.mockAgent().assertNoPendingInterceptors();
++    });
++
+     it('should stop sync when upstream blocked', async () => {
+       // sync first
+       const name = 'cnpmcore-test-block-from-upstream';
+-- 
+2.52.0
+
