@@ -29,6 +29,11 @@ describe('test/cnpm.test.js', () => {
     writeFileSync(packageJSONFile, packageJSONRaw);
   });
 
+  it('should map npm registry to npmx.dev for registryweb', () => {
+    const config = require('../lib/config');
+    assert.strictEqual(config.registryWebMap['https://registry.npmjs.org'], 'https://npmx.dev');
+  });
+
   it('should version', () => {
     return coffee.fork(cnpm, [ '-v' ])
       .debug()
