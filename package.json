@@ -48,7 +48,7 @@
     "coffee": "5",
     "egg-bin": "6",
     "eslint": "8",
-    "eslint-config-egg": "12",
+    "eslint-config-egg": "14",
     "git-contributor": "2"
   },
   "homepage": "https://github.com/cnpm/cnpm",
