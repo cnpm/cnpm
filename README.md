@@ -10,11 +10,19 @@
 
 cnpm: npm client for [npmmirror.com](http://npmmirror.com/)
 
+## ‼️ Recommendation: try [utoo](https://github.com/utooland/utoo)
+
+We recommend migrating to [**utoo**](https://github.com/utooland/utoo), a modern npm package manager:
+
+1. **Fully compatible with the `package-lock.json` format** — drop-in replacement, no lockfile rewrites required.
+2. **npmmirror binary acceleration** — pre-built binaries served via npmmirror for faster installs.
+3. **Same compatibility as cnpm** — works seamlessly in scenarios where cnpm is used today.
+
 ## Requirements
 
 |         | Minimum | Recommended |
 |---------|---------|-------------|
-| Node.js | 14.18.0 | LTS         |
+| Node.js | 20      | LTS         |
 
 ## Install
 
