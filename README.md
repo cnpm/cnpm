@@ -22,7 +22,7 @@ We recommend migrating to [**utoo**](https://github.com/utooland/utoo), a modern
 
 |         | Minimum | Recommended |
 |---------|---------|-------------|
-| Node.js | 14.18.0 | LTS         |
+| Node.js | 20      | LTS         |
 
 ## Install
 
